@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Arian Roy Store</title>
+<title>Aryan Roy Store</title>
 
 <style>
 body{
@@ -27,6 +27,17 @@ padding:8px 15px;
 border-radius:6px;
 text-decoration:none;
 font-weight:bold;
+}
+
+.hero{
+background:#111;
+text-align:center;
+padding:15px;
+}
+
+.hero img{
+width:260px;
+max-width:90%;
 }
 
 .slider{
@@ -101,6 +112,19 @@ color:white;
 text-align:center;
 padding:20px;
 }
+
+/* 🔥 fast logo animation */
+@keyframes logoIntro {
+0% { opacity:0; transform: scale(0.9); }
+25% { opacity:1; transform: scale(1.15); }
+55% { transform: scale(1.03); }
+100% { transform: scale(1); }
+}
+
+.logo-animate{
+animation: logoIntro 0.5s ease-out 1;
+transform-origin:center;
+}
 </style>
 </head>
 
@@ -116,6 +140,10 @@ padding:20px;
 <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" width="40">
 </a>
 
+</div>
+
+<div class="hero">
+<img src="file_00000000bfec720a9ea8aa8800b40ffb.png" class="logo-animate">
 </div>
 
 <div class="slider">
@@ -167,7 +195,7 @@ padding:20px;
 </section>
 
 <footer>
-© Arian Roy Store
+© Aryan Roy Store
 </footer>
 
 <script>
