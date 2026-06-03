@@ -1,216 +1,192 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Store</title>
+<title>فروشگاه آریان روی</title>
 
 <style>
 body{
-    margin:0;
-    font-family:Tahoma,Arial;
-    background:#f4f4f4;
+margin:0;
+font-family:Tahoma,sans-serif;
+background:#f4f4f4;
 }
 
-/* ===== TOP BAR ===== */
-.top-bar{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:10px 15px;
-    background:#111;
-    color:white;
+.topbar{
+background:#111;
+padding:10px 15px;
+display:flex;
+justify-content:space-between;
+align-items:center;
 }
 
-.lang button{
-    margin:0 5px;
-    padding:6px 10px;
-    border:none;
-    cursor:pointer;
+.lang-btn{
+background:white;
+color:black;
+padding:8px 15px;
+border-radius:6px;
+text-decoration:none;
+font-weight:bold;
 }
 
-/* TELEGRAM ICON ONLY */
-.telegram a{
-    display:flex;
-    align-items:center;
-}
-
-.telegram img{
-    width:26px;
-    height:26px;
-}
-
-/* ===== SLIDER ===== */
 .slider{
-    position:relative;
-    width:100%;
-    height:320px;
-    overflow:hidden;
+position:relative;
+height:360px;
+overflow:hidden;
+background:#000;
 }
 
 .slide{
-    position:absolute;
-    width:100%;
-    height:100%;
-    opacity:0;
-    transition:opacity 1s ease-in-out;
-    background-size:cover;
-    background-position:center;
+position:absolute;
+width:100%;
+height:100%;
+opacity:0;
+transition:1s;
 }
 
 .slide.active{
-    opacity:1;
+opacity:1;
 }
 
-.text{
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    color:white;
-    text-align:center;
-    text-shadow:0 2px 10px rgba(0,0,0,0.8);
+.slide img{
+width:100%;
+height:100%;
+object-fit:contain;
+background:#000;
 }
 
-/* ===== PRODUCTS ===== */
+.caption{
+position:absolute;
+bottom:20px;
+left:0;
+right:0;
+text-align:center;
+color:white;
+font-size:28px;
+font-weight:bold;
+text-shadow:0 0 10px black;
+}
+
 .products{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:20px;
-    padding:30px;
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:20px;
+padding:30px;
 }
 
 .card{
-    background:white;
-    width:280px;
-    border-radius:12px;
-    box-shadow:0 0 10px rgba(0,0,0,.15);
-    overflow:hidden;
+background:white;
+width:280px;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 0 10px rgba(0,0,0,.15);
 }
 
 .card img{
-    width:100%;
-    height:220px;
-    object-fit:cover;
+width:100%;
+height:220px;
+object-fit:contain;
+background:white;
 }
 
-.card h3,.card p{
-    padding:10px;
+.card h3{
+padding:10px;
+text-align:center;
 }
 
-.btn{
-    display:block;
-    text-align:center;
-    background:#007bff;
-    color:white;
-    padding:12px;
-    text-decoration:none;
+footer{
+background:#111;
+color:white;
+text-align:center;
+padding:20px;
 }
-
-/* TEXT LANGUAGE CONTROL */
-[data-en]{display:none;}
-
-.lang-en [data-fa]{display:none;}
-.lang-en [data-en]{display:block;}
 </style>
 </head>
 
 <body>
 
-<!-- TOP BAR -->
-<div class="top-bar">
+<div class="topbar">
 
-<!-- Telegram (NO username shown) -->
-<div class="telegram">
-<a href="https://t.me/iphonearian" target="_blank">
-<img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg">
+<a href="en.html" class="lang-btn">
+🇬🇧 English
 </a>
-</div>
 
-<!-- Language -->
-<div class="lang">
-<button onclick="setLang('fa')">🇮🇷 فارسی</button>
-<button onclick="setLang('en')">🇬🇧 English</button>
-</div>
+<a href="https://t.me/iphonearian" target="_blank">
+<img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" width="40">
+</a>
 
 </div>
 
-<!-- SLIDER -->
 <div class="slider">
 
-<div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5');">
-<div class="text">
-<h2 data-fa="آیفون 17 پرو مکس" data-en="iPhone 17 Pro Max"></h2>
-</div>
-</div>
-
-<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1517336714731-489689fd1ca8');">
-<div class="text">
-<h2 data-fa="مک‌بوک پرو" data-en="MacBook Pro"></h2>
-</div>
+<div class="slide active">
+<img src="https://m.media-amazon.com/images/I/41KOxRsuiiL._AC_UF894,1000_QL80_FMwebp_.jpg">
+<div class="caption">iPhone 17 Pro Max</div>
 </div>
 
-<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1606229365485-93a3b8ee0385');">
-<div class="text">
-<h2 data-fa="اپل واچ اولترا" data-en="Apple Watch Ultra"></h2>
-</div>
+<div class="slide">
+<img src="https://m.media-amazon.com/images/I/41iXTWoQ68L._AC_UF1000,1000_QL80_FMwebp_.jpg">
+<div class="caption">MacBook A18 Pro</div>
 </div>
 
-<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1518770660439-4636190af475');">
-<div class="text">
-<h2 data-fa="آی‌مک پرو 2026" data-en="iMac Pro 2026"></h2>
+<div class="slide">
+<img src="https://m.media-amazon.com/images/I/51LHWvW-i7L._AC_UF1000,1000_QL80_FMwebp_.jpg">
+<div class="caption">Apple Watch Ultra 4</div>
 </div>
+
+<div class="slide">
+<img src="https://m.media-amazon.com/images/I/51gHT3oOpPL._AC_UF894,1000_QL80_FMwebp_.jpg">
+<div class="caption">iMac Pro 2026</div>
 </div>
 
 </div>
 
-<!-- PRODUCTS -->
 <section class="products">
 
 <div class="card">
-<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9">
-<h3 data-fa="آیفون 17 پرو مکس" data-en="iPhone 17 Pro Max"></h3>
-<p data-fa="جدیدترین گوشی" data-en="Latest smartphone"></p>
-<a class="btn" href="#">View</a>
+<img src="https://m.media-amazon.com/images/I/51k0qRQFcuL._AC_UF894,1000_QL80_.jpg">
+<h3>iPhone 17 Pro Max</h3>
 </div>
 
 <div class="card">
-<img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853">
-<h3 data-fa="مک‌بوک پرو" data-en="MacBook Pro"></h3>
-<p data-fa="قدرت بالا" data-en="High performance"></p>
-<a class="btn" href="#">View</a>
+<img src="https://m.media-amazon.com/images/I/51QPBmoc8FL._AC_UF894,1000_QL80_FMwebp_.jpg">
+<h3>MacBook A18 Pro</h3>
 </div>
 
 <div class="card">
-<img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30">
-<h3 data-fa="اپل واچ اولترا" data-en="Apple Watch Ultra"></h3>
-<p data-fa="ساعت هوشمند" data-en="Smart watch"></p>
-<a class="btn" href="#">View</a>
+<img src="https://m.media-amazon.com/images/I/61RGZdmKzRL._AC_UF1000,1000_QL80_FMwebp_.jpg">
+<h3>Apple Watch Ultra 4</h3>
 </div>
 
 <div class="card">
-<img src="https://images.unsplash.com/photo-1510557880181-3f5c1c7b3b6a">
-<h3 data-fa="آی‌مک پرو 2026" data-en="iMac Pro 2026"></h3>
-<p data-fa="کامپیوتر حرفه‌ای" data-en="Professional desktop"></p>
-<a class="btn" href="#">View</a>
+<img src="https://m.media-amazon.com/images/I/51C8kxOdz-L._AC_UF1000,1000_QL80_FMwebp_.jpg">
+<h3>iMac Pro 2026</h3>
 </div>
 
 </section>
 
+<footer>
+© فروشگاه آریان روی
+</footer>
+
 <script>
-let slides = document.querySelectorAll(".slide");
-let i = 0;
+let slides = document.querySelectorAll('.slide');
+let current = 0;
 
-setInterval(()=>{
-slides[i].classList.remove("active");
-i=(i+1)%slides.length;
-slides[i].classList.add("active");
-},3000);
+setInterval(function(){
 
-function setLang(lang){
-document.body.classList.toggle("lang-en", lang==="en");
+slides[current].classList.remove('active');
+
+current++;
+
+if(current >= slides.length){
+current = 0;
 }
+
+slides[current].classList.add('active');
+
+},3000);
 </script>
 
 </body>
