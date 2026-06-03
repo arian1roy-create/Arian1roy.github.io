@@ -1,68 +1,127 @@
-<!DOCTYPE html><html lang="fa" dir="rtl">
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>سایت شخصی من</title><style>
+<title>فروشگاه آریان روی</title>
+
+<style>
 body{
     margin:0;
-    font-family:tahoma,sans-serif;
-    background:#f4f6f9;
+    font-family:Tahoma,sans-serif;
+    background:#f4f4f4;
 }
 
 header{
-    background:#1f4e79;
+    background:#111;
     color:white;
     text-align:center;
-    padding:60px 20px;
+    padding:30px;
 }
 
-header h1{
-    margin:0;
-    font-size:36px;
+nav{
+    background:#222;
+    text-align:center;
+    padding:10px;
 }
 
-header p{
-    font-size:18px;
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:15px;
 }
 
-section{
-    max-width:900px;
-    margin:auto;
-    padding:40px 20px;
+.products{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:20px;
+    padding:30px;
 }
 
 .card{
     background:white;
-    padding:20px;
+    width:280px;
     border-radius:12px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.1);
-    margin-bottom:20px;
+    box-shadow:0 0 10px rgba(0,0,0,.15);
+    overflow:hidden;
+}
+
+.card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
+
+.card h3{
+    padding:10px;
+}
+
+.card p{
+    padding:0 10px 10px;
+}
+
+.price{
+    color:green;
+    font-weight:bold;
+}
+
+.btn{
+    display:block;
+    text-align:center;
+    background:#007bff;
+    color:white;
+    padding:12px;
+    text-decoration:none;
 }
 
 footer{
-    background:#1f4e79;
+    background:#111;
     color:white;
     text-align:center;
-    padding:15px;
+    padding:20px;
 }
-</style></head><body><header>
-    <h1>به سایت من خوش آمدید</h1>
-    <p>سایت شخصی ساخته شده با GitHub Pages</p>
-</header><section>
-    <div class="card">
-        <h2>درباره من</h2>
-        <p>این بخش برای معرفی شما است.</p>
-    </div><div class="card">
-    <h2>پروژه‌ها</h2>
-    <p>اینجا می‌توانید پروژه‌ها و فعالیت‌های خود را معرفی کنید.</p>
+</style>
+
+</head>
+<body>
+
+<header>
+<h1>فروشگاه آریان روی</h1>
+<p>فروش موبایل، لپ‌تاپ و لوازم دیجیتال</p>
+</header>
+
+<nav>
+<a href="#">خانه</a>
+<a href="#">محصولات</a>
+<a href="#">درباره ما</a>
+<a href="#">تماس با ما</a>
+</nav>
+
+<section class="products">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9">
+<h3>گوشی هوشمند</h3>
+<p>مدل جدید با امکانات پیشرفته</p>
+<p class="price">قیمت: تماس بگیرید</p>
+<a class="btn" href="#">مشاهده</a>
 </div>
 
 <div class="card">
-    <h2>ارتباط با من</h2>
-    <p>ایمیل، تلگرام یا راه‌های ارتباطی خود را اینجا قرار دهید.</p>
+<img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853">
+<h3>لپ‌تاپ</h3>
+<p>مناسب کار و بازی</p>
+<p class="price">قیمت: تماس بگیرید</p>
+<a class="btn" href="#">مشاهده</a>
 </div>
 
-</section><footer>
-    © 2026
-</footer></body>
+</section>
+
+<footer>
+<p>© فروشگاه آریان روی</p>
+<p>واتساپ: 09XXXXXXXXX</p>
+</footer>
+
+</body>
 </html>
