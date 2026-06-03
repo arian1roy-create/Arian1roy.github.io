@@ -1,28 +1,70 @@
-<!DOCTYPE html><html lang="en"><head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Arian Roy Store</title><style>
+<title>Arian Roy Store</title>
+
+<style>
 body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    background:#f4f4f4;
-}header{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f4f4f4;
+}
+
+.topbar{
 background:#111;
-color:white;
-text-align:center;
-padding:30px;
+padding:10px 15px;
+display:flex;
+justify-content:space-between;
+align-items:center;
 }
 
-nav{
-background:#222;
-text-align:center;
-padding:10px;
-}
-
-nav a{
-color:white;
+.lang-btn{
+background:white;
+color:black;
+padding:8px 15px;
+border-radius:6px;
 text-decoration:none;
-margin:15px;
+font-weight:bold;
+}
+
+.slider{
+position:relative;
+height:360px;
+overflow:hidden;
+background:#000;
+}
+
+.slide{
+position:absolute;
+width:100%;
+height:100%;
+opacity:0;
+transition:1s;
+}
+
+.slide.active{
+opacity:1;
+}
+
+.slide img{
+width:100%;
+height:100%;
+object-fit:contain;
+background:#000;
+}
+
+.caption{
+position:absolute;
+bottom:20px;
+left:0;
+right:0;
+text-align:center;
+color:white;
+font-size:28px;
+font-weight:bold;
+text-shadow:0 0 10px black;
 }
 
 .products{
@@ -37,47 +79,20 @@ padding:30px;
 background:white;
 width:280px;
 border-radius:12px;
-box-shadow:0 0 10px rgba(0,0,0,.15);
 overflow:hidden;
+box-shadow:0 0 10px rgba(0,0,0,.15);
 }
 
 .card img{
 width:100%;
 height:220px;
-object-fit:cover;
+object-fit:contain;
+background:white;
 }
 
 .card h3{
 padding:10px;
-}
-
-.card p{
-padding:0 10px 10px;
-}
-
-.price{
-color:green;
-font-weight:bold;
-}
-
-.btn{
-display:block;
 text-align:center;
-background:#007bff;
-color:white;
-padding:12px;
-text-decoration:none;
-}
-
-.lang-btn{
-display:inline-block;
-margin-top:15px;
-padding:8px 15px;
-background:white;
-color:black;
-text-decoration:none;
-border-radius:5px;
-font-weight:bold;
 }
 
 footer{
@@ -86,35 +101,93 @@ color:white;
 text-align:center;
 padding:20px;
 }
-</style></head>
+</style>
+</head>
 
-<body><header>
-<h1>Arian Roy Store</h1><p>Mobile Phones, Laptops & Digital Products</p><a href="index.html" class="lang-btn">
+<body>
+
+<div class="topbar">
+
+<a href="index.html" class="lang-btn">
 🇮🇷 فارسی
-</a><br><br>
+</a>
 
 <a href="https://t.me/iphonearian" target="_blank">
-<img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"
-alt="Telegram"
-width="70">
-</a></header><nav>
-<a href="#">Home</a>
-<a href="#">Products</a>
-<a href="#">About Us</a>
-<a href="#">Contact</a>
-</nav><section class="products"><div class="card">
-<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9">
-<h3>Smartphone</h3>
-<p>Latest generation smartphone</p>
-<p class="price">Contact for price</p>
-<a class="btn" href="#">View</a>
-</div><div class="card">
-<img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853">
-<h3>Laptop</h3>
-<p>Suitable for work and gaming</p>
-<p class="price">Contact for price</p>
-<a class="btn" href="#">View</a>
-</div></section><footer>
-<p>© Arian Roy Store</p>
-</footer></body>
+<img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" width="40">
+</a>
+
+</div>
+
+<div class="slider">
+
+<div class="slide active">
+<img src="https://m.media-amazon.com/images/I/41KOxRsuiiL._AC_UF894,1000_QL80_FMwebp_.jpg">
+<div class="caption">iPhone 17 Pro Max</div>
+</div>
+
+<div class="slide">
+<img src="https://m.media-amazon.com/images/I/41iXTWoQ68L._AC_UF1000,1000_QL80_FMwebp_.jpg">
+<div class="caption">MacBook A18 Pro</div>
+</div>
+
+<div class="slide">
+<img src="https://m.media-amazon.com/images/I/51LHWvW-i7L._AC_UF1000,1000_QL80_FMwebp_.jpg">
+<div class="caption">Apple Watch Ultra 4</div>
+</div>
+
+<div class="slide">
+<img src="https://m.media-amazon.com/images/I/51gHT3oOpPL._AC_UF894,1000_QL80_FMwebp_.jpg">
+<div class="caption">iMac Pro 2026</div>
+</div>
+
+</div>
+
+<section class="products">
+
+<div class="card">
+<img src="https://m.media-amazon.com/images/I/51k0qRQFcuL._AC_UF894,1000_QL80_.jpg">
+<h3>iPhone 17 Pro Max</h3>
+</div>
+
+<div class="card">
+<img src="https://m.media-amazon.com/images/I/51QPBmoc8FL._AC_UF894,1000_QL80_FMwebp_.jpg">
+<h3>MacBook A18 Pro</h3>
+</div>
+
+<div class="card">
+<img src="https://m.media-amazon.com/images/I/61RGZdmKzRL._AC_UF1000,1000_QL80_FMwebp_.jpg">
+<h3>Apple Watch Ultra 4</h3>
+</div>
+
+<div class="card">
+<img src="https://m.media-amazon.com/images/I/51C8kxOdz-L._AC_UF1000,1000_QL80_FMwebp_.jpg">
+<h3>iMac Pro 2026</h3>
+</div>
+
+</section>
+
+<footer>
+© Arian Roy Store
+</footer>
+
+<script>
+let slides = document.querySelectorAll('.slide');
+let current = 0;
+
+setInterval(function(){
+
+slides[current].classList.remove('active');
+
+current++;
+
+if(current >= slides.length){
+current = 0;
+}
+
+slides[current].classList.add('active');
+
+},3000);
+</script>
+
+</body>
 </html>
