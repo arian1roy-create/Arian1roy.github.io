@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="fa" dir="rtl"><head>
+<!DOCTYPE html><html lang="fa" dir="rtl">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>فروشگاه آریان روی</title><style>
@@ -6,99 +7,148 @@ body{
     margin:0;
     font-family:Tahoma,sans-serif;
     background:#f4f4f4;
-}header{
-background:#111;
-color:white;
-text-align:center;
-padding:30px;
+}
+
+/* ===== SLIDER ===== */
+.slider{
+    position:relative;
+    width:100%;
+    height:300px;
+    overflow:hidden;
+}
+
+.slide{
+    position:absolute;
+    width:100%;
+    height:100%;
+    opacity:0;
+    transition:opacity 1s ease-in-out;
+    background-size:cover;
+    background-position:center;
+}
+
+.slide.active{
+    opacity:1;
+}
+
+/* overlay buttons */
+.top-links{
+    position:absolute;
+    top:15px;
+    left:15px;
+    display:flex;
+    gap:10px;
+    z-index:10;
+}
+
+.top-links a{
+    background:rgba(0,0,0,0.6);
+    color:white;
+    padding:6px 10px;
+    border-radius:6px;
+    text-decoration:none;
+    font-size:14px;
+}
+
+/* ===== HEADER (optional hidden text) ===== */
+header{
+    background:#111;
+    color:white;
+    text-align:center;
+    padding:15px;
 }
 
 nav{
-background:#222;
-text-align:center;
-padding:10px;
+    background:#222;
+    text-align:center;
+    padding:10px;
 }
 
 nav a{
-color:white;
-text-decoration:none;
-margin:15px;
+    color:white;
+    text-decoration:none;
+    margin:15px;
 }
 
 .products{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:20px;
-padding:30px;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:20px;
+    padding:30px;
 }
 
 .card{
-background:white;
-width:280px;
-border-radius:12px;
-box-shadow:0 0 10px rgba(0,0,0,.15);
-overflow:hidden;
+    background:white;
+    width:280px;
+    border-radius:12px;
+    box-shadow:0 0 10px rgba(0,0,0,.15);
+    overflow:hidden;
 }
 
 .card img{
-width:100%;
-height:220px;
-object-fit:cover;
+    width:100%;
+    height:220px;
+    object-fit:cover;
 }
 
 .card h3{
-padding:10px;
+    padding:10px;
 }
 
 .card p{
-padding:0 10px 10px;
+    padding:0 10px 10px;
 }
 
 .price{
-color:green;
-font-weight:bold;
+    color:green;
+    font-weight:bold;
 }
 
 .btn{
-display:block;
-text-align:center;
-background:#007bff;
-color:white;
-padding:12px;
-text-decoration:none;
+    display:block;
+    text-align:center;
+    background:#007bff;
+    color:white;
+    padding:12px;
+    text-decoration:none;
 }
 
 .lang-btn{
-display:inline-block;
-margin-top:15px;
-padding:8px 15px;
-background:white;
-color:black;
-text-decoration:none;
-border-radius:5px;
-font-weight:bold;
+    display:inline-block;
+    margin-top:15px;
+    padding:8px 15px;
+    background:white;
+    color:black;
+    text-decoration:none;
+    border-radius:5px;
+    font-weight:bold;
 }
 
 footer{
-background:#111;
-color:white;
-text-align:center;
-padding:20px;
+    background:#111;
+    color:white;
+    text-align:center;
+    padding:20px;
 }
-</style></head>
+</style></head><body><!-- SLIDER --><div class="slider"><div class="top-links">
+    <a href="en.html">🇬🇧 English</a>
+    <a href="https://t.me/iphonearian" target="_blank">📩 Telegram</a>
+</div>
 
-<body><header>
+<div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1517336714731-489689fd1ca8');">
+</div>
+
+<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5');">
+</div>
+
+<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b');">
+</div>
+
+</div><header>
 <h1>فروشگاه آریان روی</h1>
-<p>فروش موبایل، لپ‌تاپ و لوازم دیجیتال</p><a href="en.html" class="lang-btn">
-🇬🇧 English
-</a><br><br>
-
-<a href="https://t.me/iphonearian" target="_blank">
-<img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"
-alt="Telegram"
-width="70">
-</a></header><nav>
+<p>فروش موبایل، لپ‌تاپ و لوازم دیجیتال</p>
+</header><nav>
 <a href="#">خانه</a>
 <a href="#">محصولات</a>
 <a href="#">درباره ما</a>
@@ -117,5 +167,14 @@ width="70">
 <a class="btn" href="#">مشاهده</a>
 </div></section><footer>
 <p>© فروشگاه آریان روی</p>
-</footer></body>
+</footer><script>
+let slides = document.querySelectorAll(".slide");
+let index = 0;
+
+setInterval(() => {
+    slides[index].classList.remove("active");
+    index = (index + 1) % slides.length;
+    slides[index].classList.add("active");
+}, 3000);
+</script></body>
 </html>
