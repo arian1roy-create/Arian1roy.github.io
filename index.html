@@ -17,6 +17,7 @@ body{
     overflow:hidden;
 }
 
+/* خود عکس بدون تاریکی */
 .slide{
     position:absolute;
     width:100%;
@@ -31,7 +32,7 @@ body{
     opacity:1;
 }
 
-/* متن وسط اسلاید */
+/* متن روی عکس (شفاف و سبک) */
 .slide-text{
     position:absolute;
     top:50%;
@@ -39,22 +40,22 @@ body{
     transform:translate(-50%,-50%);
     color:white;
     text-align:center;
-    background:rgba(0,0,0,0.5);
-    padding:15px 25px;
+    padding:10px 15px;
     border-radius:10px;
+    text-shadow:0 2px 8px rgba(0,0,0,0.8);
 }
 
 .slide-text h2{
     margin:0;
-    font-size:26px;
+    font-size:28px;
 }
 
 .slide-text p{
-    margin-top:8px;
+    margin-top:6px;
     font-size:14px;
 }
 
-/* لینک‌های بالا */
+/* لینک بالا */
 .top-links{
     position:absolute;
     top:15px;
@@ -65,7 +66,7 @@ body{
 }
 
 .top-links a{
-    background:rgba(0,0,0,0.6);
+    background:rgba(0,0,0,0.5);
     color:white;
     padding:6px 10px;
     border-radius:6px;
@@ -73,7 +74,7 @@ body{
     font-size:14px;
 }
 
-/* ===== SITE ===== */
+/* سایت */
 header{
     background:#111;
     color:white;
@@ -152,7 +153,7 @@ footer{
 <div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1517336714731-489689fd1ca8');">
     <div class="slide-text">
         <h2>MacBook Pro</h2>
-        <p>قدرت بالا برای طراحی و کار حرفه‌ای</p>
+        <p>قدرت بالا برای کار و طراحی حرفه‌ای</p>
     </div>
 </div>
 
@@ -160,15 +161,15 @@ footer{
 <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5');">
     <div class="slide-text">
         <h2>iPhone Series</h2>
-        <p>جدیدترین مدل‌های آیفون با دوربین حرفه‌ای</p>
+        <p>جدیدترین مدل‌های آیفون</p>
     </div>
 </div>
 
-<!-- Apple Watch + AirPods -->
-<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1580910051074-3eb694886505');">
+<!-- Apple Watch + AirPods (درست) -->
+<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1606229365485-93a3b8ee0385');">
     <div class="slide-text">
         <h2>Apple Watch & AirPods</h2>
-        <p>ساعت هوشمند و ایرپاد با کیفیت عالی</p>
+        <p>ساعت هوشمند و ایرپاد حرفه‌ای</p>
     </div>
 </div>
 
