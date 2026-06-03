@@ -102,20 +102,23 @@ text-align:center;
 padding:20px;
 }
 
-/* 🔥 انیمیشن حرفه‌ای لوگو (فقط هنگام لود) */
+/* 🔥 لوگوی تیز و سریع (همونی که خواستی) */
 @keyframes logoIntro {
 0% {
 opacity:0;
-transform: scale(0.85);
+transform: scale(0.9);
 }
 
-60% {
+25% {
 opacity:1;
-transform: scale(1.08);
+transform: scale(1.15);
+}
+
+55% {
+transform: scale(1.03);
 }
 
 100% {
-opacity:1;
 transform: scale(1);
 }
 }
@@ -123,7 +126,7 @@ transform: scale(1);
 .logo-animate{
 width:260px;
 max-width:90%;
-animation: logoIntro 1.2s ease-out 1;
+animation: logoIntro 0.5s ease-out 1;
 transform-origin:center;
 }
 </style>
@@ -218,7 +221,4 @@ current = 0;
 slides[current].classList.add('active');
 
 },3000);
-</script>
-
-</body>
-</html>
+</script
