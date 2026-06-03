@@ -1,83 +1,22 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Store</title>
+<title>فروشگاه آریان روی</title>
 
 <style>
 body{
     margin:0;
-    font-family:Tahoma,Arial;
+    font-family:Tahoma,sans-serif;
     background:#f4f4f4;
 }
 
-/* ===== LANGUAGE BUTTON ===== */
-.lang-box{
-    position:fixed;
-    top:10px;
-    left:10px;
-    z-index:999;
-}
-
-.lang-box button{
-    padding:8px 12px;
-    margin:3px;
-    border:none;
-    border-radius:6px;
-    cursor:pointer;
-    background:#111;
-    color:white;
-}
-
-/* ===== SLIDER ===== */
-.slider{
-    position:relative;
-    width:100%;
-    height:320px;
-    overflow:hidden;
-}
-
-.slide{
-    position:absolute;
-    width:100%;
-    height:100%;
-    opacity:0;
-    transition:opacity 1s ease-in-out;
-    background-size:cover;
-    background-position:center;
-}
-
-.slide.active{
-    opacity:1;
-}
-
-.slide-text{
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    color:white;
-    text-align:center;
-    text-shadow:0 2px 10px rgba(0,0,0,0.8);
-}
-
-.slide-text h2{
-    margin:0;
-    font-size:26px;
-}
-
-.slide-text p{
-    margin-top:6px;
-    font-size:14px;
-}
-
-/* ===== HEADER ===== */
 header{
     background:#111;
     color:white;
     text-align:center;
-    padding:20px;
+    padding:30px;
 }
 
 nav{
@@ -92,7 +31,6 @@ nav a{
     margin:15px;
 }
 
-/* ===== PRODUCTS ===== */
 .products{
     display:flex;
     flex-wrap:wrap;
@@ -136,93 +74,65 @@ nav a{
     padding:12px;
     text-decoration:none;
 }
+
+footer{
+    background:#111;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
 </style>
 </head>
 
 <body>
 
-<!-- LANGUAGE -->
-<div class="lang-box">
-<button onclick="setLang('fa')">🇮🇷 فارسی</button>
-<button onclick="setLang('en')">🇬🇧 English</button>
-</div>
-
-<!-- SLIDER -->
-<div class="slider">
-
-    <!-- 1 -->
-    <div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5');">
-        <div class="slide-text" data-fa="آیفون سری جدید" data-en="iPhone Series"></div>
-    </div>
-
-    <!-- 2 -->
-    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1517336714731-489689fd1ca8');">
-        <div class="slide-text" data-fa="مک‌بوک پرو" data-en="MacBook Pro"></div>
-    </div>
-
-    <!-- 3 -->
-    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1606229365485-93a3b8ee0385');">
-        <div class="slide-text" data-fa="اپل واچ اولترا" data-en="Apple Watch Ultra"></div>
-    </div>
-
-    <!-- 4 -->
-    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1518770660439-4636190af475');">
-        <div class="slide-text" data-fa="آی‌مک پرو 2026" data-en="iMac Pro 2026"></div>
-    </div>
-
-</div>
-
 <header>
-<h1 data-fa="فروشگاه آریان روی" data-en="Arian Roy Store"></h1>
-<p data-fa="فروش موبایل و لپ‌تاپ" data-en="Mobile & Laptop Store"></p>
+<h1>فروشگاه آریان روی</h1>
+<p>فروش موبایل، لپ‌تاپ و لوازم دیجیتال</p>
+
+<a href="https://t.me/iphonearian" target="_blank"
+style="display:inline-block;
+background:#229ED9;
+color:white;
+padding:10px 20px;
+text-decoration:none;
+border-radius:5px;
+font-weight:bold;">
+📩 تلگرام
+</a>
+
 </header>
 
 <nav>
-<a href="#" data-fa="خانه" data-en="Home"></a>
-<a href="#" data-fa="محصولات" data-en="Products"></a>
-<a href="#" data-fa="درباره ما" data-en="About"></a>
-<a href="#" data-fa="تماس" data-en="Contact"></a>
+<a href="#">خانه</a>
+<a href="#">محصولات</a>
+<a href="#">درباره ما</a>
+<a href="#">تماس با ما</a>
 </nav>
 
 <section class="products">
 
 <div class="card">
 <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9">
-<h3 data-fa="گوشی" data-en="Phone"></h3>
-<p data-fa="مدل جدید" data-en="Latest model"></p>
-<p class="price">Contact / تماس</p>
+<h3>گوشی هوشمند</h3>
+<p>مدل جدید با امکانات پیشرفته</p>
+<p class="price">قیمت: تماس بگیرید</p>
+<a class="btn" href="#">مشاهده</a>
 </div>
 
 <div class="card">
 <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853">
-<h3 data-fa="لپ‌تاپ" data-en="Laptop"></h3>
-<p data-fa="قدرت بالا" data-en="High performance"></p>
-<p class="price">Contact / تماس</p>
+<h3>لپ‌تاپ</h3>
+<p>مناسب کار و بازی</p>
+<p class="price">قیمت: تماس بگیرید</p>
+<a class="btn" href="#">مشاهده</a>
 </div>
 
 </section>
 
 <footer>
-<p>© Store</p>
+<p>© فروشگاه آریان روی</p>
 </footer>
-
-<script>
-let slides = document.querySelectorAll(".slide");
-let index = 0;
-
-setInterval(() => {
-    slides[index].classList.remove("active");
-    index = (index + 1) % slides.length;
-    slides[index].classList.add("active");
-}, 3000);
-
-/* ===== LANGUAGE SYSTEM ===== */
-function setLang(lang){
-    document.querySelectorAll("[data-fa]").forEach(el=>{
-        el.innerText = el.getAttribute("data-"+lang);
-    });
-}
-</script>
 
 </body>
 </html>
