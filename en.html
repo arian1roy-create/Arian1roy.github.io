@@ -35,11 +35,6 @@ text-align:center;
 padding:15px;
 }
 
-.hero img{
-width:260px;
-max-width:90%;
-}
-
 .slider{
 position:relative;
 height:420px;
@@ -113,16 +108,20 @@ text-align:center;
 padding:20px;
 }
 
-/* 🔥 fast logo animation */
-@keyframes logoIntro {
-0% { opacity:0; transform: scale(0.9); }
-25% { opacity:1; transform: scale(1.15); }
-55% { transform: scale(1.03); }
+/* 🔥 FAST LOGO ANIMATION */
+@keyframes fastPulse {
+0% { transform: scale(1); }
+20% { transform: scale(1.15); }
+40% { transform: scale(0.92); }
+60% { transform: scale(1.12); }
+80% { transform: scale(0.97); }
 100% { transform: scale(1); }
 }
 
 .logo-animate{
-animation: logoIntro 0.5s ease-out 1;
+width:260px;
+max-width:90%;
+animation: fastPulse 0.35s infinite;
 transform-origin:center;
 }
 </style>
@@ -142,8 +141,10 @@ transform-origin:center;
 
 </div>
 
+<!-- 🔥 LOGO -->
 <div class="hero">
-<img src="file_00000000bfec720a9ea8aa8800b40ffb.png" class="logo-animate">
+<img src="file_00000000bfec720a9ea8aa8800b40ffb.png"
+class="logo-animate">
 </div>
 
 <div class="slider">
