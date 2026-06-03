@@ -101,10 +101,30 @@ color:white;
 text-align:center;
 padding:20px;
 }
-@keyframes pulse{
-0%{transform:scale(1);}
-50%{transform:scale(1.03);}
-100%{transform:scale(1);}
+
+/* 🔥 انیمیشن حرفه‌ای لوگو (فقط هنگام لود) */
+@keyframes logoIntro {
+0% {
+opacity:0;
+transform: scale(0.85);
+}
+
+60% {
+opacity:1;
+transform: scale(1.08);
+}
+
+100% {
+opacity:1;
+transform: scale(1);
+}
+}
+
+.logo-animate{
+width:260px;
+max-width:90%;
+animation: logoIntro 1.2s ease-out 1;
+transform-origin:center;
 }
 </style>
 </head>
@@ -122,10 +142,13 @@ padding:20px;
 </a>
 
 </div>
+
+<!-- 🔥 لوگو -->
 <div style="background:#111;text-align:center;padding:15px;">
 <img src="file_00000000bfec720a9ea8aa8800b40ffb.png"
-style="width:260px;max-width:90%;animation:pulse 4s infinite;">
+class="logo-animate">
 </div>
+
 <div class="slider">
 
 <div class="slide active">
