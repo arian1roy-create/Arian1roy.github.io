@@ -1,8 +1,11 @@
-<!DOCTYPE html><html lang="fa" dir="rtl">
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>فروشگاه آریان روی</title><style>
+<title>فروشگاه آریان روی</title>
+
+<style>
 body{
     margin:0;
     font-family:Tahoma,sans-serif;
@@ -13,11 +16,10 @@ body{
 .slider{
     position:relative;
     width:100%;
-    height:300px;
+    height:320px;
     overflow:hidden;
 }
 
-/* خود عکس بدون تاریکی */
 .slide{
     position:absolute;
     width:100%;
@@ -32,7 +34,7 @@ body{
     opacity:1;
 }
 
-/* متن روی عکس (شفاف و سبک) */
+/* متن وسط */
 .slide-text{
     position:absolute;
     top:50%;
@@ -40,14 +42,12 @@ body{
     transform:translate(-50%,-50%);
     color:white;
     text-align:center;
-    padding:10px 15px;
-    border-radius:10px;
-    text-shadow:0 2px 8px rgba(0,0,0,0.8);
+    text-shadow:0 2px 10px rgba(0,0,0,0.8);
 }
 
 .slide-text h2{
-    margin:0;
     font-size:28px;
+    margin:0;
 }
 
 .slide-text p{
@@ -55,7 +55,7 @@ body{
     font-size:14px;
 }
 
-/* لینک بالا */
+/* دکمه بالا */
 .top-links{
     position:absolute;
     top:15px;
@@ -74,7 +74,7 @@ body{
     font-size:14px;
 }
 
-/* سایت */
+/* ===== HEADER ===== */
 header{
     background:#111;
     color:white;
@@ -94,6 +94,7 @@ nav a{
     margin:15px;
 }
 
+/* ===== PRODUCTS ===== */
 .products{
     display:flex;
     flex-wrap:wrap;
@@ -138,64 +139,113 @@ nav a{
     text-decoration:none;
 }
 
+/* ===== FOOTER ===== */
 footer{
     background:#111;
     color:white;
     text-align:center;
     padding:20px;
 }
-</style></head><body><!-- SLIDER --><div class="slider"><div class="top-links">
-    <a href="en.html">🇬🇧 English</a>
-    <a href="https://t.me/iphonearian" target="_blank">📩 Telegram</a>
-</div>
+</style>
+</head>
 
-<!-- MacBook -->
-<div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1517336714731-489689fd1ca8');">
-    <div class="slide-text">
-        <h2>MacBook Pro</h2>
-        <p>قدرت بالا برای کار و طراحی حرفه‌ای</p>
+<body>
+
+<!-- SLIDER -->
+<div class="slider">
+
+    <div class="top-links">
+        <a href="en.html">🇬🇧 English</a>
+        <a href="https://t.me/iphonearian" target="_blank">📩 Telegram</a>
     </div>
-</div>
 
-<!-- iPhone -->
-<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5');">
-    <div class="slide-text">
-        <h2>iPhone Series</h2>
-        <p>جدیدترین مدل‌های آیفون</p>
+    <!-- iPhone -->
+    <div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5');">
+        <div class="slide-text">
+            <h2>iPhone</h2>
+            <p>جدیدترین سری آیفون با دوربین حرفه‌ای</p>
+        </div>
     </div>
-</div>
 
-<!-- Apple Watch + AirPods (درست) -->
-<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1606229365485-93a3b8ee0385');">
-    <div class="slide-text">
-        <h2>Apple Watch & AirPods</h2>
-        <p>ساعت هوشمند و ایرپاد حرفه‌ای</p>
+    <!-- MacBook -->
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1517336714731-489689fd1ca8');">
+        <div class="slide-text">
+            <h2>MacBook Pro</h2>
+            <p>قدرت بالا برای کار و طراحی حرفه‌ای</p>
+        </div>
     </div>
+
+    <!-- Apple Watch -->
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1606229365485-93a3b8ee0385');">
+        <div class="slide-text">
+            <h2>Apple Watch Ultra</h2>
+            <p>ساعت هوشمند نسل جدید اپل</p>
+        </div>
+    </div>
+
+    <!-- iMac -->
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1518770660439-4636190af475');">
+        <div class="slide-text">
+            <h2>iMac Pro 2026</h2>
+            <p>کامپیوتر حرفه‌ای برای کارهای سنگین</p>
+        </div>
+    </div>
+
 </div>
 
-</div><header>
+<header>
 <h1>فروشگاه آریان روی</h1>
 <p>فروش موبایل، لپ‌تاپ و لوازم دیجیتال</p>
-</header><nav>
+</header>
+
+<nav>
 <a href="#">خانه</a>
 <a href="#">محصولات</a>
 <a href="#">درباره ما</a>
 <a href="#">تماس با ما</a>
-</nav><section class="products"><div class="card">
+</nav>
+
+<section class="products">
+
+<div class="card">
 <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9">
 <h3>گوشی هوشمند</h3>
-<p>مدل جدید با امکانات پیشرفته</p>
-<p class="price">قیمت: تماس بگیرید</p>
+<p>مدل جدید و قدرتمند</p>
+<p class="price">تماس بگیرید</p>
 <a class="btn" href="#">مشاهده</a>
-</div><div class="card">
+</div>
+
+<div class="card">
 <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853">
 <h3>لپ‌تاپ</h3>
 <p>مناسب کار و بازی</p>
-<p class="price">قیمت: تماس بگیرید</p>
+<p class="price">تماس بگیرید</p>
 <a class="btn" href="#">مشاهده</a>
-</div></section><footer>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30">
+<h3>Apple Watch</h3>
+<p>ساعت هوشمند اپل</p>
+<p class="price">تماس بگیرید</p>
+<a class="btn" href="#">مشاهده</a>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1510557880181-3f5c1c7b3b6a">
+<h3>لوازم جانبی</h3>
+<p>ایرپاد و لوازم دیجیتال</p>
+<p class="price">تماس بگیرید</p>
+<a class="btn" href="#">مشاهده</a>
+</div>
+
+</section>
+
+<footer>
 <p>© فروشگاه آریان روی</p>
-</footer><script>
+</footer>
+
+<script>
 let slides = document.querySelectorAll(".slide");
 let index = 0;
 
@@ -204,5 +254,7 @@ setInterval(() => {
     index = (index + 1) % slides.length;
     slides[index].classList.add("active");
 }, 3000);
-</script></body>
+</script>
+
+</body>
 </html>
