@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Arian Roy Store</title>
+<title>Store</title>
 
 <style>
 body{
@@ -22,21 +22,22 @@ body{
     color:white;
 }
 
-.lang a{
-    color:white;
-    text-decoration:none;
+.lang button{
     margin:0 5px;
+    padding:6px 10px;
+    border:none;
+    cursor:pointer;
 }
 
-.telegram{
+/* TELEGRAM ICON ONLY */
+.telegram a{
     display:flex;
     align-items:center;
-    gap:6px;
 }
 
 .telegram img{
-    width:22px;
-    height:22px;
+    width:26px;
+    height:26px;
 }
 
 /* ===== SLIDER ===== */
@@ -61,7 +62,7 @@ body{
     opacity:1;
 }
 
-.slide-text{
+.text{
     position:absolute;
     top:50%;
     left:50%;
@@ -69,16 +70,6 @@ body{
     color:white;
     text-align:center;
     text-shadow:0 2px 10px rgba(0,0,0,0.8);
-}
-
-.slide-text h2{
-    margin:0;
-    font-size:26px;
-}
-
-.slide-text p{
-    margin-top:6px;
-    font-size:14px;
 }
 
 /* ===== PRODUCTS ===== */
@@ -104,17 +95,8 @@ body{
     object-fit:cover;
 }
 
-.card h3{
+.card h3,.card p{
     padding:10px;
-}
-
-.card p{
-    padding:0 10px 10px;
-}
-
-.price{
-    color:green;
-    font-weight:bold;
 }
 
 .btn{
@@ -126,13 +108,11 @@ body{
     text-decoration:none;
 }
 
-/* ===== FOOTER ===== */
-footer{
-    background:#111;
-    color:white;
-    text-align:center;
-    padding:20px;
-}
+/* TEXT LANGUAGE CONTROL */
+[data-en]{display:none;}
+
+.lang-en [data-fa]{display:none;}
+.lang-en [data-en]{display:block;}
 </style>
 </head>
 
@@ -141,103 +121,96 @@ footer{
 <!-- TOP BAR -->
 <div class="top-bar">
 
-    <!-- Telegram -->
-    <div class="telegram">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg">
-        <span>@iphonearian</span>
-    </div>
+<!-- Telegram (NO username shown) -->
+<div class="telegram">
+<a href="https://t.me/iphonearian" target="_blank">
+<img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg">
+</a>
+</div>
 
-    <!-- Language -->
-    <div class="lang">
-        <a href="#">🇮🇷 فارسی</a>
-        <a href="#">🇬🇧 English</a>
-    </div>
+<!-- Language -->
+<div class="lang">
+<button onclick="setLang('fa')">🇮🇷 فارسی</button>
+<button onclick="setLang('en')">🇬🇧 English</button>
+</div>
 
 </div>
 
 <!-- SLIDER -->
 <div class="slider">
 
-    <div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5');">
-        <div class="slide-text">
-            <h2>iPhone 17 Pro Max</h2>
-            <p>جدیدترین گوشی اپل | Latest Apple Phone</p>
-        </div>
-    </div>
+<div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5');">
+<div class="text">
+<h2 data-fa="آیفون 17 پرو مکس" data-en="iPhone 17 Pro Max"></h2>
+</div>
+</div>
 
-    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1517336714731-489689fd1ca8');">
-        <div class="slide-text">
-            <h2>MacBook A18 Pro</h2>
-            <p>قدرت حرفه‌ای | Professional Power</p>
-        </div>
-    </div>
+<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1517336714731-489689fd1ca8');">
+<div class="text">
+<h2 data-fa="مک‌بوک پرو" data-en="MacBook Pro"></h2>
+</div>
+</div>
 
-    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1606229365485-93a3b8ee0385');">
-        <div class="slide-text">
-            <h2>Apple Watch Ultra 4</h2>
-            <p>ساعت هوشمند | Smart Watch</p>
-        </div>
-    </div>
+<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1606229365485-93a3b8ee0385');">
+<div class="text">
+<h2 data-fa="اپل واچ اولترا" data-en="Apple Watch Ultra"></h2>
+</div>
+</div>
 
-    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1518770660439-4636190af475');">
-        <div class="slide-text">
-            <h2>iMac Pro 2026</h2>
-            <p>کامپیوتر حرفه‌ای | Desktop Power</p>
-        </div>
-    </div>
+<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1518770660439-4636190af475');">
+<div class="text">
+<h2 data-fa="آی‌مک پرو 2026" data-en="iMac Pro 2026"></h2>
+</div>
+</div>
 
 </div>
 
-<!-- PRODUCTS (4 cards) -->
+<!-- PRODUCTS -->
 <section class="products">
 
 <div class="card">
 <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9">
-<h3>iPhone 17 Pro Max</h3>
-<p>Latest Apple smartphone</p>
-<p class="price">Contact</p>
+<h3 data-fa="آیفون 17 پرو مکس" data-en="iPhone 17 Pro Max"></h3>
+<p data-fa="جدیدترین گوشی" data-en="Latest smartphone"></p>
 <a class="btn" href="#">View</a>
 </div>
 
 <div class="card">
 <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853">
-<h3>MacBook A18 Pro</h3>
-<p>High performance laptop</p>
-<p class="price">Contact</p>
+<h3 data-fa="مک‌بوک پرو" data-en="MacBook Pro"></h3>
+<p data-fa="قدرت بالا" data-en="High performance"></p>
 <a class="btn" href="#">View</a>
 </div>
 
 <div class="card">
 <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30">
-<h3>Apple Watch Ultra 4</h3>
-<p>Smart wearable device</p>
-<p class="price">Contact</p>
+<h3 data-fa="اپل واچ اولترا" data-en="Apple Watch Ultra"></h3>
+<p data-fa="ساعت هوشمند" data-en="Smart watch"></p>
 <a class="btn" href="#">View</a>
 </div>
 
 <div class="card">
 <img src="https://images.unsplash.com/photo-1510557880181-3f5c1c7b3b6a">
-<h3>iMac Pro 2026</h3>
-<p>Professional desktop</p>
-<p class="price">Contact</p>
+<h3 data-fa="آی‌مک پرو 2026" data-en="iMac Pro 2026"></h3>
+<p data-fa="کامپیوتر حرفه‌ای" data-en="Professional desktop"></p>
 <a class="btn" href="#">View</a>
 </div>
 
 </section>
 
-<footer>
-<p>© Arian Roy Store</p>
-</footer>
-
 <script>
 let slides = document.querySelectorAll(".slide");
 let i = 0;
 
-setInterval(() => {
-    slides[i].classList.remove("active");
-    i = (i + 1) % slides.length;
-    slides[i].classList.add("active");
-}, 3000);
+setInterval(()=>{
+slides[i].classList.remove("active");
+i=(i+1)%slides.length;
+slides[i].classList.add("active");
+},3000);
+
+function setLang(lang){
+document.body.classList.toggle("lang-en", lang==="en");
+}
 </script>
 
 </body>
