@@ -1,36 +1,66 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>فروشگاه آریان روی</title>
+<title>Arian Roy Store</title>
 
 <style>
 body{
     margin:0;
-    font-family:Tahoma,sans-serif;
+    font-family:Tahoma,Arial;
     background:#f4f4f4;
 }
 
-header{
+/* ===== TOP BAR ===== */
+.top-bar{
+    display:flex;
+    justify-content:space-between;
+    padding:10px 15px;
     background:#111;
     color:white;
-    text-align:center;
-    padding:30px;
+    align-items:center;
 }
 
-nav{
-    background:#222;
-    text-align:center;
-    padding:10px;
-}
-
-nav a{
+.lang a{
     color:white;
     text-decoration:none;
-    margin:15px;
+    margin:0 5px;
 }
 
+/* ===== SLIDER ===== */
+.slider{
+    position:relative;
+    width:100%;
+    height:320px;
+    overflow:hidden;
+}
+
+.slide{
+    position:absolute;
+    width:100%;
+    height:100%;
+    opacity:0;
+    transition:opacity 1s ease-in-out;
+    background-size:cover;
+    background-position:center;
+}
+
+.slide.active{
+    opacity:1;
+}
+
+.slide-text{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    color:white;
+    text-align:center;
+    text-shadow:0 2px 10px rgba(0,0,0,0.8);
+}
+
+/* ===== PRODUCTS ===== */
 .products{
     display:flex;
     flex-wrap:wrap;
@@ -75,6 +105,7 @@ nav a{
     text-decoration:none;
 }
 
+/* ===== FOOTER ===== */
 footer{
     background:#111;
     color:white;
@@ -86,53 +117,73 @@ footer{
 
 <body>
 
-<header>
-<h1>فروشگاه آریان روی</h1>
-<p>فروش موبایل، لپ‌تاپ و لوازم دیجیتال</p>
+<!-- TOP BAR -->
+<div class="top-bar">
+    <div>📩 Telegram</div>
+    <div class="lang">
+        <a href="#">🇮🇷 فارسی</a>
+        <a href="#">🇬🇧 English</a>
+    </div>
+</div>
 
-<a href="https://t.me/iphonearian" target="_blank"
-style="display:inline-block;
-background:#229ED9;
-color:white;
-padding:10px 20px;
-text-decoration:none;
-border-radius:5px;
-font-weight:bold;">
-📩 تلگرام
-</a>
+<!-- SLIDER -->
+<div class="slider">
 
-</header>
+    <div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5');">
+        <div class="slide-text">
+            <h2>iPhone Series | آیفون سری جدید</h2>
+        </div>
+    </div>
 
-<nav>
-<a href="#">خانه</a>
-<a href="#">محصولات</a>
-<a href="#">درباره ما</a>
-<a href="#">تماس با ما</a>
-</nav>
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1517336714731-489689fd1ca8');">
+        <div class="slide-text">
+            <h2>MacBook Pro | مک‌بوک پرو</h2>
+        </div>
+    </div>
 
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1606229365485-93a3b8ee0385');">
+        <div class="slide-text">
+            <h2>Apple Watch | اپل واچ</h2>
+        </div>
+    </div>
+
+</div>
+
+<!-- PRODUCTS -->
 <section class="products">
 
 <div class="card">
 <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9">
-<h3>گوشی هوشمند</h3>
-<p>مدل جدید با امکانات پیشرفته</p>
-<p class="price">قیمت: تماس بگیرید</p>
-<a class="btn" href="#">مشاهده</a>
+<h3>Phone | گوشی</h3>
+<p>Latest model</p>
+<p class="price">Contact</p>
+<a class="btn" href="#">View</a>
 </div>
 
 <div class="card">
 <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853">
-<h3>لپ‌تاپ</h3>
-<p>مناسب کار و بازی</p>
-<p class="price">قیمت: تماس بگیرید</p>
-<a class="btn" href="#">مشاهده</a>
+<h3>Laptop | لپ‌تاپ</h3>
+<p>High performance</p>
+<p class="price">Contact</p>
+<a class="btn" href="#">View</a>
 </div>
 
 </section>
 
 <footer>
-<p>© فروشگاه آریان روی</p>
+<p>© Arian Roy Store</p>
 </footer>
+
+<script>
+let slides = document.querySelectorAll(".slide");
+let i = 0;
+
+setInterval(() => {
+    slides[i].classList.remove("active");
+    i = (i + 1) % slides.length;
+    slides[i].classList.add("active");
+}, 3000);
+</script>
 
 </body>
 </html>
