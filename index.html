@@ -81,6 +81,9 @@ width:280px;
 border-radius:12px;
 overflow:hidden;
 box-shadow:0 0 10px rgba(0,0,0,.15);
+text-decoration:none;
+color:black;
+display:block;
 transition:0.3s;
 }
 
@@ -98,13 +101,19 @@ background:white;
 .card h3{
 padding:10px;
 text-align:center;
-color:black;
+margin:0;
 }
 
-a.card{
-text-decoration:none;
-color:black;
+.buy-btn{
 display:block;
+margin:10px auto 15px;
+padding:8px 16px;
+background:black;
+color:white;
+border:none;
+border-radius:6px;
+font-weight:bold;
+cursor:pointer;
 }
 
 footer{
@@ -116,12 +125,12 @@ padding:20px;
 
 /* لوگو انیمیشن */
 @keyframes fastPulse {
-0% {transform:scale(1);}
-20% {transform:scale(1.15);}
-40% {transform:scale(0.92);}
-60% {transform:scale(1.12);}
-80% {transform:scale(0.97);}
-100% {transform:scale(1);}
+0%{transform:scale(1);}
+20%{transform:scale(1.15);}
+40%{transform:scale(0.92);}
+60%{transform:scale(1.12);}
+80%{transform:scale(0.97);}
+100%{transform:scale(1);}
 }
 
 .logo-animate{
@@ -136,13 +145,11 @@ transform-origin:center;
 <body>
 
 <div class="topbar">
-
 <a href="en.html" class="lang-btn">🇬🇧 English</a>
 
 <a href="https://t.me/iphonearian" target="_blank">
 <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" width="40">
 </a>
-
 </div>
 
 <!-- LOGO -->
@@ -181,21 +188,25 @@ transform-origin:center;
 <a href="iphone.html" class="card">
 <img src="https://m.media-amazon.com/images/I/51k0qRQFcuL._AC_UF894,1000_QL80_.jpg">
 <h3>iPhone 17 Pro Max</h3>
+<button class="buy-btn">BUY</button>
 </a>
 
 <a href="macbook.html" class="card">
 <img src="https://m.media-amazon.com/images/I/51QPBmoc8FL._AC_UF894,1000_QL80_FMwebp_.jpg">
 <h3>MacBook A18 Pro</h3>
+<button class="buy-btn">BUY</button>
 </a>
 
 <a href="watch.html" class="card">
 <img src="https://m.media-amazon.com/images/I/61RGZdmKzRL._AC_UF1000,1000_QL80_FMwebp_.jpg">
 <h3>Apple Watch Ultra 4</h3>
+<button class="buy-btn">BUY</button>
 </a>
 
 <a href="imac.html" class="card">
 <img src="https://m.media-amazon.com/images/I/51C8kxOdz-L._AC_UF1000,1000_QL80_FMwebp_.jpg">
 <h3>iMac Pro 2026</h3>
+<button class="buy-btn">BUY</button>
 </a>
 
 </section>
