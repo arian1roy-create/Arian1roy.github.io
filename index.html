@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AR Store Pro</title>
+<title>AR Store</title>
 
 <style>
 body{
 margin:0;
 font-family:tahoma;
-background:#f2f4f6;
+background:#f5f5f5;
 }
 
 .header{
@@ -91,27 +91,6 @@ color:#fff;
 padding:10px;
 }
 
-.cart-items{
-max-height:120px;
-overflow:auto;
-font-size:12px;
-margin:5px 0;
-}
-
-.item{
-display:flex;
-justify-content:space-between;
-margin:3px 0;
-}
-
-.item button{
-background:red;
-border:none;
-color:white;
-border-radius:5px;
-cursor:pointer;
-}
-
 .pay,.clear{
 width:100%;
 padding:10px;
@@ -131,7 +110,7 @@ cursor:pointer;
 
 <div class="header">
 
-<div class="logo" id="logo">🛍 AR Store Pro</div>
+<div class="logo" id="logo">🛍 AR Store</div>
 
 <input id="search" class="search" placeholder="Search..." onkeyup="searchProducts()">
 
@@ -175,12 +154,10 @@ cursor:pointer;
 
 🛒 <span id="cartText">Cart</span> (<span id="count">0</span>)<br>
 
-<div class="cart-items" id="cartItems"></div>
+<span id="totalText">Total</span>: $<span id="total">0</span>
 
-Total: $<span id="total">0</span>
-
-<button class="pay" onclick="checkout()">Checkout</button>
-<button class="clear" onclick="clearCart()">Clear</button>
+<button class="pay" id="payBtn" onclick="checkout()">Checkout Telegram</button>
+<button class="clear" id="clearBtn" onclick="clearCart()">Clear Cart</button>
 
 </div>
 
@@ -189,36 +166,17 @@ Total: $<span id="total">0</span>
 let cart=[];
 let lang="en";
 
-/* ADD */
 function add(name,price){
 cart.push({name,price});
 update();
 }
 
-/* UPDATE */
 function update(){
 document.getElementById("count").innerText=cart.length;
 
 let total=0;
 cart.forEach(i=>total+=i.price);
 document.getElementById("total").innerText=total;
-
-let html="";
-cart.forEach((i,index)=>{
-html+=`
-<div class="item">
-<span>${i.name}</span>
-<span>$${i.price}</span>
-<button onclick="removeItem(${index})">x</button>
-</div>`;
-});
-
-document.getElementById("cartItems").innerHTML=html;
-}
-
-function removeItem(i){
-cart.splice(i,1);
-update();
 }
 
 function clearCart(){
@@ -226,15 +184,15 @@ cart=[];
 update();
 }
 
-/* ✔ FIXED CHECKOUT (TELEGRAM) */
+/* ✅ FIXED CHECKOUT (TELEGRAM WORKING 100%) */
 function checkout(){
 
 if(cart.length===0){
-alert(lang==="en" ? "Cart empty" : "سبد خرید خالی است");
+alert(lang==="en"?"Cart is empty!":"سبد خرید خالی است!");
 return;
 }
 
-let text="🛒 New Order\n\n";
+let text="🛒 "+(lang==="en"?"Order":"سفارش")+"\n\n";
 let total=0;
 
 cart.forEach(i=>{
@@ -242,35 +200,40 @@ text+="• "+i.name+" - $"+i.price+"\n";
 total+=i.price;
 });
 
-text+="\n💰 Total: $"+total;
+text+="\n💰 "+(lang==="en"?"Total":"جمع کل")+": $"+total;
 
-/* GUARANTEED OPEN */
-window.location.href =
-"https://t.me/iphonearian?text=" + encodeURIComponent(text);
+/* ✔ guaranteed open */
+const url = "https://t.me/iphonearian?text=" + encodeURIComponent(text);
+window.location.href = url;
 }
 
-/* ✔ FIXED LANGUAGE */
+/* SEARCH */
+function searchProducts(){
+let input=document.getElementById("search").value.toLowerCase();
+document.querySelectorAll(".card").forEach(c=>{
+c.style.display=c.innerText.toLowerCase().includes(input)?"block":"none";
+});
+}
+
+/* LANGUAGE FIXED */
 function toggleLang(){
 
 if(lang==="en"){
 lang="fa";
-
-document.getElementById("logo").innerText="🛍 فروشگاه حرفه‌ای";
+document.getElementById("logo").innerText="🛍 فروشگاه AR";
 document.getElementById("search").placeholder="جستجو...";
+document.getElementById("payBtn").innerText="پرداخت";
+document.getElementById("clearBtn").innerText="پاک کردن";
 document.getElementById("cartText").innerText="سبد";
-
-document.querySelectorAll(".pay").forEach(b=>b.innerText="پرداخت");
-document.querySelectorAll(".clear").forEach(b=>b.innerText="پاک کردن");
-
+document.getElementById("totalText").innerText="جمع";
 }else{
 lang="en";
-
-document.getElementById("logo").innerText="🛍 AR Store Pro";
+document.getElementById("logo").innerText="🛍 AR Store";
 document.getElementById("search").placeholder="Search...";
+document.getElementById("payBtn").innerText="Checkout Telegram";
+document.getElementById("clearBtn").innerText="Clear Cart";
 document.getElementById("cartText").innerText="Cart";
-
-document.querySelectorAll(".pay").forEach(b=>b.innerText="Checkout");
-document.querySelectorAll(".clear").forEach(b=>b.innerText="Clear");
+document.getElementById("totalText").innerText="Total";
 }
 }
 
