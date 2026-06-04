@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Arian Roy Store</title>
+<title>فروشگاه آریان روی</title>
 
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#111111">
+<meta name="theme-color" content="#111">
 
 <style>
 body{
@@ -97,24 +97,14 @@ right:0;
 background:#111;
 color:white;
 z-index:100;
-border-top-left-radius:15px;
-border-top-right-radius:15px;
-}
-
-#overlay{
-position:fixed;
-top:0;left:0;right:0;bottom:0;
-background:rgba(0,0,0,0.5);
-display:none;
-z-index:99;
 }
 
 #cartHeader{
 padding:15px;
 display:flex;
 justify-content:space-between;
-cursor:pointer;
 font-weight:bold;
+cursor:pointer;
 }
 
 #cartBody{
@@ -167,32 +157,30 @@ padding:3px 6px;
 <div class="card">
 <img src="https://m.media-amazon.com/images/I/51k0qRQFcuL.jpg">
 <h3 id="iphone">آیفون 17 پرو مکس</h3>
-<div class="btn" onclick="addToCart('iPhone 17 Pro Max',1299)">View</div>
+<div class="btn" onclick="addToCart('iPhone 17 Pro Max',1299)" id="b1">مشاهده</div>
 </div>
 
 <div class="card">
 <img src="https://m.media-amazon.com/images/I/51QPBmoc8FL.jpg">
 <h3 id="mac">مک‌بوک A18 پرو</h3>
-<div class="btn" onclick="addToCart('MacBook A18 Pro',1299)">View</div>
+<div class="btn" onclick="addToCart('MacBook A18 Pro',1299)" id="b2">مشاهده</div>
 </div>
 
 <div class="card">
 <img src="https://m.media-amazon.com/images/I/61RGZdmKzRL.jpg">
 <h3 id="watch">اپل واچ اولترا 4</h3>
-<div class="btn" onclick="addToCart('Apple Watch Ultra 4',799)">View</div>
+<div class="btn" onclick="addToCart('Apple Watch Ultra 4',799)" id="b3">مشاهده</div>
 </div>
 
 <div class="card">
 <img src="https://m.media-amazon.com/images/I/51C8kxOdz-L.jpg">
 <h3 id="imac">آی‌مک پرو 2026</h3>
-<div class="btn" onclick="addToCart('iMac Pro 2026',1799)">View</div>
+<div class="btn" onclick="addToCart('iMac Pro 2026',1799)" id="b4">مشاهده</div>
 </div>
 
 </section>
 
 <!-- CART -->
-<div id="overlay" onclick="closeCart()"></div>
-
 <div id="cartBar">
 
 <div id="cartHeader" onclick="toggleCart()">
@@ -201,9 +189,7 @@ padding:3px 6px;
 </div>
 
 <div id="cartBody">
-
 <div id="cartItems"></div>
-
 <p>💰 Total: $<span id="total">0</span></p>
 
 <button onclick="checkout()" style="
@@ -212,8 +198,7 @@ padding:12px;
 background:#25D366;
 color:white;
 border:none;
-border-radius:10px;
-font-weight:bold;">
+border-radius:10px;">
 Checkout Telegram
 </button>
 
@@ -236,36 +221,43 @@ Clear Cart
 <script>
 function toggleCart(){
 let b=document.getElementById("cartBody");
-let o=document.getElementById("overlay");
-
-if(b.style.display==="block"){
-b.style.display="none";
-o.style.display="none";
-}else{
-b.style.display="block";
-o.style.display="block";
-}
+b.style.display = (b.style.display==="block")?"none":"block";
 }
 
-function closeCart(){
-document.getElementById("cartBody").style.display="none";
-document.getElementById("overlay").style.display="none";
-}
-
-const texts={
+const t={
 fa:{
 title:"فروشگاه آریان روی",
-cart:"سبد خرید"
+cart:"سبد خرید",
+iphone:"آیفون 17 پرو مکس",
+mac:"مک‌بوک A18 پرو",
+watch:"اپل واچ اولترا 4",
+imac:"آی‌مک پرو 2026",
+view:"مشاهده"
 },
 en:{
 title:"Arian Roy Store",
-cart:"Cart"
+cart:"Cart",
+iphone:"iPhone 17 Pro Max",
+mac:"MacBook A18 Pro",
+watch:"Apple Watch Ultra 4",
+imac:"iMac Pro 2026",
+view:"View"
 }
 };
 
 function setLang(l){
-document.getElementById("title").innerText=texts[l].title;
-document.getElementById("cartText").innerText=texts[l].cart;
+document.getElementById("title").innerText=t[l].title;
+document.getElementById("cartText").innerText=t[l].cart;
+
+document.getElementById("iphone").innerText=t[l].iphone;
+document.getElementById("mac").innerText=t[l].mac;
+document.getElementById("watch").innerText=t[l].watch;
+document.getElementById("imac").innerText=t[l].imac;
+
+document.getElementById("b1").innerText=t[l].view;
+document.getElementById("b2").innerText=t[l].view;
+document.getElementById("b3").innerText=t[l].view;
+document.getElementById("b4").innerText=t[l].view;
 }
 </script>
 
