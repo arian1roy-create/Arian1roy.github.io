@@ -12,6 +12,7 @@ font-family:Tahoma,sans-serif;
 background:#f4f4f4;
 }
 
+/* TOP BAR */
 .topbar{
 background:#111;
 padding:10px 15px;
@@ -29,6 +30,7 @@ text-decoration:none;
 font-weight:bold;
 }
 
+/* SLIDER */
 .slider{
 position:relative;
 height:420px;
@@ -67,6 +69,7 @@ font-weight:bold;
 text-shadow:0 0 10px black;
 }
 
+/* PRODUCTS GRID */
 .products{
 display:flex;
 flex-wrap:wrap;
@@ -75,20 +78,21 @@ gap:20px;
 padding:30px;
 }
 
+/* CARD STYLE */
 .card{
 background:white;
 width:280px;
-border-radius:12px;
+border-radius:15px;
 overflow:hidden;
-box-shadow:0 0 10px rgba(0,0,0,.15);
+box-shadow:0 8px 20px rgba(0,0,0,0.1);
+transition:0.3s;
 text-decoration:none;
 color:black;
-display:block;
-transition:0.3s;
 }
 
 .card:hover{
-transform:scale(1.03);
+transform:translateY(-8px);
+box-shadow:0 12px 25px rgba(0,0,0,0.2);
 }
 
 .card img{
@@ -104,18 +108,26 @@ text-align:center;
 margin:0;
 }
 
+/* BUY BUTTON */
 .buy-btn{
 display:block;
 margin:10px auto 15px;
-padding:8px 16px;
-background:black;
+padding:10px 18px;
+background:linear-gradient(45deg,#000,#333);
 color:white;
 border:none;
-border-radius:6px;
+border-radius:8px;
 font-weight:bold;
 cursor:pointer;
+transition:0.3s;
 }
 
+.buy-btn:hover{
+transform:scale(1.05);
+background:linear-gradient(45deg,#111,#555);
+}
+
+/* FOOTER */
 footer{
 background:#111;
 color:white;
@@ -123,7 +135,7 @@ text-align:center;
 padding:20px;
 }
 
-/* لوگو انیمیشن */
+/* LOGO ANIMATION */
 @keyframes fastPulse {
 0%{transform:scale(1);}
 20%{transform:scale(1.15);}
