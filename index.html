@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AR Store</title>
 
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#111111">
+<meta name="apple-mobile-web-app-capable" content="yes">
+
 <style>
 body{
 margin:0;
@@ -104,7 +108,6 @@ cursor:pointer;
 .pay{background:#25D366}
 .clear{background:#444}
 
-/* PAYMENT */
 #payBox{
 display:none;
 position:fixed;
@@ -149,13 +152,9 @@ cursor:pointer;
 <body>
 
 <div class="header">
-
 <div class="logo" id="logo">🛍 AR Store</div>
-
 <input class="search" id="search" placeholder="Search...">
-
 <button class="lang" onclick="toggleLang()">🌐</button>
-
 </div>
 
 <div class="products">
@@ -191,34 +190,22 @@ cursor:pointer;
 </div>
 
 <div class="cart">
-
 🛒 <span id="count">0</span><br>
-
 Total: $<span id="total">0</span>
 
 <button class="pay" onclick="openPay()">Checkout</button>
 <button class="clear" onclick="clearCart()">Clear</button>
-
 </div>
 
-<!-- PAYMENT -->
 <div id="payBox">
 <div class="payInner">
 
 <h3 id="payTitle">Payment</h3>
-
 <div id="payItems"></div>
-
 <strong>Total: $<span id="payTotal">0</span></strong>
 
-<button class="tgBtn" onclick="goTelegram()">
-📲 Pay via Telegram
-</button>
-
-<button class="pay" onclick="doPay()">
-💳 Pay Now
-</button>
-
+<button class="tgBtn" onclick="goTelegram()">📲 Telegram Pay</button>
+<button class="pay" onclick="doPay()">💳 Pay</button>
 <button class="clear" onclick="closePay()">Close</button>
 
 </div>
@@ -229,32 +216,26 @@ Total: $<span id="total">0</span>
 let cart=[];
 let lang="en";
 
-/* ADD */
 function add(name,price){
 cart.push({name,price});
 update();
 }
 
-/* UPDATE */
 function update(){
 document.getElementById("count").innerText=cart.length;
-
 let total=0;
 cart.forEach(i=>total+=i.price);
 document.getElementById("total").innerText=total;
 }
 
-/* CLEAR */
 function clearCart(){
 cart=[];
 update();
 }
 
-/* OPEN PAY */
 function openPay(){
-
 if(cart.length===0){
-alert(lang==="en"?"Cart empty":"سبد خرید خالی است");
+alert(lang==="en"?"Cart empty":"سبد خالی است");
 return;
 }
 
@@ -272,17 +253,14 @@ document.getElementById("payItems").innerHTML=html;
 document.getElementById("payTotal").innerText=total;
 }
 
-/* CLOSE */
 function closePay(){
 document.getElementById("payBox").style.display="none";
 }
 
-/* FAKE PAY */
 function doPay(){
-alert("Payment Success (Demo)");
+alert("Success (Demo)");
 }
 
-/* TELEGRAM */
 function goTelegram(){
 
 let text="🛒 Order\n\n";
@@ -312,8 +290,14 @@ document.querySelectorAll(".card button").forEach(b=>{
 b.innerText="افزودن";
 });
 
-document.querySelector(".pay").innerText="پرداخت";
-document.querySelector(".clear").innerText="پاک کردن";
+document.querySelectorAll(".pay").forEach(b=>{
+b.innerText="پرداخت";
+});
+
+document.querySelectorAll(".clear").forEach(b=>{
+b.innerText="پاک کردن";
+});
+
 document.getElementById("payTitle").innerText="پرداخت";
 
 }else{
@@ -326,12 +310,24 @@ document.querySelectorAll(".card button").forEach(b=>{
 b.innerText="Add";
 });
 
-document.querySelector(".pay").innerText="Checkout";
-document.querySelector(".clear").innerText="Clear";
+document.querySelectorAll(".pay").forEach(b=>{
+b.innerText="Checkout";
+});
+
+document.querySelectorAll(".clear").forEach(b=>{
+b.innerText="Clear";
+});
+
 document.getElementById("payTitle").innerText="Payment";
 }
 }
 
+</script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js');
+}
 </script>
 
 </body>
