@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="en" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,22 +25,40 @@ top:0;
 background:#fff;
 display:flex;
 align-items:center;
-gap:8px;
+justify-content:space-between;
 padding:10px;
 border-bottom:1px solid #ddd;
 z-index:10;
 }
 
 .logo{
+display:flex;
+align-items:center;
+gap:8px;
 font-weight:bold;
 color:#e60012;
 }
 
+.logo img{
+width:28px;
+height:28px;
+}
+
 .search{
 flex:1;
+margin:0 10px;
 padding:8px;
 border:1px solid #ddd;
 border-radius:8px;
+}
+
+.lang-btn{
+background:#111;
+color:#fff;
+border:none;
+padding:6px 10px;
+border-radius:8px;
+cursor:pointer;
 }
 
 /* PRODUCTS */
@@ -118,9 +136,16 @@ cursor:pointer;
 
 <!-- HEADER -->
 <div class="header">
-<div class="logo">🛍 AR Store</div>
+
+<div class="logo">
+<img src="icon.png">
+<span id="title">AR Store</span>
+</div>
 
 <input id="search" class="search" placeholder="Search..." onkeyup="searchProducts()">
+
+<button class="lang-btn" onclick="toggleLang()">🌐</button>
+
 </div>
 
 <!-- PRODUCTS -->
@@ -167,12 +192,15 @@ cursor:pointer;
 
 <script>
 let cart=[];
+let lang="en";
 
+/* ADD */
 function add(name,price){
 cart.push({name,price});
 update();
 }
 
+/* UPDATE */
 function update(){
 document.getElementById("count").innerText=cart.length;
 let t=0;
@@ -180,11 +208,13 @@ cart.forEach(i=>t+=i.price);
 document.getElementById("total").innerText=t;
 }
 
+/* CLEAR */
 function clearCart(){
 cart=[];
 update();
 }
 
+/* CHECKOUT */
 function checkout(){
 if(cart.length===0){
 alert("Cart is empty!");
@@ -204,6 +234,7 @@ msg+="%0A💰 Total: $"+total;
 window.open("https://t.me/iphonearian?text="+msg,"_blank");
 }
 
+/* SEARCH */
 function searchProducts(){
 let input=document.getElementById("search").value.toLowerCase();
 let cards=document.querySelectorAll(".card");
@@ -212,6 +243,19 @@ cards.forEach(c=>{
 let text=c.innerText.toLowerCase();
 c.style.display = text.includes(input) ? "block" : "none";
 });
+}
+
+/* LANGUAGE SWITCH */
+function toggleLang(){
+lang = (lang === "en") ? "fa" : "en";
+
+if(lang === "fa"){
+document.getElementById("title").innerText="فروشگاه";
+document.getElementById("search").placeholder="جستجو...";
+} else {
+document.getElementById("title").innerText="AR Store";
+document.getElementById("search").placeholder="Search...";
+}
 }
 </script>
 
