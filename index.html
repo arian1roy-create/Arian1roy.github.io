@@ -3,40 +3,43 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>AR Store</title>
 
+<!-- PWA -->
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#111">
 
 <style>
-body{margin:0;font-family:tahoma;background:#f5f5f5}
+body{
+margin:0;
+font-family:tahoma;
+background:#f5f5f5;
+}
 
 /* HEADER */
 .header{
-position:sticky;top:0;
+position:sticky;
+top:0;
 background:#fff;
 display:flex;
-gap:8px;
 align-items:center;
+gap:8px;
 padding:10px;
 border-bottom:1px solid #ddd;
 z-index:10;
 }
 
-.logo{font-weight:bold;color:#e60012}
+.logo{
+font-weight:bold;
+color:#e60012;
+}
 
 .search{
 flex:1;
 padding:8px;
 border:1px solid #ddd;
 border-radius:8px;
-}
-
-.lang button{
-border:none;
-padding:6px;
-border-radius:6px;
-cursor:pointer;
 }
 
 /* PRODUCTS */
@@ -66,6 +69,12 @@ font-size:13px;
 margin:8px 0;
 }
 
+.price{
+color:#e60012;
+font-weight:bold;
+margin-bottom:5px;
+}
+
 .card button{
 background:#e60012;
 color:#fff;
@@ -85,9 +94,9 @@ right:0;
 background:#111;
 color:#fff;
 padding:10px;
-z-index:20;
 border-top-left-radius:15px;
 border-top-right-radius:15px;
+z-index:20;
 }
 
 .cart button{
@@ -111,37 +120,36 @@ cursor:pointer;
 <div class="logo">🛍 AR Store</div>
 
 <input id="search" class="search" placeholder="Search..." onkeyup="searchProducts()">
-
-<div class="lang">
-<button onclick="setLang('fa')">FA</button>
-<button onclick="setLang('en')">EN</button>
-</div>
 </div>
 
 <!-- PRODUCTS -->
-<div class="products" id="productBox">
+<div class="products">
 
 <div class="card">
 <img src="https://m.media-amazon.com/images/I/51k0qRQFcuL.jpg">
 <h3>iPhone 17 Pro Max</h3>
+<div class="price">$1299</div>
 <button onclick="add('iPhone 17 Pro Max',1299)">Add</button>
 </div>
 
 <div class="card">
 <img src="https://m.media-amazon.com/images/I/51QPBmoc8FL.jpg">
 <h3>MacBook A18 Pro</h3>
+<div class="price">$1299</div>
 <button onclick="add('MacBook A18 Pro',1299)">Add</button>
 </div>
 
 <div class="card">
 <img src="https://m.media-amazon.com/images/I/61RGZdmKzRL.jpg">
 <h3>Apple Watch Ultra 4</h3>
+<div class="price">$799</div>
 <button onclick="add('Apple Watch Ultra 4',799)">Add</button>
 </div>
 
 <div class="card">
 <img src="https://m.media-amazon.com/images/I/51C8kxOdz-L.jpg">
 <h3>iMac Pro 2026</h3>
+<div class="price">$1799</div>
 <button onclick="add('iMac Pro 2026',1799)">Add</button>
 </div>
 
@@ -149,11 +157,11 @@ cursor:pointer;
 
 <!-- CART -->
 <div class="cart">
-🛒 <span id="cartText">Cart</span> (<span id="count">0</span>)
-<div>💰 Total: $<span id="total">0</span></div>
+🛒 Cart (<span id="count">0</span>)
+<div>Total: $<span id="total">0</span></div>
 
 <button class="pay" onclick="checkout()">Checkout Telegram</button>
-<button class="clear" onclick="clearCart()">Clear</button>
+<button class="clear" onclick="clearCart()">Clear Cart</button>
 </div>
 
 <script>
@@ -179,10 +187,11 @@ cart=[];
 update();
 }
 
-/* CHECKOUT */
+/* CHECKOUT TELEGRAM */
 function checkout(){
+
 if(cart.length===0){
-alert("Cart empty!");
+alert("Cart is empty!");
 return;
 }
 
@@ -199,7 +208,7 @@ msg+="%0A💰 Total: $"+total;
 window.open("https://t.me/iphonearian?text="+msg,"_blank");
 }
 
-/* 🔍 SEARCH REAL */
+/* SEARCH REAL */
 function searchProducts(){
 let input=document.getElementById("search").value.toLowerCase();
 let cards=document.querySelectorAll(".card");
@@ -209,14 +218,12 @@ let text=c.innerText.toLowerCase();
 c.style.display = text.includes(input) ? "block" : "none";
 });
 }
+</script>
 
-/* LANG */
-function setLang(l){
-if(l=="en"){
-document.getElementById("cartText").innerText="Cart";
-}else{
-document.getElementById("cartText").innerText="سبد خرید";
-}
+<!-- PWA -->
+<script>
+if('serviceWorker' in navigator){
+navigator.serviceWorker.register('sw.js');
 }
 </script>
 
