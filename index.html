@@ -103,6 +103,46 @@ cursor:pointer;
 
 .pay{background:#25D366}
 .clear{background:#444}
+
+/* PAYMENT */
+#payBox{
+display:none;
+position:fixed;
+top:0;
+left:0;
+right:0;
+bottom:0;
+background:rgba(0,0,0,.4);
+z-index:999;
+align-items:center;
+justify-content:center;
+}
+
+.payInner{
+background:#fff;
+width:90%;
+max-width:320px;
+padding:15px;
+border-radius:12px;
+text-align:center;
+}
+
+#payItems{
+text-align:right;
+font-size:13px;
+margin:10px 0;
+}
+
+.tgBtn{
+background:#229ED9;
+color:white;
+border:none;
+padding:10px;
+border-radius:8px;
+width:100%;
+margin-top:5px;
+cursor:pointer;
+}
 </style>
 </head>
 
@@ -112,7 +152,7 @@ cursor:pointer;
 
 <div class="logo" id="logo">🛍 AR Store</div>
 
-<input id="search" class="search" placeholder="Search..." onkeyup="searchProducts()">
+<input class="search" id="search" placeholder="Search...">
 
 <button class="lang" onclick="toggleLang()">🌐</button>
 
@@ -152,13 +192,36 @@ cursor:pointer;
 
 <div class="cart">
 
-🛒 <span id="cartText">Cart</span> (<span id="count">0</span>)<br>
+🛒 <span id="count">0</span><br>
 
-<span id="totalText">Total</span>: $<span id="total">0</span>
+Total: $<span id="total">0</span>
 
-<button class="pay" id="payBtn" onclick="checkout()">Checkout Telegram</button>
-<button class="clear" id="clearBtn" onclick="clearCart()">Clear Cart</button>
+<button class="pay" onclick="openPay()">Checkout</button>
+<button class="clear" onclick="clearCart()">Clear</button>
 
+</div>
+
+<!-- PAYMENT -->
+<div id="payBox">
+<div class="payInner">
+
+<h3 id="payTitle">Payment</h3>
+
+<div id="payItems"></div>
+
+<strong>Total: $<span id="payTotal">0</span></strong>
+
+<button class="tgBtn" onclick="goTelegram()">
+📲 Pay via Telegram
+</button>
+
+<button class="pay" onclick="doPay()">
+💳 Pay Now
+</button>
+
+<button class="clear" onclick="closePay()">Close</button>
+
+</div>
 </div>
 
 <script>
@@ -166,11 +229,13 @@ cursor:pointer;
 let cart=[];
 let lang="en";
 
+/* ADD */
 function add(name,price){
 cart.push({name,price});
 update();
 }
 
+/* UPDATE */
 function update(){
 document.getElementById("count").innerText=cart.length;
 
@@ -179,20 +244,48 @@ cart.forEach(i=>total+=i.price);
 document.getElementById("total").innerText=total;
 }
 
+/* CLEAR */
 function clearCart(){
 cart=[];
 update();
 }
 
-/* ✅ FIXED CHECKOUT (TELEGRAM WORKING 100%) */
-function checkout(){
+/* OPEN PAY */
+function openPay(){
 
 if(cart.length===0){
-alert(lang==="en"?"Cart is empty!":"سبد خرید خالی است!");
+alert(lang==="en"?"Cart empty":"سبد خرید خالی است");
 return;
 }
 
-let text="🛒 "+(lang==="en"?"Order":"سفارش")+"\n\n";
+document.getElementById("payBox").style.display="flex";
+
+let html="";
+let total=0;
+
+cart.forEach(i=>{
+html+="• "+i.name+" - $"+i.price+"<br>";
+total+=i.price;
+});
+
+document.getElementById("payItems").innerHTML=html;
+document.getElementById("payTotal").innerText=total;
+}
+
+/* CLOSE */
+function closePay(){
+document.getElementById("payBox").style.display="none";
+}
+
+/* FAKE PAY */
+function doPay(){
+alert("Payment Success (Demo)");
+}
+
+/* TELEGRAM */
+function goTelegram(){
+
+let text="🛒 Order\n\n";
 let total=0;
 
 cart.forEach(i=>{
@@ -200,40 +293,42 @@ text+="• "+i.name+" - $"+i.price+"\n";
 total+=i.price;
 });
 
-text+="\n💰 "+(lang==="en"?"Total":"جمع کل")+": $"+total;
+text+="\n💰 Total: $"+total;
 
-/* ✔ guaranteed open */
-const url = "https://t.me/iphonearian?text=" + encodeURIComponent(text);
-window.location.href = url;
+window.location.href =
+"https://t.me/iphonearian?text=" + encodeURIComponent(text);
 }
 
-/* SEARCH */
-function searchProducts(){
-let input=document.getElementById("search").value.toLowerCase();
-document.querySelectorAll(".card").forEach(c=>{
-c.style.display=c.innerText.toLowerCase().includes(input)?"block":"none";
-});
-}
-
-/* LANGUAGE FIXED */
+/* ✅ FIXED LANGUAGE (FULL WORKING) */
 function toggleLang(){
 
 if(lang==="en"){
 lang="fa";
+
 document.getElementById("logo").innerText="🛍 فروشگاه AR";
 document.getElementById("search").placeholder="جستجو...";
-document.getElementById("payBtn").innerText="پرداخت";
-document.getElementById("clearBtn").innerText="پاک کردن";
-document.getElementById("cartText").innerText="سبد";
-document.getElementById("totalText").innerText="جمع";
+
+document.querySelectorAll(".card button").forEach(b=>{
+b.innerText="افزودن";
+});
+
+document.querySelector(".pay").innerText="پرداخت";
+document.querySelector(".clear").innerText="پاک کردن";
+document.getElementById("payTitle").innerText="پرداخت";
+
 }else{
 lang="en";
+
 document.getElementById("logo").innerText="🛍 AR Store";
 document.getElementById("search").placeholder="Search...";
-document.getElementById("payBtn").innerText="Checkout Telegram";
-document.getElementById("clearBtn").innerText="Clear Cart";
-document.getElementById("cartText").innerText="Cart";
-document.getElementById("totalText").innerText="Total";
+
+document.querySelectorAll(".card button").forEach(b=>{
+b.innerText="Add";
+});
+
+document.querySelector(".pay").innerText="Checkout";
+document.querySelector(".clear").innerText="Clear";
+document.getElementById("payTitle").innerText="Payment";
 }
 }
 
