@@ -115,32 +115,6 @@ font-weight:bold;
 cursor:pointer;
 }
 
-/* CART BOX */
-#cartBox{
-position:fixed;
-bottom:15px;
-right:15px;
-background:#111;
-color:white;
-padding:15px;
-border-radius:12px;
-width:240px;
-z-index:999;
-font-size:14px;
-}
-
-#cartBox button{
-width:100%;
-padding:10px;
-background:#25D366;
-color:white;
-border:none;
-border-radius:8px;
-font-weight:bold;
-cursor:pointer;
-margin-top:10px;
-}
-
 /* FOOTER */
 footer{
 background:#111;
@@ -163,6 +137,55 @@ padding:20px;
 width:260px;
 animation:fastPulse 0.35s infinite;
 }
+
+/* =========================
+   CART (DIGIKALA STYLE)
+========================= */
+
+#cartBar{
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+background:#111;
+color:white;
+z-index:999;
+border-top:2px solid #333;
+font-family:tahoma;
+}
+
+#cartHeader{
+padding:12px;
+cursor:pointer;
+display:flex;
+justify-content:space-between;
+font-weight:bold;
+}
+
+#cartBody{
+display:none;
+padding:10px;
+background:#1a1a1a;
+}
+
+#cartList{
+max-height:120px;
+overflow:auto;
+font-size:13px;
+margin-bottom:8px;
+}
+
+#cartBar button{
+width:100%;
+padding:10px;
+background:#25D366;
+color:white;
+border:none;
+border-radius:8px;
+font-weight:bold;
+cursor:pointer;
+}
+
 </style>
 </head>
 
@@ -208,25 +231,25 @@ animation:fastPulse 0.35s infinite;
 <!-- PRODUCTS -->
 <section class="products">
 
-<a href="iphone.html" class="card">
+<a class="card">
 <img src="https://m.media-amazon.com/images/I/51k0qRQFcuL._AC_UF894,1000_QL80_.jpg">
 <h3>iPhone 17 Pro Max</h3>
 <button class="buy-btn" onclick="addToCart('iPhone 17 Pro Max',1299)">BUY</button>
 </a>
 
-<a href="macbook.html" class="card">
+<a class="card">
 <img src="https://m.media-amazon.com/images/I/51QPBmoc8FL._AC_UF894,1000_QL80_FMwebp_.jpg">
 <h3>MacBook A18 Pro</h3>
 <button class="buy-btn" onclick="addToCart('MacBook A18 Pro',999)">BUY</button>
 </a>
 
-<a href="watch.html" class="card">
+<a class="card">
 <img src="https://m.media-amazon.com/images/I/61RGZdmKzRL._AC_UF1000,1000_QL80_FMwebp_.jpg">
 <h3>Apple Watch Ultra 4</h3>
 <button class="buy-btn" onclick="addToCart('Apple Watch Ultra 4',699)">BUY</button>
 </a>
 
-<a href="imac.html" class="card">
+<a class="card">
 <img src="https://m.media-amazon.com/images/I/51C8kxOdz-L._AC_UF1000,1000_QL80_FMwebp_.jpg">
 <h3>iMac Pro 2026</h3>
 <button class="buy-btn" onclick="addToCart('iMac Pro 2026',1499)">BUY</button>
@@ -234,13 +257,19 @@ animation:fastPulse 0.35s infinite;
 
 </section>
 
-<!-- CART -->
-<div id="cartBox">
-<h3>🛒 Cart</h3>
+<!-- CART BAR -->
+<div id="cartBar">
+<div id="cartHeader" onclick="toggleCart()">
+🛒 Cart (<span id="cartCount">0</span>)
+<span id="arrow">▲</span>
+</div>
+
+<div id="cartBody">
 <div id="cartList">Empty</div>
 <p>Total: $<span id="cartTotal">0</span></p>
 
 <button onclick="checkoutTelegram()">Checkout Telegram</button>
+</div>
 </div>
 
 <footer>
@@ -258,6 +287,8 @@ updateCart();
 }
 
 function updateCart(){
+document.getElementById("cartCount").innerText=cart.length;
+
 let box=document.getElementById("cartList");
 box.innerHTML="";
 
@@ -270,6 +301,19 @@ box.innerHTML+="• "+i.name+" - $"+i.price+"<br>";
 });
 
 document.getElementById("cartTotal").innerText=total;
+}
+
+function toggleCart(){
+let body=document.getElementById("cartBody");
+let arrow=document.getElementById("arrow");
+
+if(body.style.display==="block"){
+body.style.display="none";
+arrow.innerHTML="▲";
+}else{
+body.style.display="block";
+arrow.innerHTML="▼";
+}
 }
 
 function checkoutTelegram(){
