@@ -3,32 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>فروشگاه آریان روی</title>
+<title>AR Store</title>
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#111">
 
 <style>
-body{
-margin:0;
-font-family:tahoma;
-background:#f5f5f5;
-}
+body{margin:0;font-family:tahoma;background:#f5f5f5}
 
 /* HEADER */
 .header{
-position:sticky;
-top:0;
+position:sticky;top:0;
 background:#fff;
-padding:10px;
 display:flex;
+gap:8px;
 align-items:center;
-gap:10px;
-z-index:10;
+padding:10px;
 border-bottom:1px solid #ddd;
+z-index:10;
 }
 
-.logo{
-font-weight:bold;
-color:#e60012;
-}
+.logo{font-weight:bold;color:#e60012}
 
 .search{
 flex:1;
@@ -39,28 +34,9 @@ border-radius:8px;
 
 .lang button{
 border:none;
-padding:6px 8px;
+padding:6px;
 border-radius:6px;
 cursor:pointer;
-background:#eee;
-}
-
-/* CATEGORY BAR */
-.cat{
-display:flex;
-gap:8px;
-overflow:auto;
-padding:10px;
-background:#fff;
-border-bottom:1px solid #eee;
-}
-
-.cat div{
-background:#f0f0f0;
-padding:6px 10px;
-border-radius:20px;
-font-size:12px;
-white-space:nowrap;
 }
 
 /* PRODUCTS */
@@ -75,8 +51,8 @@ padding:10px;
 background:#fff;
 border-radius:12px;
 padding:10px;
-box-shadow:0 2px 8px rgba(0,0,0,0.08);
 text-align:center;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
 }
 
 .card img{
@@ -90,20 +66,14 @@ font-size:13px;
 margin:8px 0;
 }
 
-.price{
-color:#e60012;
-font-weight:bold;
-margin-bottom:5px;
-}
-
 .card button{
 background:#e60012;
 color:#fff;
 border:none;
-padding:6px 10px;
+padding:6px;
 border-radius:8px;
-cursor:pointer;
 width:100%;
+cursor:pointer;
 }
 
 /* CART */
@@ -129,15 +99,8 @@ border-radius:8px;
 cursor:pointer;
 }
 
-.pay{
-background:#25D366;
-color:#fff;
-}
-
-.clear{
-background:#444;
-color:#fff;
-}
+.pay{background:#25D366}
+.clear{background:#444}
 </style>
 </head>
 
@@ -147,7 +110,7 @@ color:#fff;
 <div class="header">
 <div class="logo">🛍 AR Store</div>
 
-<input class="search" placeholder="Search products...">
+<input id="search" class="search" placeholder="Search..." onkeyup="searchProducts()">
 
 <div class="lang">
 <button onclick="setLang('fa')">FA</button>
@@ -155,50 +118,38 @@ color:#fff;
 </div>
 </div>
 
-<!-- CATEGORY -->
-<div class="cat">
-<div>📱 Phone</div>
-<div>💻 Laptop</div>
-<div>⌚ Watch</div>
-<div>🖥 iMac</div>
-</div>
-
 <!-- PRODUCTS -->
-<div class="products">
+<div class="products" id="productBox">
 
 <div class="card">
 <img src="https://m.media-amazon.com/images/I/51k0qRQFcuL.jpg">
-<h3 id="iphone">آیفون 17 پرو مکس</h3>
-<div class="price">$1299</div>
-<button onclick="addToCart('iPhone 17 Pro Max',1299)">Add to Cart</button>
+<h3>iPhone 17 Pro Max</h3>
+<button onclick="add('iPhone 17 Pro Max',1299)">Add</button>
 </div>
 
 <div class="card">
 <img src="https://m.media-amazon.com/images/I/51QPBmoc8FL.jpg">
-<h3 id="mac">مک‌بوک A18 پرو</h3>
-<div class="price">$1299</div>
-<button onclick="addToCart('MacBook A18 Pro',1299)">Add to Cart</button>
+<h3>MacBook A18 Pro</h3>
+<button onclick="add('MacBook A18 Pro',1299)">Add</button>
 </div>
 
 <div class="card">
 <img src="https://m.media-amazon.com/images/I/61RGZdmKzRL.jpg">
-<h3 id="watch">اپل واچ اولترا 4</h3>
-<div class="price">$799</div>
-<button onclick="addToCart('Apple Watch Ultra 4',799)">Add to Cart</button>
+<h3>Apple Watch Ultra 4</h3>
+<button onclick="add('Apple Watch Ultra 4',799)">Add</button>
 </div>
 
 <div class="card">
 <img src="https://m.media-amazon.com/images/I/51C8kxOdz-L.jpg">
-<h3 id="imac">آی‌مک پرو 2026</h3>
-<div class="price">$1799</div>
-<button onclick="addToCart('iMac Pro 2026',1799)">Add to Cart</button>
+<h3>iMac Pro 2026</h3>
+<button onclick="add('iMac Pro 2026',1799)">Add</button>
 </div>
 
 </div>
 
 <!-- CART -->
 <div class="cart">
-🛒 <span id="cartText">سبد خرید</span> (<span id="count">0</span>)
+🛒 <span id="cartText">Cart</span> (<span id="count">0</span>)
 <div>💰 Total: $<span id="total">0</span></div>
 
 <button class="pay" onclick="checkout()">Checkout Telegram</button>
@@ -208,26 +159,30 @@ color:#fff;
 <script>
 let cart=[];
 
-function addToCart(name,price){
+/* ADD */
+function add(name,price){
 cart.push({name,price});
 update();
 }
 
+/* UPDATE */
 function update(){
 document.getElementById("count").innerText=cart.length;
-let total=0;
-cart.forEach(i=>total+=i.price);
-document.getElementById("total").innerText=total;
+let t=0;
+cart.forEach(i=>t+=i.price);
+document.getElementById("total").innerText=t;
 }
 
+/* CLEAR */
 function clearCart(){
 cart=[];
 update();
 }
 
+/* CHECKOUT */
 function checkout(){
 if(cart.length===0){
-alert("Cart is empty!");
+alert("Cart empty!");
 return;
 }
 
@@ -244,18 +199,24 @@ msg+="%0A💰 Total: $"+total;
 window.open("https://t.me/iphonearian?text="+msg,"_blank");
 }
 
-/* LANG */
-const t={
-fa:{cart:"سبد خرید",iphone:"آیفون 17 پرو مکس",mac:"مک‌بوک A18 پرو",watch:"اپل واچ",imac:"آی‌مک"},
-en:{cart:"Cart",iphone:"iPhone 17 Pro Max",mac:"MacBook A18 Pro",watch:"Apple Watch",imac:"iMac"}
-};
+/* 🔍 SEARCH REAL */
+function searchProducts(){
+let input=document.getElementById("search").value.toLowerCase();
+let cards=document.querySelectorAll(".card");
 
+cards.forEach(c=>{
+let text=c.innerText.toLowerCase();
+c.style.display = text.includes(input) ? "block" : "none";
+});
+}
+
+/* LANG */
 function setLang(l){
-document.getElementById("cartText").innerText=t[l].cart;
-document.getElementById("iphone").innerText=t[l].iphone;
-document.getElementById("mac").innerText=t[l].mac;
-document.getElementById("watch").innerText=t[l].watch;
-document.getElementById("imac").innerText=t[l].imac;
+if(l=="en"){
+document.getElementById("cartText").innerText="Cart";
+}else{
+document.getElementById("cartText").innerText="سبد خرید";
+}
 }
 </script>
 
