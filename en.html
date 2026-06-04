@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Arian Roy Store</title>
 
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#111111">
+
 <style>
 body{
 margin:0;
@@ -22,13 +25,12 @@ justify-content:space-between;
 align-items:center;
 }
 
-.lang-btn{
-background:white;
-color:black;
-padding:6px 12px;
-border-radius:8px;
-text-decoration:none;
+.lang-btn button{
+padding:6px 10px;
+border:none;
+border-radius:6px;
 font-weight:bold;
+cursor:pointer;
 }
 
 /* HERO */
@@ -39,7 +41,7 @@ padding:15px;
 }
 
 .hero img{
-width:200px;
+width:170px;
 animation:pulse 0.4s infinite;
 }
 
@@ -62,8 +64,6 @@ background:white;
 border-radius:15px;
 overflow:hidden;
 text-align:center;
-text-decoration:none;
-color:black;
 box-shadow:0 6px 18px rgba(0,0,0,0.1);
 }
 
@@ -74,8 +74,8 @@ object-fit:contain;
 }
 
 .card h3{
-font-size:14px;
 margin:10px 0;
+font-size:14px;
 }
 
 .btn{
@@ -85,8 +85,7 @@ padding:6px 12px;
 background:black;
 color:white;
 border-radius:8px;
-font-size:12px;
-text-decoration:none;
+cursor:pointer;
 }
 </style>
 </head>
@@ -95,11 +94,15 @@ text-decoration:none;
 
 <!-- TOP -->
 <div class="topbar">
-<a class="lang-btn" href="index.html">🇮🇷 FA</a>
-<span>Store</span>
+<span id="title">Arian Roy Store</span>
+
+<div class="lang-btn">
+<button onclick="setLang('fa')">FA</button>
+<button onclick="setLang('en')">EN</button>
+</div>
 </div>
 
-<!-- LOGO -->
+<!-- HERO -->
 <div class="hero">
 <img src="file_00000000bfec720a9ea8aa8800b40ffb.png">
 </div>
@@ -107,75 +110,43 @@ text-decoration:none;
 <!-- PRODUCTS -->
 <section class="products">
 
-<a class="card" href="iphone.html">
+<div class="card">
 <img src="https://m.media-amazon.com/images/I/51k0qRQFcuL.jpg">
-<h3>iPhone 17 Pro Max</h3>
-<div class="btn">View</div>
-</a>
+<h3 id="iphone">iPhone 17 Pro Max</h3>
+<div class="btn" onclick="addToCart('iPhone 17 Pro Max',1299)">View</div>
+</div>
 
-<a class="card" href="macbook.html">
+<div class="card">
 <img src="https://m.media-amazon.com/images/I/51QPBmoc8FL.jpg">
-<h3>MacBook A18 Pro</h3>
-<div class="btn">View</div>
-</a>
+<h3 id="mac">MacBook A18 Pro</h3>
+<div class="btn" onclick="addToCart('MacBook A18 Pro',1299)">View</div>
+</div>
 
-<a class="card" href="watch.html">
+<div class="card">
 <img src="https://m.media-amazon.com/images/I/61RGZdmKzRL.jpg">
-<h3>Apple Watch Ultra 4</h3>
-<div class="btn">View</div>
-</a>
+<h3 id="watch">Apple Watch Ultra 4</h3>
+<div class="btn" onclick="addToCart('Apple Watch Ultra 4',799)">View</div>
+</div>
 
-<a class="card" href="imac.html">
+<div class="card">
 <img src="https://m.media-amazon.com/images/I/51C8kxOdz-L.jpg">
-<h3>iMac Pro 2026</h3>
-<div class="btn">View</div>
-</a>
+<h3 id="imac">iMac Pro 2026</h3>
+<div class="btn" onclick="addToCart('iMac Pro 2026',1799)">View</div>
+</div>
 
 </section>
 
 <!-- CART -->
+<div id="overlay" onclick="closeCart()"></div>
+
 <div id="cartBar">
 
-<div id="overlay" onclick="closeCart()" style="
-position:fixed;
-top:0;left:0;right:0;bottom:0;
-background:rgba(0,0,0,0.5);
-display:none;
-z-index:99;"></div>
-
-<div onclick="toggleCart()" style="
-position:fixed;
-bottom:0;
-left:0;
-right:0;
-background:#111;
-color:white;
-padding:15px;
-display:flex;
-justify-content:space-between;
-z-index:100;
-border-top-left-radius:15px;
-border-top-right-radius:15px;
-font-weight:bold;
-cursor:pointer;">
-🛒 Cart (<span id="count">0</span>)
-<span>▲</span>
+<div id="cartHeader" onclick="toggleCart()">
+🛒 <span id="cartText">Cart</span>
+(<span id="count">0</span>)
 </div>
 
-<div id="cartBody" style="
-display:none;
-position:fixed;
-bottom:50px;
-left:0;
-right:0;
-background:#1a1a1a;
-color:white;
-padding:10px;
-z-index:101;
-max-height:60vh;
-overflow:auto;
-border-top:1px solid #333;
-">
+<div id="cartBody">
 
 <div id="cartItems"></div>
 
@@ -189,7 +160,7 @@ color:white;
 border:none;
 border-radius:10px;
 font-weight:bold;">
-Checkout via Telegram
+Checkout Telegram
 </button>
 
 <button onclick="clearCart()" style="
@@ -207,6 +178,36 @@ Clear Cart
 </div>
 
 <script src="cart.js"></script>
+
+<script>
+function toggleCart(){
+let b=document.getElementById("cartBody");
+let o=document.getElementById("overlay");
+
+if(b.style.display==="block"){
+b.style.display="none";
+o.style.display="none";
+}else{
+b.style.display="block";
+o.style.display="block";
+}
+}
+
+function closeCart(){
+document.getElementById("cartBody").style.display="none";
+document.getElementById("overlay").style.display="none";
+}
+
+const texts={
+fa:{title:"فروشگاه آریان روی",cart:"سبد خرید"},
+en:{title:"Arian Roy Store",cart:"Cart"}
+};
+
+function setLang(l){
+document.getElementById("title").innerText=texts[l].title;
+document.getElementById("cartText").innerText=texts[l].cart;
+}
+</script>
 
 </body>
 </html>
