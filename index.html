@@ -12,25 +12,33 @@ font-family:tahoma;
 background:#f4f4f4;
 }
 
-/* TOP */
+/* HEADER */
 .topbar{
 background:#111;
-padding:10px;
+padding:12px;
 display:flex;
 justify-content:space-between;
 align-items:center;
+color:white;
 }
 
 .lang-btn{
 background:white;
 color:black;
 padding:6px 12px;
-border-radius:6px;
+border-radius:8px;
 text-decoration:none;
+font-weight:bold;
 }
 
-/* LOGO */
-.logo{
+/* HERO */
+.hero{
+text-align:center;
+background:#111;
+padding:15px;
+}
+
+.hero img{
 width:200px;
 animation:pulse 0.4s infinite;
 }
@@ -43,77 +51,64 @@ animation:pulse 0.4s infinite;
 
 /* PRODUCTS */
 .products{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:15px;
-padding:20px;
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:12px;
+padding:15px;
 }
 
 .card{
-width:260px;
 background:white;
-border-radius:12px;
+border-radius:15px;
 overflow:hidden;
+box-shadow:0 6px 18px rgba(0,0,0,0.1);
 text-align:center;
-box-shadow:0 5px 15px rgba(0,0,0,0.1);
 text-decoration:none;
 color:black;
+transition:0.2s;
+}
+
+.card:hover{
+transform:scale(1.03);
 }
 
 .card img{
 width:100%;
-height:200px;
+height:160px;
 object-fit:contain;
+background:white;
 }
 
 .card h3{
 margin:10px 0;
+font-size:14px;
 }
 
-/* CART */
-#cartBar{
-position:fixed;
-bottom:0;
-left:0;
-right:0;
-background:#111;
+/* BUTTON */
+.btn{
+display:inline-block;
+margin-bottom:10px;
+padding:6px 12px;
+background:black;
 color:white;
-}
-
-#cartHeader{
-padding:12px;
-display:flex;
-justify-content:space-between;
-cursor:pointer;
-}
-
-#cartBody{
-display:none;
-background:#1a1a1a;
-padding:10px;
-}
-
-button{
-background:#25D366;
-color:white;
-border:none;
-padding:10px;
-width:100%;
-margin-top:5px;
-border-radius:6px;
+border-radius:8px;
+text-decoration:none;
+font-size:12px;
 }
 </style>
 </head>
 
 <body>
 
+<!-- TOP -->
 <div class="topbar">
 <a class="lang-btn" href="en.html">🇬🇧 EN</a>
+<span>فروشگاه آریان روی</span>
 </div>
 
-<div style="text-align:center;background:#111;padding:10px">
-<img src="file_00000000bfec720a9ea8aa8800b40ffb.png" class="logo">
+<!-- LOGO -->
+<div class="hero">
+<img src="file_00000000bfec720a9ea8aa8800b40ffb.png">
 </div>
 
 <!-- PRODUCTS -->
@@ -122,53 +117,102 @@ border-radius:6px;
 <a class="card" href="iphone.html">
 <img src="https://m.media-amazon.com/images/I/51k0qRQFcuL.jpg">
 <h3>iPhone 17 Pro Max</h3>
+<div class="btn">View</div>
 </a>
 
 <a class="card" href="macbook.html">
 <img src="https://m.media-amazon.com/images/I/51QPBmoc8FL.jpg">
 <h3>MacBook A18 Pro</h3>
+<div class="btn">View</div>
 </a>
 
 <a class="card" href="watch.html">
 <img src="https://m.media-amazon.com/images/I/61RGZdmKzRL.jpg">
 <h3>Apple Watch Ultra 4</h3>
+<div class="btn">View</div>
 </a>
 
 <a class="card" href="imac.html">
 <img src="https://m.media-amazon.com/images/I/51C8kxOdz-L.jpg">
 <h3>iMac Pro 2026</h3>
+<div class="btn">View</div>
 </a>
 
 </section>
 
-<!-- CART -->
+<!-- CART UI -->
 <div id="cartBar">
+<div id="overlay" onclick="closeCart()" style="
+position:fixed;
+top:0;left:0;right:0;bottom:0;
+background:rgba(0,0,0,0.5);
+display:none;
+z-index:99;"></div>
 
-<div id="cartHeader" onclick="toggleCart()">
+<div onclick="toggleCart()" style="
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+background:#111;
+color:white;
+padding:15px;
+display:flex;
+justify-content:space-between;
+z-index:100;
+border-top-left-radius:15px;
+border-top-right-radius:15px;
+font-weight:bold;
+cursor:pointer;">
 🛒 Cart (<span id="count">0</span>)
 <span>▲</span>
 </div>
 
-<div id="cartBody">
+<div id="cartBody" style="
+display:none;
+position:fixed;
+bottom:50px;
+left:0;
+right:0;
+background:#1a1a1a;
+color:white;
+padding:10px;
+z-index:101;
+max-height:60vh;
+overflow:auto;
+border-top:1px solid #333;
+">
 
 <div id="cartItems"></div>
 
-<p>Total: $<span id="total">0</span></p>
+<p>💰 Total: $<span id="total">0</span></p>
 
-<button onclick="checkout()">Send to Telegram</button>
+<button onclick="checkout()" style="
+width:100%;
+padding:12px;
+background:#25D366;
+color:white;
+border:none;
+border-radius:10px;
+font-weight:bold;">
+Checkout Telegram
+</button>
+
+<button onclick="clearCart()" style="
+width:100%;
+padding:10px;
+margin-top:5px;
+background:#444;
+color:white;
+border:none;
+border-radius:10px;">
+Clear Cart
+</button>
 
 </div>
-
 </div>
 
 <script src="cart.js"></script>
-
-<script>
-function toggleCart(){
-let b=document.getElementById("cartBody");
-b.style.display = b.style.display==="block"?"none":"block";
-}
-</script>
 
 </body>
 </html>
