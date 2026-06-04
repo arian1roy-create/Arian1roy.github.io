@@ -32,16 +32,12 @@ z-index:10;
 }
 
 .logo{
-display:flex;
-align-items:center;
-gap:8px;
+font-size:18px;
 font-weight:bold;
 color:#e60012;
-}
-
-.logo img{
-width:28px;
-height:28px;
+display:flex;
+align-items:center;
+gap:6px;
 }
 
 .search{
@@ -138,8 +134,7 @@ cursor:pointer;
 <div class="header">
 
 <div class="logo">
-<img src="icon.png">
-<span id="title">AR Store</span>
+🛍 AR Store
 </div>
 
 <input id="search" class="search" placeholder="Search..." onkeyup="searchProducts()">
@@ -245,15 +240,13 @@ c.style.display = text.includes(input) ? "block" : "none";
 });
 }
 
-/* LANGUAGE SWITCH */
+/* LANGUAGE (simple) */
 function toggleLang(){
-lang = (lang === "en") ? "fa" : "en";
-
-if(lang === "fa"){
-document.getElementById("title").innerText="فروشگاه";
+if(lang==="en"){
+lang="fa";
 document.getElementById("search").placeholder="جستجو...";
 } else {
-document.getElementById("title").innerText="AR Store";
+lang="en";
 document.getElementById("search").placeholder="Search...";
 }
 }
