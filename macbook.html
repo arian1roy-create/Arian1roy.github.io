@@ -1,16 +1,33 @@
 <!DOCTYPE html>
-<html>
-<head><meta charset="UTF-8"><title>MacBook</title></head>
-<body style="text-align:center;font-family:tahoma;background:#f4f4f4;padding:20px">
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>MacBook</title>
+<style>
+body{font-family:tahoma;background:#f4f4f4;text-align:center}
+.box{background:white;width:260px;margin:10px auto;padding:15px;border-radius:12px}
+button{padding:8px 15px;background:black;color:white;border:none;border-radius:8px}
+</style>
+</head>
+<body>
 
-<h1>MacBook A18 Pro</h1>
-<img src="https://m.media-amazon.com/images/I/51QPBmoc8FL._AC_UF894,1000_QL80_FMwebp_.jpg" width="300">
+<h1>MacBook Models</h1>
 
-<h2>$1999</h2>
+<div class="box">
+<p>512GB - $999</p>
+<button onclick="buy('MacBook 512GB',999)">Buy</button>
+</div>
 
-<button onclick="location.href='https://t.me/iphonearian?text=Buy MacBook'">
-Buy Now
-</button>
+<div class="box">
+<p>1TB - $1299</p>
+<button onclick="buy('MacBook 1TB',1299)">Buy</button>
+</div>
+
+<script>
+function buy(n,p){
+window.open("https://t.me/iphonearian?text=🛒 "+n+" - $"+p,"_blank");
+}
+</script>
 
 </body>
 </html>
