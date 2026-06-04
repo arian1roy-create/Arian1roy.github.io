@@ -8,7 +8,7 @@
 <style>
 body{
 margin:0;
-font-family:Tahoma,sans-serif;
+font-family:Tahoma;
 background:#f4f4f4;
 }
 
@@ -30,43 +30,6 @@ text-decoration:none;
 font-weight:bold;
 }
 
-/* SLIDER */
-.slider{
-position:relative;
-height:420px;
-overflow:hidden;
-background:#fff;
-}
-
-.slide{
-position:absolute;
-width:100%;
-height:100%;
-opacity:0;
-transition:1s;
-}
-
-.slide.active{opacity:1;}
-
-.slide img{
-width:100%;
-height:100%;
-object-fit:contain;
-background:#fff;
-}
-
-.caption{
-position:absolute;
-bottom:20px;
-left:0;
-right:0;
-text-align:center;
-color:white;
-font-size:28px;
-font-weight:bold;
-text-shadow:0 0 10px black;
-}
-
 /* PRODUCTS */
 .products{
 display:flex;
@@ -82,14 +45,6 @@ width:280px;
 border-radius:15px;
 overflow:hidden;
 box-shadow:0 8px 20px rgba(0,0,0,0.1);
-text-decoration:none;
-color:black;
-transition:0.3s;
-}
-
-.card:hover{
-transform:translateY(-8px);
-box-shadow:0 12px 25px rgba(0,0,0,0.2);
 }
 
 .card img{
@@ -107,41 +62,14 @@ margin:10px 0;
 display:block;
 margin:10px auto 15px;
 padding:10px 18px;
-background:linear-gradient(45deg,#000,#333);
+background:black;
 color:white;
 border:none;
 border-radius:8px;
-font-weight:bold;
 cursor:pointer;
 }
 
-/* FOOTER */
-footer{
-background:#111;
-color:white;
-text-align:center;
-padding:20px;
-}
-
-/* LOGO */
-@keyframes fastPulse {
-0%{transform:scale(1);}
-20%{transform:scale(1.15);}
-40%{transform:scale(0.92);}
-60%{transform:scale(1.12);}
-80%{transform:scale(0.97);}
-100%{transform:scale(1);}
-}
-
-.logo-animate{
-width:260px;
-animation:fastPulse 0.35s infinite;
-}
-
-/* =========================
-   CART (DIGIKALA STYLE)
-========================= */
-
+/* CART */
 #cartBar{
 position:fixed;
 bottom:0;
@@ -149,9 +77,7 @@ left:0;
 right:0;
 background:#111;
 color:white;
-z-index:999;
 border-top:2px solid #333;
-font-family:tahoma;
 }
 
 #cartHeader{
@@ -168,11 +94,31 @@ padding:10px;
 background:#1a1a1a;
 }
 
-#cartList{
-max-height:120px;
-overflow:auto;
+.cart-item{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin:5px 0;
 font-size:13px;
-margin-bottom:8px;
+}
+
+.qty-btn{
+background:#333;
+color:white;
+border:none;
+padding:3px 8px;
+margin:0 3px;
+cursor:pointer;
+border-radius:5px;
+}
+
+.remove-btn{
+background:red;
+color:white;
+border:none;
+padding:3px 6px;
+border-radius:5px;
+cursor:pointer;
 }
 
 #cartBar button{
@@ -182,10 +128,9 @@ background:#25D366;
 color:white;
 border:none;
 border-radius:8px;
-font-weight:bold;
+margin-top:10px;
 cursor:pointer;
 }
-
 </style>
 </head>
 
@@ -193,114 +138,102 @@ cursor:pointer;
 
 <div class="topbar">
 <a href="en.html" class="lang-btn">🇬🇧 English</a>
-<a href="https://t.me/iphonearian" target="_blank">
-<img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" width="40">
-</a>
-</div>
-
-<!-- LOGO -->
-<div style="background:#111;text-align:center;padding:15px;">
-<img src="file_00000000bfec720a9ea8aa8800b40ffb.png" class="logo-animate">
-</div>
-
-<!-- SLIDER -->
-<div class="slider">
-
-<div class="slide active">
-<img src="https://m.media-amazon.com/images/I/41KOxRsuiiL._AC_UF894,1000_QL80_FMwebp_.jpg">
-<div class="caption">iPhone 17 Pro Max</div>
-</div>
-
-<div class="slide">
-<img src="https://m.media-amazon.com/images/I/41iXTWoQ68L._AC_UF1000,1000_QL80_FMwebp_.jpg">
-<div class="caption">MacBook A18 Pro</div>
-</div>
-
-<div class="slide">
-<img src="https://m.media-amazon.com/images/I/51LHWvW-i7L._AC_UF1000,1000_QL80_FMwebp_.jpg">
-<div class="caption">Apple Watch Ultra 4</div>
-</div>
-
-<div class="slide">
-<img src="https://m.media-amazon.com/images/I/51gHT3oOpPL._AC_UF894,1000_QL80_FMwebp_.jpg">
-<div class="caption">iMac Pro 2026</div>
-</div>
-
 </div>
 
 <!-- PRODUCTS -->
 <section class="products">
 
-<a class="card">
+<div class="card">
 <img src="https://m.media-amazon.com/images/I/51k0qRQFcuL._AC_UF894,1000_QL80_.jpg">
 <h3>iPhone 17 Pro Max</h3>
 <button class="buy-btn" onclick="addToCart('iPhone 17 Pro Max',1299)">BUY</button>
-</a>
+</div>
 
-<a class="card">
+<div class="card">
 <img src="https://m.media-amazon.com/images/I/51QPBmoc8FL._AC_UF894,1000_QL80_FMwebp_.jpg">
 <h3>MacBook A18 Pro</h3>
 <button class="buy-btn" onclick="addToCart('MacBook A18 Pro',999)">BUY</button>
-</a>
+</div>
 
-<a class="card">
+<div class="card">
 <img src="https://m.media-amazon.com/images/I/61RGZdmKzRL._AC_UF1000,1000_QL80_FMwebp_.jpg">
 <h3>Apple Watch Ultra 4</h3>
 <button class="buy-btn" onclick="addToCart('Apple Watch Ultra 4',699)">BUY</button>
-</a>
-
-<a class="card">
-<img src="https://m.media-amazon.com/images/I/51C8kxOdz-L._AC_UF1000,1000_QL80_FMwebp_.jpg">
-<h3>iMac Pro 2026</h3>
-<button class="buy-btn" onclick="addToCart('iMac Pro 2026',1499)">BUY</button>
-</a>
+</div>
 
 </section>
 
-<!-- CART BAR -->
+<!-- CART -->
 <div id="cartBar">
+
 <div id="cartHeader" onclick="toggleCart()">
-🛒 Cart (<span id="cartCount">0</span>)
+🛒 Cart (<span id="count">0</span>)
 <span id="arrow">▲</span>
 </div>
 
 <div id="cartBody">
-<div id="cartList">Empty</div>
-<p>Total: $<span id="cartTotal">0</span></p>
 
-<button onclick="checkoutTelegram()">Checkout Telegram</button>
+<div id="cartItems"></div>
+
+<p>Total: $<span id="total">0</span></p>
+
+<button onclick="checkout()">Checkout Telegram</button>
+
 </div>
 </div>
-
-<footer>
-© فروشگاه آریان روی
-</footer>
 
 <script>
 let cart=[];
-let total=0;
 
 function addToCart(name,price){
-cart.push({name,price});
-total+=price;
-updateCart();
+let item=cart.find(i=>i.name===name);
+
+if(item){
+item.qty++;
+}else{
+cart.push({name,price,qty:1});
 }
 
-function updateCart(){
-document.getElementById("cartCount").innerText=cart.length;
+update();
+}
 
-let box=document.getElementById("cartList");
+function update(){
+document.getElementById("count").innerText=cart.length;
+
+let box=document.getElementById("cartItems");
 box.innerHTML="";
 
-if(cart.length===0){
-box.innerHTML="Empty";
-}
+let total=0;
 
-cart.forEach(i=>{
-box.innerHTML+="• "+i.name+" - $"+i.price+"<br>";
+cart.forEach((i,index)=>{
+total += i.price*i.qty;
+
+box.innerHTML+=`
+<div class="cart-item">
+<span>${i.name} ($${i.price})</span>
+
+<div>
+<button class="qty-btn" onclick="changeQty(${index},-1)">-</button>
+${i.qty}
+<button class="qty-btn" onclick="changeQty(${index},1)">+</button>
+<button class="remove-btn" onclick="removeItem(${index})">x</button>
+</div>
+</div>
+`;
 });
 
-document.getElementById("cartTotal").innerText=total;
+document.getElementById("total").innerText=total;
+}
+
+function changeQty(index,val){
+cart[index].qty+=val;
+if(cart[index].qty<=0) cart.splice(index,1);
+update();
+}
+
+function removeItem(index){
+cart.splice(index,1);
+update();
 }
 
 function toggleCart(){
@@ -316,7 +249,7 @@ arrow.innerHTML="▼";
 }
 }
 
-function checkoutTelegram(){
+function checkout(){
 if(cart.length===0){
 alert("Cart is empty!");
 return;
@@ -324,11 +257,14 @@ return;
 
 let msg="🛒 New Order:%0A";
 
+let total=0;
+
 cart.forEach(i=>{
-msg+=i.name+" - $"+i.price+"%0A";
+msg+=`${i.name} x${i.qty} - $${i.price*i.qty}%0A`;
+total+=i.price*i.qty;
 });
 
-msg+="%0A💰 Total: $"+total;
+msg+=`%0A💰 Total: $${total}`;
 
 window.open("https://t.me/iphonearian?text="+msg,"_blank");
 }
