@@ -124,27 +124,6 @@ cursor:pointer;
 
 .pay{background:#25D366}
 .clear{background:#444}
-
-/* PAYMENT MODAL */
-#payBox{
-display:none;
-position:fixed;
-top:0;
-left:0;
-right:0;
-bottom:0;
-background:rgba(0,0,0,.6);
-z-index:999;
-}
-
-.payInner{
-background:#fff;
-max-width:380px;
-margin:80px auto;
-padding:20px;
-border-radius:12px;
-text-align:center;
-}
 </style>
 </head>
 
@@ -198,38 +177,11 @@ text-align:center;
 
 <div class="cart-items" id="cartItems"></div>
 
-<span id="totalText">Total</span>: $<span id="total">0</span>
+Total: $<span id="total">0</span>
 
-<button class="pay" onclick="openPay()">Checkout</button>
+<button class="pay" onclick="checkout()">Checkout</button>
 <button class="clear" onclick="clearCart()">Clear</button>
 
-</div>
-
-<!-- PAYMENT -->
-<div id="payBox">
-<div class="payInner">
-
-<h3 id="payTitle">Payment</h3>
-
-<div id="payInfo"></div>
-
-<input placeholder="Card Number" style="width:100%;padding:8px;margin:5px 0;">
-<input placeholder="CVV2" style="width:100%;padding:8px;margin:5px 0;">
-<input placeholder="OTP" style="width:100%;padding:8px;margin:5px 0;">
-
-<button onclick="doPay()" style="width:100%;padding:10px;background:green;color:white;border:none;border-radius:8px;">
-Pay
-</button>
-
-<button onclick="closePay()" style="width:100%;padding:10px;margin-top:5px;">
-Close
-</button>
-
-<div id="success" style="display:none;color:green;margin-top:10px;">
-✅ Success (Demo)
-</div>
-
-</div>
 </div>
 
 <script>
@@ -245,12 +197,11 @@ update();
 
 /* UPDATE */
 function update(){
-
 document.getElementById("count").innerText=cart.length;
 
-let t=0;
-cart.forEach(i=>t+=i.price);
-document.getElementById("total").innerText=t;
+let total=0;
+cart.forEach(i=>total+=i.price);
+document.getElementById("total").innerText=total;
 
 let html="";
 cart.forEach((i,index)=>{
@@ -265,58 +216,40 @@ html+=`
 document.getElementById("cartItems").innerHTML=html;
 }
 
-/* REMOVE ITEM */
 function removeItem(i){
 cart.splice(i,1);
 update();
 }
 
-/* CLEAR */
 function clearCart(){
 cart=[];
 update();
 }
 
-/* OPEN PAY */
-function openPay(){
+/* ✔ FIXED CHECKOUT (TELEGRAM) */
+function checkout(){
+
 if(cart.length===0){
-alert(lang==="en"?"Cart empty":"سبد خرید خالی است");
+alert(lang==="en" ? "Cart empty" : "سبد خرید خالی است");
 return;
 }
 
+let text="🛒 New Order\n\n";
 let total=0;
-cart.forEach(i=>total+=i.price);
 
-document.getElementById("payInfo").innerText="Total: $"+total;
-document.getElementById("payBox").style.display="block";
-}
-
-/* CLOSE */
-function closePay(){
-document.getElementById("payBox").style.display="none";
-document.getElementById("success").style.display="none";
-}
-
-/* PAY */
-function doPay(){
-document.getElementById("success").style.display="block";
-
-setTimeout(()=>{
-cart=[];
-update();
-closePay();
-},1500);
-}
-
-/* SEARCH */
-function searchProducts(){
-let input=document.getElementById("search").value.toLowerCase();
-document.querySelectorAll(".card").forEach(c=>{
-c.style.display=c.innerText.toLowerCase().includes(input)?"block":"none";
+cart.forEach(i=>{
+text+="• "+i.name+" - $"+i.price+"\n";
+total+=i.price;
 });
+
+text+="\n💰 Total: $"+total;
+
+/* GUARANTEED OPEN */
+window.location.href =
+"https://t.me/iphonearian?text=" + encodeURIComponent(text);
 }
 
-/* LANGUAGE */
+/* ✔ FIXED LANGUAGE */
 function toggleLang(){
 
 if(lang==="en"){
@@ -325,8 +258,9 @@ lang="fa";
 document.getElementById("logo").innerText="🛍 فروشگاه حرفه‌ای";
 document.getElementById("search").placeholder="جستجو...";
 document.getElementById("cartText").innerText="سبد";
-document.getElementById("totalText").innerText="جمع";
-document.getElementById("payTitle").innerText="پرداخت";
+
+document.querySelectorAll(".pay").forEach(b=>b.innerText="پرداخت");
+document.querySelectorAll(".clear").forEach(b=>b.innerText="پاک کردن");
 
 }else{
 lang="en";
@@ -334,8 +268,9 @@ lang="en";
 document.getElementById("logo").innerText="🛍 AR Store Pro";
 document.getElementById("search").placeholder="Search...";
 document.getElementById("cartText").innerText="Cart";
-document.getElementById("totalText").innerText="Total";
-document.getElementById("payTitle").innerText="Payment";
+
+document.querySelectorAll(".pay").forEach(b=>b.innerText="Checkout");
+document.querySelectorAll(".clear").forEach(b=>b.innerText="Clear");
 }
 }
 
