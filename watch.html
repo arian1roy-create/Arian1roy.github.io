@@ -1,33 +1,23 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa">
 <head>
 <meta charset="UTF-8">
-<title>Watch</title>
-<style>
-body{font-family:tahoma;text-align:center;background:#f4f4f4}
-.box{background:white;width:260px;margin:10px auto;padding:15px;border-radius:12px}
-button{padding:8px 15px;background:black;color:white;border:none;border-radius:8px}
-</style>
+<title>Apple Watch</title>
 </head>
-<body>
+<body style="font-family:tahoma;text-align:center;background:#f4f4f4;padding:20px">
 
-<h1>Apple Watch</h1>
+<h1>Apple Watch Models</h1>
 
-<div class="box">
+<div style="background:white;padding:15px;margin:10px;border-radius:10px">
 <p>GPS - $699</p>
-<button onclick="buy('Watch GPS',699)">Buy</button>
+<button onclick="addToCart('Watch GPS',699)">Add to Cart</button>
 </div>
 
-<div class="box">
+<div style="background:white;padding:15px;margin:10px;border-radius:10px">
 <p>LTE - $799</p>
-<button onclick="buy('Watch LTE',799)">Buy</button>
+<button onclick="addToCart('Watch LTE',799)">Add to Cart</button>
 </div>
 
-<script>
-function buy(n,p){
-window.open("https://t.me/iphonearian?text="+n+" - $"+p,"_blank");
-}
-</script>
-
+<script src="cart.js"></script>
 </body>
 </html>
