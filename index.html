@@ -3,7 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>فروشگاه آریان روی</title>
+<title>Arian Roy Store</title>
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#111111">
 
 <style>
 body{
@@ -26,10 +29,11 @@ align-items:center;
 padding:6px 10px;
 border:none;
 border-radius:6px;
-cursor:pointer;
 font-weight:bold;
+cursor:pointer;
 }
 
+/* HERO */
 .hero{
 text-align:center;
 background:#111;
@@ -85,6 +89,60 @@ color:white;
 border-radius:8px;
 font-size:12px;
 }
+
+/* CART */
+#cartBar{
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+background:#111;
+color:white;
+z-index:100;
+border-top-left-radius:15px;
+border-top-right-radius:15px;
+}
+
+#overlay{
+position:fixed;
+top:0;left:0;right:0;bottom:0;
+background:rgba(0,0,0,0.5);
+display:none;
+z-index:99;
+}
+
+#cartHeader{
+padding:15px;
+display:flex;
+justify-content:space-between;
+font-weight:bold;
+cursor:pointer;
+}
+
+#cartBody{
+display:none;
+background:#1a1a1a;
+padding:10px;
+max-height:60vh;
+overflow:auto;
+}
+
+.cart-item{
+display:flex;
+justify-content:space-between;
+background:#222;
+padding:8px;
+margin:6px 0;
+border-radius:8px;
+}
+
+.remove{
+background:red;
+color:white;
+border:none;
+border-radius:5px;
+padding:3px 6px;
+}
 </style>
 </head>
 
@@ -100,7 +158,7 @@ font-size:12px;
 </div>
 </div>
 
-<!-- LOGO -->
+<!-- HERO -->
 <div class="hero">
 <img src="file_00000000bfec720a9ea8aa8800b40ffb.png">
 </div>
@@ -108,71 +166,43 @@ font-size:12px;
 <!-- PRODUCTS -->
 <section class="products">
 
-<a class="card" href="iphone.html">
+<div class="card">
 <img src="https://m.media-amazon.com/images/I/51k0qRQFcuL.jpg">
 <h3 id="iphone">آیفون 17 پرو مکس</h3>
-<div class="btn" id="view1">مشاهده</div>
-</a>
+<div class="btn" onclick="addToCart('iPhone 17 Pro Max',1299)">View</div>
+</div>
 
-<a class="card" href="macbook.html">
+<div class="card">
 <img src="https://m.media-amazon.com/images/I/51QPBmoc8FL.jpg">
 <h3 id="mac">مک‌بوک A18 پرو</h3>
-<div class="btn" id="view2">مشاهده</div>
-</a>
+<div class="btn" onclick="addToCart('MacBook A18 Pro',1299)">View</div>
+</div>
 
-<a class="card" href="watch.html">
+<div class="card">
 <img src="https://m.media-amazon.com/images/I/61RGZdmKzRL.jpg">
 <h3 id="watch">اپل واچ اولترا 4</h3>
-<div class="btn" id="view3">مشاهده</div>
-</a>
+<div class="btn" onclick="addToCart('Apple Watch Ultra 4',799)">View</div>
+</div>
 
-<a class="card" href="imac.html">
+<div class="card">
 <img src="https://m.media-amazon.com/images/I/51C8kxOdz-L.jpg">
 <h3 id="imac">آی‌مک پرو 2026</h3>
-<div class="btn" id="view4">مشاهده</div>
-</a>
+<div class="btn" onclick="addToCart('iMac Pro 2026',1799)">View</div>
+</div>
 
 </section>
 
 <!-- CART -->
+<div id="overlay" onclick="closeCart()"></div>
+
 <div id="cartBar">
 
-<div id="overlay" onclick="closeCart()" style="
-position:fixed;
-top:0;left:0;right:0;bottom:0;
-background:rgba(0,0,0,0.5);
-display:none;
-z-index:99;"></div>
-
-<div onclick="toggleCart()" style="
-position:fixed;
-bottom:0;
-left:0;
-right:0;
-background:#111;
-color:white;
-padding:15px;
-display:flex;
-justify-content:space-between;
-z-index:100;
-font-weight:bold;
-">
-🛒 <span id="cartText">سبد خرید</span> (<span id="count">0</span>)
+<div id="cartHeader" onclick="toggleCart()">
+🛒 <span id="cartText">سبد خرید</span>
+(<span id="count">0</span>)
 </div>
 
-<div id="cartBody" style="
-display:none;
-position:fixed;
-bottom:50px;
-left:0;
-right:0;
-background:#1a1a1a;
-color:white;
-padding:10px;
-z-index:101;
-max-height:60vh;
-overflow:auto;
-">
+<div id="cartBody">
 
 <div id="cartItems"></div>
 
@@ -208,47 +238,36 @@ Clear Cart
 <script>
 function toggleCart(){
 let b=document.getElementById("cartBody");
-b.style.display=b.style.display==="block"?"none":"block";
+let o=document.getElementById("overlay");
+
+if(b.style.display==="block"){
+b.style.display="none";
+o.style.display="none";
+}else{
+b.style.display="block";
+o.style.display="block";
+}
+}
+
+function closeCart(){
+document.getElementById("cartBody").style.display="none";
+document.getElementById("overlay").style.display="none";
 }
 
 const texts={
 fa:{
 title:"فروشگاه آریان روی",
-iphone:"آیفون 17 پرو مکس",
-mac:"مک‌بوک A18 پرو",
-watch:"اپل واچ اولترا 4",
-imac:"آی‌مک پرو 2026",
-view:"مشاهده",
-cart:"سبد خرید",
-checkout:"پرداخت تلگرام",
-clear:"خالی کردن"
+cart:"سبد خرید"
 },
 en:{
 title:"Arian Roy Store",
-iphone:"iPhone 17 Pro Max",
-mac:"MacBook A18 Pro",
-watch:"Apple Watch Ultra 4",
-imac:"iMac Pro 2026",
-view:"View",
-cart:"Cart",
-checkout:"Checkout Telegram",
-clear:"Clear Cart"
+cart:"Cart"
 }
 };
 
-function setLang(lang){
-document.getElementById("title").innerText=texts[lang].title;
-document.getElementById("iphone").innerText=texts[lang].iphone;
-document.getElementById("mac").innerText=texts[lang].mac;
-document.getElementById("watch").innerText=texts[lang].watch;
-document.getElementById("imac").innerText=texts[lang].imac;
-
-document.getElementById("view1").innerText=texts[lang].view;
-document.getElementById("view2").innerText=texts[lang].view;
-document.getElementById("view3").innerText=texts[lang].view;
-document.getElementById("view4").innerText=texts[lang].view;
-
-document.getElementById("cartText").innerText=texts[lang].cart;
+function setLang(l){
+document.getElementById("title").innerText=texts[l].title;
+document.getElementById("cartText").innerText=texts[l].cart;
 }
 </script>
 
