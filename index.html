@@ -15,249 +15,216 @@ font-family:tahoma;
 background:#f4f4f4;
 }
 
-/* TOP */
-.topbar{
+/* HEADER */
+.header{
+position:sticky;
+top:0;
 background:#111;
 color:white;
 padding:12px;
 display:flex;
 justify-content:space-between;
 align-items:center;
+z-index:10;
 }
 
-.lang-btn button{
-padding:6px 10px;
+.header input{
+width:45%;
+padding:6px;
+border-radius:6px;
+border:none;
+}
+
+/* LANG */
+.lang button{
+padding:5px 10px;
 border:none;
 border-radius:6px;
 font-weight:bold;
 cursor:pointer;
-}
-
-/* HERO */
-.hero{
-text-align:center;
-background:#111;
-padding:15px;
-}
-
-.hero img{
-width:170px;
-animation:pulse 0.4s infinite;
-}
-
-@keyframes pulse{
-0%{transform:scale(1);}
-50%{transform:scale(1.1);}
-100%{transform:scale(1);}
 }
 
 /* PRODUCTS */
 .products{
 display:grid;
 grid-template-columns:repeat(2,1fr);
-gap:12px;
-padding:15px;
+gap:10px;
+padding:10px;
 }
 
 .card{
 background:white;
-border-radius:15px;
-overflow:hidden;
+border-radius:12px;
+padding:10px;
 text-align:center;
-box-shadow:0 6px 18px rgba(0,0,0,0.1);
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
 }
 
 .card img{
 width:100%;
-height:160px;
+height:140px;
 object-fit:contain;
 }
 
 .card h3{
-margin:10px 0;
-font-size:14px;
+font-size:13px;
+margin:8px 0;
 }
 
-.btn{
-display:inline-block;
-margin-bottom:10px;
-padding:6px 12px;
+.card button{
 background:black;
 color:white;
+border:none;
+padding:6px 10px;
 border-radius:8px;
 cursor:pointer;
 }
 
 /* CART */
-#cartBar{
+.cart{
 position:fixed;
 bottom:0;
 left:0;
 right:0;
 background:#111;
 color:white;
-z-index:100;
+padding:12px;
+z-index:20;
+border-top-left-radius:15px;
+border-top-right-radius:15px;
 }
 
-#cartHeader{
-padding:15px;
-display:flex;
-justify-content:space-between;
-font-weight:bold;
+.cart button{
+width:100%;
+margin-top:6px;
+padding:10px;
+border:none;
+border-radius:8px;
 cursor:pointer;
 }
 
-#cartBody{
-display:none;
-background:#1a1a1a;
-padding:10px;
-max-height:60vh;
-overflow:auto;
-}
-
-.cart-item{
-display:flex;
-justify-content:space-between;
-background:#222;
-padding:8px;
-margin:6px 0;
-border-radius:8px;
-}
-
-.remove{
-background:red;
+.checkout{
+background:#25D366;
 color:white;
-border:none;
-border-radius:6px;
-padding:3px 6px;
+}
+.clear{
+background:#444;
+color:white;
 }
 </style>
 </head>
 
 <body>
 
-<!-- TOP -->
-<div class="topbar">
-<span id="title">فروشگاه آریان روی</span>
+<!-- HEADER -->
+<div class="header">
+<div>🛍 <span id="title">فروشگاه</span></div>
 
-<div class="lang-btn">
+<input placeholder="Search...">
+
+<div class="lang">
 <button onclick="setLang('fa')">FA</button>
 <button onclick="setLang('en')">EN</button>
 </div>
 </div>
 
-<!-- HERO -->
-<div class="hero">
-<img src="file_00000000bfec720a9ea8aa8800b40ffb.png">
-</div>
-
 <!-- PRODUCTS -->
-<section class="products">
+<div class="products">
 
 <div class="card">
 <img src="https://m.media-amazon.com/images/I/51k0qRQFcuL.jpg">
 <h3 id="iphone">آیفون 17 پرو مکس</h3>
-<div class="btn" onclick="addToCart('iPhone 17 Pro Max',1299)" id="b1">مشاهده</div>
+<button onclick="addToCart('iPhone 17 Pro Max',1299)">+</button>
 </div>
 
 <div class="card">
 <img src="https://m.media-amazon.com/images/I/51QPBmoc8FL.jpg">
 <h3 id="mac">مک‌بوک A18 پرو</h3>
-<div class="btn" onclick="addToCart('MacBook A18 Pro',1299)" id="b2">مشاهده</div>
+<button onclick="addToCart('MacBook A18 Pro',1299)">+</button>
 </div>
 
 <div class="card">
 <img src="https://m.media-amazon.com/images/I/61RGZdmKzRL.jpg">
 <h3 id="watch">اپل واچ اولترا 4</h3>
-<div class="btn" onclick="addToCart('Apple Watch Ultra 4',799)" id="b3">مشاهده</div>
+<button onclick="addToCart('Apple Watch Ultra 4',799)">+</button>
 </div>
 
 <div class="card">
 <img src="https://m.media-amazon.com/images/I/51C8kxOdz-L.jpg">
 <h3 id="imac">آی‌مک پرو 2026</h3>
-<div class="btn" onclick="addToCart('iMac Pro 2026',1799)" id="b4">مشاهده</div>
+<button onclick="addToCart('iMac Pro 2026',1799)">+</button>
 </div>
 
-</section>
+</div>
 
 <!-- CART -->
-<div id="cartBar">
+<div class="cart">
+🛒 <span id="cartText">سبد خرید</span> (<span id="count">0</span>)
 
-<div id="cartHeader" onclick="toggleCart()">
-🛒 <span id="cartText">سبد خرید</span>
-(<span id="count">0</span>)
+<div>💰 Total: $<span id="total">0</span></div>
+
+<button class="checkout" onclick="checkout()">Checkout Telegram</button>
+<button class="clear" onclick="clearCart()">Clear</button>
 </div>
-
-<div id="cartBody">
-<div id="cartItems"></div>
-<p>💰 Total: $<span id="total">0</span></p>
-
-<button onclick="checkout()" style="
-width:100%;
-padding:12px;
-background:#25D366;
-color:white;
-border:none;
-border-radius:10px;">
-Checkout Telegram
-</button>
-
-<button onclick="clearCart()" style="
-width:100%;
-padding:10px;
-margin-top:5px;
-background:#444;
-color:white;
-border:none;
-border-radius:10px;">
-Clear Cart
-</button>
-
-</div>
-</div>
-
-<script src="cart.js"></script>
 
 <script>
-function toggleCart(){
-let b=document.getElementById("cartBody");
-b.style.display = (b.style.display==="block")?"none":"block";
+let cart=[];
+
+/* ADD */
+function addToCart(name,price){
+cart.push({name,price});
+update();
 }
 
-const t={
-fa:{
-title:"فروشگاه آریان روی",
-cart:"سبد خرید",
-iphone:"آیفون 17 پرو مکس",
-mac:"مک‌بوک A18 پرو",
-watch:"اپل واچ اولترا 4",
-imac:"آی‌مک پرو 2026",
-view:"مشاهده"
-},
-en:{
-title:"Arian Roy Store",
-cart:"Cart",
-iphone:"iPhone 17 Pro Max",
-mac:"MacBook A18 Pro",
-watch:"Apple Watch Ultra 4",
-imac:"iMac Pro 2026",
-view:"View"
+/* UPDATE */
+function update(){
+document.getElementById("count").innerText=cart.length;
+
+let total=0;
+cart.forEach(i=>total+=i.price);
+document.getElementById("total").innerText=total;
 }
+
+/* CLEAR */
+function clearCart(){
+cart=[];
+update();
+}
+
+/* CHECKOUT TELEGRAM */
+function checkout(){
+
+if(cart.length===0){
+alert("Cart is empty!");
+return;
+}
+
+let msg="🛒 New Order%0A%0A";
+let total=0;
+
+cart.forEach(i=>{
+msg+= "• "+i.name+" - $"+i.price+"%0A";
+total+=i.price;
+});
+
+msg+="%0A💰 Total: $"+total;
+
+window.open("https://t.me/iphonearian?text="+msg,"_blank");
+}
+
+/* LANG */
+const t={
+fa:{title:"فروشگاه",iphone:"آیفون 17 پرو مکس",mac:"مک‌بوک A18 پرو",watch:"اپل واچ",imac:"آی‌مک",cart:"سبد خرید"},
+en:{title:"Store",iphone:"iPhone 17 Pro Max",mac:"MacBook A18 Pro",watch:"Apple Watch",imac:"iMac",cart:"Cart"}
 };
 
 function setLang(l){
 document.getElementById("title").innerText=t[l].title;
-document.getElementById("cartText").innerText=t[l].cart;
-
 document.getElementById("iphone").innerText=t[l].iphone;
 document.getElementById("mac").innerText=t[l].mac;
 document.getElementById("watch").innerText=t[l].watch;
 document.getElementById("imac").innerText=t[l].imac;
-
-document.getElementById("b1").innerText=t[l].view;
-document.getElementById("b2").innerText=t[l].view;
-document.getElementById("b3").innerText=t[l].view;
-document.getElementById("b4").innerText=t[l].view;
+document.getElementById("cartText").innerText=t[l].cart;
 }
 </script>
 
