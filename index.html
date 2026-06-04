@@ -9,6 +9,7 @@
 <!-- PWA -->
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#111">
+<meta name="apple-mobile-web-app-capable" content="yes">
 
 <style>
 body{
@@ -167,13 +168,11 @@ cursor:pointer;
 <script>
 let cart=[];
 
-/* ADD */
 function add(name,price){
 cart.push({name,price});
 update();
 }
 
-/* UPDATE */
 function update(){
 document.getElementById("count").innerText=cart.length;
 let t=0;
@@ -181,15 +180,12 @@ cart.forEach(i=>t+=i.price);
 document.getElementById("total").innerText=t;
 }
 
-/* CLEAR */
 function clearCart(){
 cart=[];
 update();
 }
 
-/* CHECKOUT TELEGRAM */
 function checkout(){
-
 if(cart.length===0){
 alert("Cart is empty!");
 return;
@@ -208,7 +204,6 @@ msg+="%0A💰 Total: $"+total;
 window.open("https://t.me/iphonearian?text="+msg,"_blank");
 }
 
-/* SEARCH REAL */
 function searchProducts(){
 let input=document.getElementById("search").value.toLowerCase();
 let cards=document.querySelectorAll(".card");
@@ -222,8 +217,8 @@ c.style.display = text.includes(input) ? "block" : "none";
 
 <!-- PWA -->
 <script>
-if('serviceWorker' in navigator){
-navigator.serviceWorker.register('sw.js');
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/Arian1roy.github.io/sw.js');
 }
 </script>
 
