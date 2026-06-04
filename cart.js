@@ -8,6 +8,7 @@ function addToCart(name, price){
 cart.push({name, price:Number(price)});
 save();
 updateCart();
+openCart();
 }
 
 function removeItem(i){
@@ -17,7 +18,7 @@ updateCart();
 }
 
 function clearCart(){
-cart = [];
+cart=[];
 save();
 updateCart();
 }
@@ -42,20 +43,19 @@ box.innerHTML += `
 display:flex;
 justify-content:space-between;
 align-items:center;
-background:#222;
-padding:8px;
-margin:6px 0;
-border-radius:8px;
+background:#2a2a2a;
 color:white;
-font-size:14px;
+padding:10px;
+margin:6px 0;
+border-radius:10px;
 ">
 
 <span>${item.name}</span>
 
 <div>
-<span style="margin-right:10px;">$${item.price}</span>
+<span>$${item.price}</span>
 <button onclick="removeItem(${i})"
-style="background:red;color:white;border:none;padding:4px 8px;border-radius:5px;">
+style="margin-left:8px;background:red;color:white;border:none;border-radius:6px;padding:4px 8px;">
 x
 </button>
 </div>
@@ -68,9 +68,25 @@ count.innerText = cart.length;
 totalBox.innerText = total;
 }
 
+function openCart(){
+document.getElementById("cartBody").style.display="block";
+document.getElementById("overlay").style.display="block";
+}
+
+function closeCart(){
+document.getElementById("cartBody").style.display="none";
+document.getElementById("overlay").style.display="none";
+}
+
 function toggleCart(){
 let b=document.getElementById("cartBody");
-b.style.display = b.style.display==="block"?"none":"block";
+let o=document.getElementById("overlay");
+
+if(b.style.display==="block"){
+closeCart();
+}else{
+openCart();
+}
 }
 
 function checkout(){
@@ -83,11 +99,11 @@ let msg="🛒 New Order:%0A%0A";
 let total=0;
 
 cart.forEach(i=>{
-msg+= "• " + i.name + " - $" + i.price + "%0A";
+msg+="• "+i.name+" - $"+i.price+"%0A";
 total+=i.price;
 });
 
-msg+="%0A💰 Total: $" + total;
+msg+="%0A💰 Total: $"+total;
 
 window.open("https://t.me/iphonearian?text="+encodeURIComponent(msg),"_blank");
 }
