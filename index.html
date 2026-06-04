@@ -12,7 +12,6 @@ font-family:Tahoma;
 background:#f4f4f4;
 }
 
-/* TOP */
 .topbar{
 background:#111;
 padding:10px 15px;
@@ -78,6 +77,7 @@ right:0;
 background:#111;
 color:white;
 border-top:2px solid #333;
+z-index:999;
 }
 
 #cartHeader{
@@ -159,6 +159,12 @@ cursor:pointer;
 <img src="https://m.media-amazon.com/images/I/61RGZdmKzRL._AC_UF1000,1000_QL80_FMwebp_.jpg">
 <h3>Apple Watch Ultra 4</h3>
 <button class="buy-btn" onclick="addToCart('Apple Watch Ultra 4',699)">BUY</button>
+</div>
+
+<div class="card">
+<img src="https://m.media-amazon.com/images/I/51C8kxOdz-L._AC_UF1000,1000_QL80_FMwebp_.jpg">
+<h3>iMac Pro 2026</h3>
+<button class="buy-btn" onclick="addToCart('iMac Pro 2026',1499)">BUY</button>
 </div>
 
 </section>
@@ -256,7 +262,6 @@ return;
 }
 
 let msg="🛒 New Order:%0A";
-
 let total=0;
 
 cart.forEach(i=>{
