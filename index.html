@@ -12,26 +12,24 @@ font-family:tahoma;
 background:#f4f4f4;
 }
 
-/* HEADER */
+/* TOP */
 .topbar{
 background:#111;
+color:white;
 padding:12px;
 display:flex;
 justify-content:space-between;
 align-items:center;
-color:white;
 }
 
-.lang-btn{
-background:white;
-color:black;
-padding:6px 12px;
-border-radius:8px;
-text-decoration:none;
+.lang-btn button{
+padding:6px 10px;
+border:none;
+border-radius:6px;
+cursor:pointer;
 font-weight:bold;
 }
 
-/* HERO */
 .hero{
 text-align:center;
 background:#111;
@@ -39,7 +37,7 @@ padding:15px;
 }
 
 .hero img{
-width:200px;
+width:180px;
 animation:pulse 0.4s infinite;
 }
 
@@ -61,22 +59,16 @@ padding:15px;
 background:white;
 border-radius:15px;
 overflow:hidden;
-box-shadow:0 6px 18px rgba(0,0,0,0.1);
 text-align:center;
 text-decoration:none;
 color:black;
-transition:0.2s;
-}
-
-.card:hover{
-transform:scale(1.03);
+box-shadow:0 6px 18px rgba(0,0,0,0.1);
 }
 
 .card img{
 width:100%;
 height:160px;
 object-fit:contain;
-background:white;
 }
 
 .card h3{
@@ -84,7 +76,6 @@ margin:10px 0;
 font-size:14px;
 }
 
-/* BUTTON */
 .btn{
 display:inline-block;
 margin-bottom:10px;
@@ -92,7 +83,6 @@ padding:6px 12px;
 background:black;
 color:white;
 border-radius:8px;
-text-decoration:none;
 font-size:12px;
 }
 </style>
@@ -102,8 +92,12 @@ font-size:12px;
 
 <!-- TOP -->
 <div class="topbar">
-<a class="lang-btn" href="en.html">🇬🇧 EN</a>
-<span>فروشگاه آریان روی</span>
+<span id="title">فروشگاه آریان روی</span>
+
+<div class="lang-btn">
+<button onclick="setLang('fa')">FA</button>
+<button onclick="setLang('en')">EN</button>
+</div>
 </div>
 
 <!-- LOGO -->
@@ -116,32 +110,33 @@ font-size:12px;
 
 <a class="card" href="iphone.html">
 <img src="https://m.media-amazon.com/images/I/51k0qRQFcuL.jpg">
-<h3>iPhone 17 Pro Max</h3>
-<div class="btn">View</div>
+<h3 id="iphone">آیفون 17 پرو مکس</h3>
+<div class="btn" id="view1">مشاهده</div>
 </a>
 
 <a class="card" href="macbook.html">
 <img src="https://m.media-amazon.com/images/I/51QPBmoc8FL.jpg">
-<h3>MacBook A18 Pro</h3>
-<div class="btn">View</div>
+<h3 id="mac">مک‌بوک A18 پرو</h3>
+<div class="btn" id="view2">مشاهده</div>
 </a>
 
 <a class="card" href="watch.html">
 <img src="https://m.media-amazon.com/images/I/61RGZdmKzRL.jpg">
-<h3>Apple Watch Ultra 4</h3>
-<div class="btn">View</div>
+<h3 id="watch">اپل واچ اولترا 4</h3>
+<div class="btn" id="view3">مشاهده</div>
 </a>
 
 <a class="card" href="imac.html">
 <img src="https://m.media-amazon.com/images/I/51C8kxOdz-L.jpg">
-<h3>iMac Pro 2026</h3>
-<div class="btn">View</div>
+<h3 id="imac">آی‌مک پرو 2026</h3>
+<div class="btn" id="view4">مشاهده</div>
 </a>
 
 </section>
 
-<!-- CART UI -->
+<!-- CART -->
 <div id="cartBar">
+
 <div id="overlay" onclick="closeCart()" style="
 position:fixed;
 top:0;left:0;right:0;bottom:0;
@@ -160,12 +155,9 @@ padding:15px;
 display:flex;
 justify-content:space-between;
 z-index:100;
-border-top-left-radius:15px;
-border-top-right-radius:15px;
 font-weight:bold;
-cursor:pointer;">
-🛒 Cart (<span id="count">0</span>)
-<span>▲</span>
+">
+🛒 <span id="cartText">سبد خرید</span> (<span id="count">0</span>)
 </div>
 
 <div id="cartBody" style="
@@ -180,7 +172,6 @@ padding:10px;
 z-index:101;
 max-height:60vh;
 overflow:auto;
-border-top:1px solid #333;
 ">
 
 <div id="cartItems"></div>
@@ -213,6 +204,53 @@ Clear Cart
 </div>
 
 <script src="cart.js"></script>
+
+<script>
+function toggleCart(){
+let b=document.getElementById("cartBody");
+b.style.display=b.style.display==="block"?"none":"block";
+}
+
+const texts={
+fa:{
+title:"فروشگاه آریان روی",
+iphone:"آیفون 17 پرو مکس",
+mac:"مک‌بوک A18 پرو",
+watch:"اپل واچ اولترا 4",
+imac:"آی‌مک پرو 2026",
+view:"مشاهده",
+cart:"سبد خرید",
+checkout:"پرداخت تلگرام",
+clear:"خالی کردن"
+},
+en:{
+title:"Arian Roy Store",
+iphone:"iPhone 17 Pro Max",
+mac:"MacBook A18 Pro",
+watch:"Apple Watch Ultra 4",
+imac:"iMac Pro 2026",
+view:"View",
+cart:"Cart",
+checkout:"Checkout Telegram",
+clear:"Clear Cart"
+}
+};
+
+function setLang(lang){
+document.getElementById("title").innerText=texts[lang].title;
+document.getElementById("iphone").innerText=texts[lang].iphone;
+document.getElementById("mac").innerText=texts[lang].mac;
+document.getElementById("watch").innerText=texts[lang].watch;
+document.getElementById("imac").innerText=texts[lang].imac;
+
+document.getElementById("view1").innerText=texts[lang].view;
+document.getElementById("view2").innerText=texts[lang].view;
+document.getElementById("view3").innerText=texts[lang].view;
+document.getElementById("view4").innerText=texts[lang].view;
+
+document.getElementById("cartText").innerText=texts[lang].cart;
+}
+</script>
 
 </body>
 </html>
