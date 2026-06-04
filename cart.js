@@ -5,10 +5,7 @@ localStorage.setItem("cart", JSON.stringify(cart));
 }
 
 function addToCart(name, price){
-cart.push({
-name: name,
-price: Number(price)
-});
+cart.push({name, price:Number(price)});
 save();
 updateCart();
 }
@@ -32,7 +29,7 @@ box.innerHTML = "";
 let total = 0;
 
 cart.forEach((item,i)=>{
-total += Number(item.price);
+total += item.price;
 
 box.innerHTML += `
 <div style="display:flex;justify-content:space-between;margin:5px 0">
@@ -55,21 +52,23 @@ b.style.display = b.style.display==="block"?"none":"block";
 
 function checkout(){
 if(cart.length===0){
-alert("Cart is empty");
+alert("سبد خرید خالی است");
 return;
 }
 
-let msg="🛒 Order:%0A";
-let total=0;
+let msg = "🛒 New Order:%0A%0A";
+let total = 0;
 
 cart.forEach(i=>{
-msg+=i.name+" - $"+i.price+"%0A";
-total+=Number(i.price);
+msg += "▪ " + i.name + " - $" + i.price + "%0A";
+total += i.price;
 });
 
-msg+="%0A💰 Total: $"+total;
+msg += "%0A💰 Total: $" + total;
 
-window.open("https://t.me/iphonearian?text="+msg,"_blank");
+msg += "%0A%0A📦 Please confirm order";
+
+window.open("https://t.me/iphonearian?text=" + encodeURIComponent(msg), "_blank");
 }
 
-window.onload=updateCart;
+window.onload = updateCart;
