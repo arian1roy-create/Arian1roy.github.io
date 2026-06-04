@@ -25,43 +25,24 @@ updateCart();
 
 function updateCart(){
 
-let box = document.getElementById("cartItems");
-let count = document.getElementById("count");
-let totalBox = document.getElementById("total");
+let box=document.getElementById("cartItems");
+let count=document.getElementById("count");
+let totalBox=document.getElementById("total");
 
 if(!box) return;
 
-box.innerHTML = "";
+box.innerHTML="";
 
-let total = 0;
+let total=0;
 
 cart.forEach((item,i)=>{
-total += item.price;
+total += Number(item.price);
 
-box.innerHTML += `
-<div style="
-display:flex;
-justify-content:space-between;
-align-items:center;
-background:#2a2a2a;
-color:white;
-padding:10px;
-margin:6px 0;
-border-radius:10px;
-">
-
+box.innerHTML+=`
+<div style="display:flex;justify-content:space-between;background:#222;padding:8px;margin:5px 0;border-radius:8px;">
 <span>${item.name}</span>
-
-<div>
-<span>$${item.price}</span>
-<button onclick="removeItem(${i})"
-style="margin-left:8px;background:red;color:white;border:none;border-radius:6px;padding:4px 8px;">
-x
-</button>
-</div>
-
-</div>
-`;
+<span>$${item.price} <button onclick="removeItem(${i})" style="background:red;color:white;border:none">x</button></span>
+</div>`;
 });
 
 count.innerText = cart.length;
@@ -80,13 +61,8 @@ document.getElementById("overlay").style.display="none";
 
 function toggleCart(){
 let b=document.getElementById("cartBody");
-let o=document.getElementById("overlay");
-
-if(b.style.display==="block"){
-closeCart();
-}else{
-openCart();
-}
+if(b.style.display==="block") closeCart();
+else openCart();
 }
 
 function checkout(){
@@ -95,12 +71,12 @@ alert("Cart is empty");
 return;
 }
 
-let msg="🛒 New Order:%0A%0A";
+let msg="🛒 Order:%0A%0A";
 let total=0;
 
 cart.forEach(i=>{
-msg+="• "+i.name+" - $"+i.price+"%0A";
-total+=i.price;
+msg+=i.name+" - $"+i.price+"%0A";
+total+=Number(i.price);
 });
 
 msg+="%0A💰 Total: $"+total;
