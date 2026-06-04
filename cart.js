@@ -16,6 +16,12 @@ save();
 updateCart();
 }
 
+function clearCart(){
+cart = [];
+save();
+updateCart();
+}
+
 function updateCart(){
 
 let box = document.getElementById("cartItems");
@@ -32,11 +38,28 @@ cart.forEach((item,i)=>{
 total += item.price;
 
 box.innerHTML += `
-<div style="display:flex;justify-content:space-between;margin:5px 0">
+<div style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:#222;
+padding:8px;
+margin:6px 0;
+border-radius:8px;
+color:white;
+font-size:14px;
+">
+
 <span>${item.name}</span>
-<span>$${item.price}
-<button onclick="removeItem(${i})">x</button>
-</span>
+
+<div>
+<span style="margin-right:10px;">$${item.price}</span>
+<button onclick="removeItem(${i})"
+style="background:red;color:white;border:none;padding:4px 8px;border-radius:5px;">
+x
+</button>
+</div>
+
 </div>
 `;
 });
@@ -52,23 +75,21 @@ b.style.display = b.style.display==="block"?"none":"block";
 
 function checkout(){
 if(cart.length===0){
-alert("سبد خرید خالی است");
+alert("Cart is empty");
 return;
 }
 
-let msg = "🛒 New Order:%0A%0A";
-let total = 0;
+let msg="🛒 New Order:%0A%0A";
+let total=0;
 
 cart.forEach(i=>{
-msg += "▪ " + i.name + " - $" + i.price + "%0A";
-total += i.price;
+msg+= "• " + i.name + " - $" + i.price + "%0A";
+total+=i.price;
 });
 
-msg += "%0A💰 Total: $" + total;
+msg+="%0A💰 Total: $" + total;
 
-msg += "%0A%0A📦 Please confirm order";
-
-window.open("https://t.me/iphonearian?text=" + encodeURIComponent(msg), "_blank");
+window.open("https://t.me/iphonearian?text="+encodeURIComponent(msg),"_blank");
 }
 
-window.onload = updateCart;
+window.onload=updateCart;
