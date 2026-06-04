@@ -81,6 +81,11 @@ width:280px;
 border-radius:12px;
 overflow:hidden;
 box-shadow:0 0 10px rgba(0,0,0,.15);
+transition:0.3s;
+}
+
+.card:hover{
+transform:scale(1.03);
 }
 
 .card img{
@@ -93,6 +98,13 @@ background:white;
 .card h3{
 padding:10px;
 text-align:center;
+color:black;
+}
+
+a.card{
+text-decoration:none;
+color:black;
+display:block;
 }
 
 footer{
@@ -102,37 +114,20 @@ text-align:center;
 padding:20px;
 }
 
-/* 🔥 لوگو: تند عقب و جلو */
+/* لوگو انیمیشن */
 @keyframes fastPulse {
-0% {
-transform: scale(1);
-}
-
-20% {
-transform: scale(1.15);
-}
-
-40% {
-transform: scale(0.92);
-}
-
-60% {
-transform: scale(1.12);
-}
-
-80% {
-transform: scale(0.97);
-}
-
-100% {
-transform: scale(1);
-}
+0% {transform:scale(1);}
+20% {transform:scale(1.15);}
+40% {transform:scale(0.92);}
+60% {transform:scale(1.12);}
+80% {transform:scale(0.97);}
+100% {transform:scale(1);}
 }
 
 .logo-animate{
 width:260px;
 max-width:90%;
-animation: fastPulse 0.35s infinite;
+animation:fastPulse 0.35s infinite;
 transform-origin:center;
 }
 </style>
@@ -142,9 +137,7 @@ transform-origin:center;
 
 <div class="topbar">
 
-<a href="en.html" class="lang-btn">
-🇬🇧 English
-</a>
+<a href="en.html" class="lang-btn">🇬🇧 English</a>
 
 <a href="https://t.me/iphonearian" target="_blank">
 <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" width="40">
@@ -152,12 +145,12 @@ transform-origin:center;
 
 </div>
 
-<!-- 🔥 لوگو -->
+<!-- LOGO -->
 <div style="background:#111;text-align:center;padding:15px;">
-<img src="file_00000000bfec720a9ea8aa8800b40ffb.png"
-class="logo-animate">
+<img src="file_00000000bfec720a9ea8aa8800b40ffb.png" class="logo-animate">
 </div>
 
+<!-- SLIDER -->
 <div class="slider">
 
 <div class="slide active">
@@ -182,27 +175,28 @@ class="logo-animate">
 
 </div>
 
+<!-- PRODUCTS -->
 <section class="products">
 
-<div class="card">
+<a href="iphone.html" class="card">
 <img src="https://m.media-amazon.com/images/I/51k0qRQFcuL._AC_UF894,1000_QL80_.jpg">
 <h3>iPhone 17 Pro Max</h3>
-</div>
+</a>
 
-<div class="card">
+<a href="macbook.html" class="card">
 <img src="https://m.media-amazon.com/images/I/51QPBmoc8FL._AC_UF894,1000_QL80_FMwebp_.jpg">
 <h3>MacBook A18 Pro</h3>
-</div>
+</a>
 
-<div class="card">
+<a href="watch.html" class="card">
 <img src="https://m.media-amazon.com/images/I/61RGZdmKzRL._AC_UF1000,1000_QL80_FMwebp_.jpg">
 <h3>Apple Watch Ultra 4</h3>
-</div>
+</a>
 
-<div class="card">
+<a href="imac.html" class="card">
 <img src="https://m.media-amazon.com/images/I/51C8kxOdz-L._AC_UF1000,1000_QL80_FMwebp_.jpg">
 <h3>iMac Pro 2026</h3>
-</div>
+</a>
 
 </section>
 
@@ -211,21 +205,14 @@ class="logo-animate">
 </footer>
 
 <script>
-let slides = document.querySelectorAll('.slide');
-let current = 0;
+let slides=document.querySelectorAll('.slide');
+let current=0;
 
-setInterval(function(){
-
+setInterval(()=>{
 slides[current].classList.remove('active');
-
 current++;
-
-if(current >= slides.length){
-current = 0;
-}
-
+if(current>=slides.length) current=0;
 slides[current].classList.add('active');
-
 },3000);
 </script>
 
