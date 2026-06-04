@@ -3,209 +3,255 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Arian Roy Store</title>
-
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#111111">
+<title>AR Store</title>
 
 <style>
 body{
 margin:0;
 font-family:Arial;
-background:#f4f4f4;
+background:#f5f5f5;
 }
 
-/* TOP */
-.topbar{
-background:#111;
-color:white;
-padding:12px;
+/* HEADER */
+.header{
+position:sticky;
+top:0;
+background:#fff;
+padding:10px;
 display:flex;
-justify-content:space-between;
 align-items:center;
+gap:10px;
+z-index:10;
+border-bottom:1px solid #ddd;
 }
 
-.lang-btn button{
-padding:6px 10px;
-border:none;
-border-radius:6px;
+.logo{
 font-weight:bold;
+color:#e60012;
+}
+
+.search{
+flex:1;
+padding:8px;
+border:1px solid #ddd;
+border-radius:8px;
+}
+
+.lang button{
+border:none;
+padding:6px 8px;
+border-radius:6px;
 cursor:pointer;
+background:#eee;
 }
 
-/* HERO */
-.hero{
-text-align:center;
-background:#111;
-padding:15px;
+/* CATEGORY */
+.cat{
+display:flex;
+gap:8px;
+overflow:auto;
+padding:10px;
+background:#fff;
+border-bottom:1px solid #eee;
 }
 
-.hero img{
-width:170px;
-animation:pulse 0.4s infinite;
-}
-
-@keyframes pulse{
-0%{transform:scale(1);}
-50%{transform:scale(1.1);}
-100%{transform:scale(1);}
+.cat div{
+background:#f0f0f0;
+padding:6px 10px;
+border-radius:20px;
+font-size:12px;
+white-space:nowrap;
 }
 
 /* PRODUCTS */
 .products{
 display:grid;
 grid-template-columns:repeat(2,1fr);
-gap:12px;
-padding:15px;
+gap:10px;
+padding:10px;
 }
 
 .card{
-background:white;
-border-radius:15px;
-overflow:hidden;
+background:#fff;
+border-radius:12px;
+padding:10px;
+box-shadow:0 2px 8px rgba(0,0,0,0.08);
 text-align:center;
-box-shadow:0 6px 18px rgba(0,0,0,0.1);
 }
 
 .card img{
 width:100%;
-height:160px;
+height:130px;
 object-fit:contain;
 }
 
 .card h3{
-margin:10px 0;
-font-size:14px;
+font-size:13px;
+margin:8px 0;
 }
 
-.btn{
-display:inline-block;
-margin-bottom:10px;
-padding:6px 12px;
-background:black;
-color:white;
+.price{
+color:#e60012;
+font-weight:bold;
+margin-bottom:5px;
+}
+
+.card button{
+background:#e60012;
+color:#fff;
+border:none;
+padding:6px 10px;
 border-radius:8px;
 cursor:pointer;
+width:100%;
+}
+
+/* CART */
+.cart{
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+background:#111;
+color:#fff;
+padding:10px;
+z-index:20;
+border-top-left-radius:15px;
+border-top-right-radius:15px;
+}
+
+.cart button{
+width:100%;
+margin-top:6px;
+padding:10px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+.pay{
+background:#25D366;
+color:#fff;
+}
+
+.clear{
+background:#444;
+color:#fff;
 }
 </style>
 </head>
 
 <body>
 
-<!-- TOP -->
-<div class="topbar">
-<span id="title">Arian Roy Store</span>
+<!-- HEADER -->
+<div class="header">
+<div class="logo">🛍 AR Store</div>
 
-<div class="lang-btn">
+<input class="search" placeholder="Search products...">
+
+<div class="lang">
 <button onclick="setLang('fa')">FA</button>
 <button onclick="setLang('en')">EN</button>
 </div>
 </div>
 
-<!-- HERO -->
-<div class="hero">
-<img src="file_00000000bfec720a9ea8aa8800b40ffb.png">
+<!-- CATEGORY -->
+<div class="cat">
+<div>📱 Phone</div>
+<div>💻 Laptop</div>
+<div>⌚ Watch</div>
+<div>🖥 iMac</div>
 </div>
 
 <!-- PRODUCTS -->
-<section class="products">
+<div class="products">
 
 <div class="card">
 <img src="https://m.media-amazon.com/images/I/51k0qRQFcuL.jpg">
 <h3 id="iphone">iPhone 17 Pro Max</h3>
-<div class="btn" onclick="addToCart('iPhone 17 Pro Max',1299)">View</div>
+<div class="price">$1299</div>
+<button onclick="addToCart('iPhone 17 Pro Max',1299)">Add to Cart</button>
 </div>
 
 <div class="card">
 <img src="https://m.media-amazon.com/images/I/51QPBmoc8FL.jpg">
 <h3 id="mac">MacBook A18 Pro</h3>
-<div class="btn" onclick="addToCart('MacBook A18 Pro',1299)">View</div>
+<div class="price">$1299</div>
+<button onclick="addToCart('MacBook A18 Pro',1299)">Add to Cart</button>
 </div>
 
 <div class="card">
 <img src="https://m.media-amazon.com/images/I/61RGZdmKzRL.jpg">
 <h3 id="watch">Apple Watch Ultra 4</h3>
-<div class="btn" onclick="addToCart('Apple Watch Ultra 4',799)">View</div>
+<div class="price">$799</div>
+<button onclick="addToCart('Apple Watch Ultra 4',799)">Add to Cart</button>
 </div>
 
 <div class="card">
 <img src="https://m.media-amazon.com/images/I/51C8kxOdz-L.jpg">
 <h3 id="imac">iMac Pro 2026</h3>
-<div class="btn" onclick="addToCart('iMac Pro 2026',1799)">View</div>
+<div class="price">$1799</div>
+<button onclick="addToCart('iMac Pro 2026',1799)">Add to Cart</button>
 </div>
 
-</section>
+</div>
 
 <!-- CART -->
-<div id="overlay" onclick="closeCart()"></div>
+<div class="cart">
+🛒 <span id="cartText">Cart</span> (<span id="count">0</span>)
+<div>💰 Total: $<span id="total">0</span></div>
 
-<div id="cartBar">
-
-<div id="cartHeader" onclick="toggleCart()">
-🛒 <span id="cartText">Cart</span>
-(<span id="count">0</span>)
+<button class="pay" onclick="checkout()">Checkout Telegram</button>
+<button class="clear" onclick="clearCart()">Clear</button>
 </div>
-
-<div id="cartBody">
-
-<div id="cartItems"></div>
-
-<p>💰 Total: $<span id="total">0</span></p>
-
-<button onclick="checkout()" style="
-width:100%;
-padding:12px;
-background:#25D366;
-color:white;
-border:none;
-border-radius:10px;
-font-weight:bold;">
-Checkout Telegram
-</button>
-
-<button onclick="clearCart()" style="
-width:100%;
-padding:10px;
-margin-top:5px;
-background:#444;
-color:white;
-border:none;
-border-radius:10px;">
-Clear Cart
-</button>
-
-</div>
-</div>
-
-<script src="cart.js"></script>
 
 <script>
-function toggleCart(){
-let b=document.getElementById("cartBody");
-let o=document.getElementById("overlay");
+let cart=[];
 
-if(b.style.display==="block"){
-b.style.display="none";
-o.style.display="none";
-}else{
-b.style.display="block";
-o.style.display="block";
-}
+function addToCart(name,price){
+cart.push({name,price});
+update();
 }
 
-function closeCart(){
-document.getElementById("cartBody").style.display="none";
-document.getElementById("overlay").style.display="none";
+function update(){
+document.getElementById("count").innerText=cart.length;
+let total=0;
+cart.forEach(i=>total+=i.price);
+document.getElementById("total").innerText=total;
 }
 
-const texts={
-fa:{title:"فروشگاه آریان روی",cart:"سبد خرید"},
-en:{title:"Arian Roy Store",cart:"Cart"}
+function clearCart(){
+cart=[];
+update();
+}
+
+function checkout(){
+if(cart.length===0){
+alert("Cart is empty!");
+return;
+}
+
+let msg="🛒 New Order%0A%0A";
+let total=0;
+
+cart.forEach(i=>{
+msg+="• "+i.name+" - $"+i.price+"%0A";
+total+=i.price;
+});
+
+msg+="%0A💰 Total: $"+total;
+
+window.open("https://t.me/iphonearian?text="+msg,"_blank");
+}
+
+/* LANG */
+const t={
+fa:{cart:"سبد خرید",iphone:"آیفون 17 پرو مکس",mac:"مک‌بوک A18 پرو",watch:"اپل واچ",imac:"آی‌مک"},
+en:{cart:"Cart",iphone:"iPhone 17 Pro Max",mac:"MacBook A18 Pro",watch:"Apple Watch Ultra 4",imac:"iMac Pro 2026"}
 };
 
 function setLang(l){
-document.getElementById("title").innerText=texts[l].title;
-document.getElementById("cartText").innerText=texts[l].cart;
+document.getElementById("cartText").innerText=t[l].cart;
 }
 </script>
 
