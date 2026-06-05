@@ -1,210 +1,262 @@
-<!DOCTYPE html>
-<html lang="en" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AR Store</title>
+<!DOCTYPE html>  <html lang="en" dir="rtl">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<title>AR Store</title>  <style>  
+html,body{overflow-x:hidden;margin:0;font-family:tahoma;background:#f5f5f5;}  
+*{box-sizing:border-box;}  
+  
+.header{  
+position:sticky;top:0;background:#fff;  
+padding:10px;display:flex;justify-content:space-between;  
+align-items:center;border-bottom:1px solid #ddd;  
+z-index:10;  
+}  
+  
+.langBtn,.back{  
+background:#111;color:#fff;border:none;  
+padding:6px 10px;border-radius:8px;cursor:pointer;  
+}  
+  
+.container{padding:10px;padding-bottom:170px;}  
+  
+.grid{  
+display:grid;  
+grid-template-columns:repeat(2,1fr);  
+gap:10px;  
+}  
+  
+.category,.card{  
+background:#fff;border-radius:12px;  
+padding:10px;text-align:center;  
+box-shadow:0 2px 5px rgba(0,0,0,0.1);  
+}  
+  
+.card img{  
+width:100%;height:90px;object-fit:contain;  
+}  
+  
+.price{color:#e60012;font-weight:bold;}  
+  
+button{  
+background:#e60012;color:#fff;border:none;  
+padding:6px;border-radius:8px;width:100%;  
+margin-top:5px;cursor:pointer;  
+}  
+  
+.cartBar{  
+position:fixed;bottom:0;left:0;right:0;  
+background:#111;color:#fff;padding:10px;  
+}  
+  
+.payBtn{background:#25D366;}  
+.clearBtn{background:#444;}  
+  
+#payBox{  
+display:none;  
+position:fixed;  
+inset:0;  
+background:rgba(0,0,0,.5);  
+justify-content:center;  
+align-items:center;  
+z-index:999;  
+}  
+  
+.payInner{  
+background:#fff;width:90%;max-width:320px;  
+border-radius:12px;padding:15px;text-align:center;  
+}  
+  
+/* SLIDER */  
+.slider{  
+width:100%;  
+height:160px;  
+overflow:hidden;  
+border-radius:15px;  
+margin-bottom:15px;  
+}  
+  
+.slider img{  
+width:100%;  
+height:160px;  
+object-fit:cover;  
+transition:opacity 0.5s ease;  
+}  
+</style>  </head>  <body>  <div class="header">  
+<button class="back" id="backBtn">⬅</button>  
+<div>🛍 AR Store</div>  
+<button class="langBtn" onclick="toggleLang()">🌐</button>  
+</div>  <div class="container" id="app"></div>  <div class="cartBar">  
+🛒 <span id="count">0</span><br>  
+Total: $<span id="total">0</span>  <button class="payBtn" onclick="openPay()">  
+Checkout  
+</button>  <button class="clearBtn" onclick="clearCart()">Clear</button>
 
-<style>
-html,body{overflow-x:hidden;margin:0;font-family:tahoma;background:#f5f5f5;}
-*{box-sizing:border-box;}
-
-.header{
-position:sticky;top:0;background:#fff;
-padding:10px;display:flex;justify-content:space-between;
-align-items:center;border-bottom:1px solid #ddd;
-z-index:10;
-}
-
-.langBtn,.back{
-background:#111;color:#fff;border:none;
-padding:6px 10px;border-radius:8px;cursor:pointer;
-}
-
-.container{padding:10px;padding-bottom:170px;}
-
-.grid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:10px;
-}
-
-.category,.card{
-background:#fff;border-radius:12px;
-padding:10px;text-align:center;
-box-shadow:0 2px 5px rgba(0,0,0,0.1);
-}
-
-.card img{
-width:100%;height:90px;object-fit:contain;
-}
-
-.price{color:#e60012;font-weight:bold;}
-
-button{
-background:#e60012;color:#fff;border:none;
-padding:6px;border-radius:8px;width:100%;
-margin-top:5px;cursor:pointer;
-}
-
-.cartBar{
-position:fixed;bottom:0;left:0;right:0;
-background:#111;color:#fff;padding:10px;
-}
-
-.payBtn{background:#25D366;}
-.clearBtn{background:#444;}
-
-.slider{
-width:100%;
-height:160px;
-overflow:hidden;
-border-radius:15px;
-margin-bottom:15px;
-}
-
-.slider img{
-width:100%;
-height:160px;
-object-fit:cover;
-transition:opacity 0.5s ease;
-}
-
-</style>
-</head>
-
-<body>
-
-<div class="header">
-<button class="back">⬅</button>
-<div>🛍 AR Store</div>
-<button class="langBtn">🌐</button>
-</div>
-
-<div class="container" id="app"></div>
-
-<div class="cartBar">
-🛒 <span id="count">0</span><br>
-Total: $<span id="total">0</span>
-
-<button class="payBtn" onclick="openPay()">Checkout</button>
-<button class="clearBtn" onclick="clearCart()">Clear</button>
-</div>
-
-<script>
-
-let cart=[];
-
-let data={
-cars:Array.from({length:10},(_,i)=>({name:"Car "+(i+1),price:50000+i*1500})),
-phones:Array.from({length:10},(_,i)=>({name:"Phone "+(i+1),price:800+i*40}))
-};
-
-let slides=[
-"arian-company.png",
-"arian-company2.png",
-"arian-company3.png"
-];
-
-let s=0;
-
-/* HOME */
-function renderHome(){
-document.getElementById("app").innerHTML=`
-<div class="slider">
-<img id="slideImg" src="${slides[0]}">
-</div>
-
-<div class="grid">
-<div class="category" onclick="openCat('cars')">Cars</div>
-<div class="category" onclick="openCat('phones')">Phones</div>
-</div>
-`;
-}
-
-setInterval(()=>{
-let img=document.getElementById("slideImg");
-if(!img) return;
-
-s=(s+1)%slides.length;
-img.style.opacity="0";
-
-setTimeout(()=>{
-img.src=slides[s];
-img.style.opacity="1";
-},300);
-
-},3000);
-
-/* CART */
-function add(n,p){
-cart.push({n,p});
-update();
-}
-
-function update(){
-document.getElementById("count").innerText=cart.length;
-let total=0;
-cart.forEach(i=>total+=i.p);
-document.getElementById("total").innerText=total;
-}
-
-function clearCart(){
-cart=[];
-update();
-}
-
-/* ✅ FIXED CHECKOUT */
-async function openPay(){
-if(cart.length===0){
-alert("Cart empty");
-return;
-}
-
-let total=0;
-cart.forEach(i=>total+=i.p);
-
-try{
-const res = await fetch("https://ar-store-backend.onrender.com/pay", {
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({amount:total})
-});
-
-const data = await res.json();
-
-if(data && data.url){
-window.open(data.url,"_blank");
-}else{
-alert("Payment failed");
-}
-
-}catch(e){
-console.log(e);
-alert("Server error. Try again later.");
-}
-}
-
-/* CATEGORIES */
-function openCat(cat){
-let html=`<div class="grid">`;
-
-data[cat].forEach(p=>{
-html+=`
-<div class="card">
-<h3>${p.name}</h3>
-<div class="price">$${p.price}</div>
-<button onclick="add('${p.name}',${p.price})">Add</button>
-</div>`;
-});
-
-html+="</div>";
-document.getElementById("app").innerHTML=html;
-}
-
-renderHome();
-
-</script>
-
-</body>
-</html>
+</div>  <div id="payBox">  
+<div class="payInner">  
+<div style="font-size:40px">💳</div>  
+<div style="font-weight:bold;margin-bottom:10px;">Telegram Payment</div>  
+<button class="payBtn" onclick="goTelegram()">Pay via Telegram</button>  
+<button class="payBtn" onclick="fakePay()">Pay Now</button>  
+<button class="clearBtn" onclick="closePay()">Close</button>  
+</div>  
+</div>  <script>  
+  
+let cart=[];  
+let lang="en";  
+  
+let data={  
+cars:Array.from({length:20},(_,i)=>({name:"Car "+(i+1),price:50000+i*1500})),  
+phones:Array.from({length:20},(_,i)=>({name:"Phone "+(i+1),price:800+i*40})),  
+laptops:Array.from({length:20},(_,i)=>({name:"Laptop "+(i+1),price:1200+i*80})),  
+imac:Array.from({length:20},(_,i)=>({name:"iMac "+(i+1),price:1500+i*100})),  
+beds:Array.from({length:20},(_,i)=>({name:"Bed "+(i+1),price:300+i*30}))  
+};  
+  
+let t={  
+en:{cars:"Cars",phones:"Phones",laptops:"Laptops",imac:"iMac",beds:"Beds",add:"Add"},  
+fa:{cars:"ماشین",phones:"موبایل",laptops:"لپ‌تاپ",imac:"آی‌مک",beds:"تخت",add:"افزودن"}  
+};  
+  
+let slides=[  
+"arian-company.png",  
+"arian-company2.png",  
+"arian-company3.png"  
+];  
+  
+let s=0;  
+  
+function renderHome(){  
+  
+document.getElementById("app").innerHTML=`  
+  
+<div class="slider">  
+<img id="slideImg" src="${slides[0]}">  
+</div>  
+  
+<div class="grid">  
+<div class="category" onclick="openCat('cars')">${t[lang].cars}</div>  
+<div class="category" onclick="openCat('phones')">${t[lang].phones}</div>  
+<div class="category" onclick="openCat('laptops')">${t[lang].laptops}</div>  
+<div class="category" onclick="openCat('imac')">${t[lang].imac}</div>  
+<div class="category" onclick="openCat('beds')">${t[lang].beds}</div>  
+</div>  
+  
+<div class="grid" style="margin-top:15px">  
+  <div class="card">  
+    <img src="https://m.media-amazon.com/images/I/61bK6PMOC3L._AC_SL1500_.jpg">  
+    <h3>Mobile</h3>  
+  </div>  
+  
+  <div class="card">  
+    <img src="https://m.media-amazon.com/images/I/61L5QgPvgqL._AC_SL1500_.jpg">  
+    <h3>Laptop</h3>  
+  </div>  
+</div>  
+  
+`;  
+}  
+  
+setInterval(()=>{  
+let el=document.getElementById("slideImg");  
+if(!el) return;  
+  
+s=(s+1)%slides.length;  
+el.style.opacity="0";  
+  
+setTimeout(()=>{  
+el.src=slides[s];  
+el.style.opacity="1";  
+},300);  
+  
+},3000);  
+  
+function openCat(cat){  
+let html=`<div class="grid">`;  
+  
+data[cat].forEach(p=>{  
+html+=`  
+<div class="card">  
+<h3>${p.name}</h3>  
+<div class="price">$${p.price}</div>  
+<button onclick="add('${p.name}',${p.price})">${t[lang].add}</button>  
+</div>`;  
+});  
+  
+html+="</div>";  
+document.getElementById("app").innerHTML=html;  
+}  
+  
+function add(n,p){  
+cart.push({n,p});  
+update();  
+}  
+  
+function update(){  
+document.getElementById("count").innerText=cart.length;  
+let total=0;  
+cart.forEach(i=>total+=i.p);  
+document.getElementById("total").innerText=total;  
+}  
+  
+function clearCart(){  
+cart=[];  
+update();  
+}  
+  
+function openPay(){  
+if(!cart.length){  
+alert("Cart empty");  
+return;  
+}  
+  
+let total=0;  
+cart.forEach(i=>total+=i.p);  
+  
+fetch("https://ar-store-backend.onrender.com/pay", {  
+method:"POST",  
+headers:{"Content-Type":"application/json"},  
+body:JSON.stringify({amount:total})  
+})  
+.then(r=>r.json())  
+.then(data=>{  
+if(data.url){  
+window.location.href=data.url;  
+}else{  
+alert("Payment error");  
+}  
+})  
+.catch(err=>{  
+alert("Server error");  
+console.log(err);  
+});  
+}  
+  
+function closePay(){  
+document.getElementById("payBox").style.display="none";  
+}  
+  
+function fakePay(){  
+alert("Success");  
+}  
+  
+function goTelegram(){  
+let txt="Order:\n";  
+let total=0;  
+cart.forEach(i=>{  
+txt+=i.n+" - $"+i.p+"\n";  
+total+=i.p;  
+});  
+txt+="\nTotal:"+total;  
+window.location.href="https://t.me/iphonearian?text="+encodeURIComponent(txt);  
+}  
+  
+function toggleLang(){  
+lang=(lang==="en")?"fa":"en";  
+renderHome();  
+}  
+  
+renderHome();  
+  
+</script>  </body>  
+</html>  
