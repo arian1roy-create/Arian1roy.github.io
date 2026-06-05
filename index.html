@@ -6,7 +6,7 @@
 <title>AR Store</title>
 
 <style>
-html,body{overflow-x:hidden;margin:0;font-family:tahoma;background:#f5f5f5;}
+html,body{margin:0;font-family:tahoma;background:#f5f5f5;overflow-x:hidden;}
 *{box-sizing:border-box;}
 
 .header{
@@ -21,7 +21,7 @@ background:#111;color:#fff;border:none;
 padding:6px 10px;border-radius:8px;cursor:pointer;
 }
 
-.container{padding:10px;padding-bottom:170px;}
+.container{padding:10px;padding-bottom:180px;}
 
 .grid{
 display:grid;
@@ -97,12 +97,10 @@ object-fit:cover;
 <div class="cartBar">
 🛒 <span id="count">0</span><br>
 Total: $<span id="total">0</span>
-
 <button class="payBtn" onclick="openPay()">Checkout</button>
 <button class="clearBtn" onclick="clearCart()">Clear</button>
 </div>
 
-<!-- PAYMENT -->
 <div id="payBox">
 <div class="payInner">
 <div style="font-size:40px">💳</div>
@@ -120,24 +118,20 @@ let lang="en";
 
 /* 20 PRODUCTS */
 let data={
-cars:Array.from({length:20},(_,i)=>({name:"Car "+(i+1),price:50000+i*1500})),
-phones:Array.from({length:20},(_,i)=>({name:"Phone "+(i+1),price:800+i*40})),
-laptops:Array.from({length:20},(_,i)=>({name:"Laptop "+(i+1),price:1200+i*80})),
-imac:Array.from({length:20},(_,i)=>({name:"iMac "+(i+1),price:1500+i*100})),
-beds:Array.from({length:20},(_,i)=>({name:"Bed "+(i+1),price:300+i*30}))
+cars:Array.from({length:20},(_,i)=>({name:"Car "+(i+1),price:50000+i*1500,img:"https://via.placeholder.com/300"})),
+phones:Array.from({length:20},(_,i)=>({name:"Phone "+(i+1),price:800+i*40,img:"https://via.placeholder.com/300"})),
+laptops:Array.from({length:20},(_,i)=>({name:"Laptop "+(i+1),price:1200+i*80,img:"https://via.placeholder.com/300"})),
+imac:Array.from({length:20},(_,i)=>({name:"iMac "+(i+1),price:1500+i*100,img:"https://via.placeholder.com/300"})),
+beds:Array.from({length:20},(_,i)=>({name:"Bed "+(i+1),price:300+i*30,img:"https://via.placeholder.com/300"}))
 };
 
-let t={
-en:{cars:"Cars",phones:"Phones",laptops:"Laptops",imac:"iMac",beds:"Beds"},
-fa:{cars:"ماشین",phones:"موبایل",laptops:"لپ‌تاپ",imac:"آی‌مک",beds:"تخت"}
-};
-
-/* SAFE SLIDER IMAGES */
+/* SAFE SLIDES */
 let slides=[
-"https://via.placeholder.com/800x300?text=AR+Store+1",
-"https://via.placeholder.com/800x300?text=AR+Store+2",
-"https://via.placeholder.com/800x300?text=AR+Store+3"
+"https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1200",
+"https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=1200",
+"https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200"
 ];
+
 let s=0;
 
 /* HOME */
@@ -156,11 +150,24 @@ oninput="searchProducts()"
 style="width:100%;padding:12px;border-radius:12px;border:1px solid #ddd;margin-bottom:15px;">
 
 <div class="grid">
-<div class="category" onclick="openCat('cars')">${t[lang].cars}</div>
-<div class="category" onclick="openCat('phones')">${t[lang].phones}</div>
-<div class="category" onclick="openCat('laptops')">${t[lang].laptops}</div>
-<div class="category" onclick="openCat('imac')">${t[lang].imac}</div>
-<div class="category" onclick="openCat('beds')">${t[lang].beds}</div>
+<div class="category" onclick="openCat('cars')">🚗 Cars</div>
+<div class="category" onclick="openCat('phones')">📱 Phones</div>
+<div class="category" onclick="openCat('laptops')">💻 Laptops</div>
+<div class="category" onclick="openCat('imac')">🖥 iMac</div>
+<div class="category" onclick="openCat('beds')">🛏 Beds</div>
+</div>
+
+<!-- 🔥 پایین صفحه (حفظ شده طبق خواسته تو) -->
+<div class="grid" style="margin-top:15px">
+<div class="card">
+<img src="https://m.media-amazon.com/images/I/61bK6PMOC3L._AC_SL1500_.jpg">
+<h3>Mobile</h3>
+</div>
+
+<div class="card">
+<img src="https://m.media-amazon.com/images/I/61L5QgPvgqL._AC_SL1500_.jpg">
+<h3>Laptop</h3>
+</div>
 </div>
 
 `;
@@ -193,7 +200,7 @@ html+=`
 </div>`;
 });
 
-html+=`</div>`;
+html+="</div>";
 document.getElementById("app").innerHTML=html;
 }
 
@@ -217,8 +224,11 @@ document.getElementById("app").innerHTML=html;
 /* CART */
 function add(n,p){
 cart.push({n,p});
-document.getElementById("count").innerText=cart.length;
+update();
+}
 
+function update(){
+document.getElementById("count").innerText=cart.length;
 let t=0;
 cart.forEach(i=>t+=i.p);
 document.getElementById("total").innerText=t;
@@ -226,8 +236,7 @@ document.getElementById("total").innerText=t;
 
 function clearCart(){
 cart=[];
-document.getElementById("count").innerText=0;
-document.getElementById("total").innerText=0;
+update();
 }
 
 /* PAYMENT */
@@ -242,7 +251,6 @@ document.getElementById("payBox").style.display="none";
 
 function fakePay(){alert("Success");}
 
-/* TELEGRAM */
 function goTelegram(){
 let txt="Order:\n";
 let total=0;
@@ -254,9 +262,24 @@ txt+="\nTotal:"+total;
 window.location.href="https://t.me/iphonearian?text="+encodeURIComponent(txt);
 }
 
-/* LANG */
+function goBack(){renderHome();}
+
 function toggleLang(){
-lang=(lang==="en")?"fa":"en";
+lang = (lang === "en") ? "fa" : "en";
+
+/* صفحه خانه */
+if(page === "home"){
+renderHome();
+return;
+}
+
+/* صفحه دسته‌ها */
+if(data[page]){
+openCat(page);
+return;
+}
+
+/* حالت اضطراری */
 renderHome();
 }
 
