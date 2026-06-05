@@ -6,24 +6,152 @@
 <title>AR Store</title>
 
 <style>
-body{margin:0;font-family:tahoma;background:#f5f5f5;}
-.header{position:sticky;top:0;background:#fff;padding:10px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #ddd;}
-.langBtn{background:#111;color:#fff;border:none;padding:6px 10px;border-radius:8px;cursor:pointer;}
-.back{display:none;background:#111;color:#fff;border:none;padding:5px 10px;border-radius:6px;cursor:pointer;}
-.container{padding:10px;padding-bottom:180px;}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
-.category{background:#fff;padding:25px;border-radius:12px;text-align:center;font-size:18px;cursor:pointer;box-shadow:0 2px 5px rgba(0,0,0,0.1);}
-.card{background:#fff;border-radius:12px;padding:10px;text-align:center;}
-.card img{width:100%;height:90px;object-fit:contain;}
-.price{color:#e60012;font-weight:bold;}
-button{background:#e60012;color:#fff;border:none;padding:6px;border-radius:8px;width:100%;margin-top:5px;cursor:pointer;}
-.cartBar{position:fixed;bottom:0;left:0;right:0;background:#111;color:#fff;padding:10px;}
+/* ✅ FIX MOBILE JITTER */
+html, body{
+  overflow-x: hidden;
+}
+
+*{
+  box-sizing: border-box;
+}
+
+body{
+  margin:0;
+  font-family:tahoma;
+  background:#f5f5f5;
+}
+
+.header{
+  position:sticky;
+  top:0;
+  background:#fff;
+  padding:10px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #ddd;
+}
+
+.langBtn{
+  background:#111;
+  color:#fff;
+  border:none;
+  padding:6px 10px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.back{
+  display:none;
+  background:#111;
+  color:#fff;
+  border:none;
+  padding:5px 10px;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+.container{
+  padding:10px;
+  padding-bottom:180px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  overflow-x:hidden;
+}
+
+.category{
+  background:#fff;
+  padding:25px;
+  border-radius:12px;
+  text-align:center;
+  font-size:18px;
+  cursor:pointer;
+  box-shadow:0 2px 5px rgba(0,0,0,0.1);
+}
+
+.card{
+  background:#fff;
+  border-radius:12px;
+  padding:10px;
+  text-align:center;
+}
+
+.card img{
+  width:100%;
+  height:90px;
+  object-fit:contain;
+}
+
+.price{
+  color:#e60012;
+  font-weight:bold;
+}
+
+button{
+  background:#e60012;
+  color:#fff;
+  border:none;
+  padding:6px;
+  border-radius:8px;
+  width:100%;
+  margin-top:5px;
+  cursor:pointer;
+}
+
+.cartBar{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:#111;
+  color:#fff;
+  padding:10px;
+}
+
 .payBtn{background:#25D366;}
 .clearBtn{background:#444;}
-#payBox{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);justify-content:center;align-items:center;z-index:999;}
-.payInner{background:#fff;width:90%;max-width:320px;border-radius:12px;padding:15px;text-align:center;}
-.cardIcon{font-size:40px;margin-bottom:10px;}
-.tgBtn{background:#229ED9;color:#fff;border:none;padding:10px;border-radius:8px;width:100%;margin-top:8px;cursor:pointer;}
+
+#payBox{
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background:rgba(0,0,0,.5);
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+}
+
+.payInner{
+  background:#fff;
+  width:90%;
+  max-width:320px;
+  border-radius:12px;
+  padding:15px;
+  text-align:center;
+}
+
+.cardIcon{
+  font-size:40px;
+  margin-bottom:10px;
+}
+
+.tgBtn{
+  background:#229ED9;
+  color:#fff;
+  border:none;
+  padding:10px;
+  border-radius:8px;
+  width:100%;
+  margin-top:8px;
+  cursor:pointer;
+}
 </style>
 </head>
 
@@ -60,33 +188,13 @@ let page="home";
 let cart=[];
 let lang="en";
 
-/* 🔥 OLX STYLE DATA (20 items each) */
+/* DATA */
 let data = {
-cars: Array.from({length: 20}, (_,i)=>({
-name:"Car "+(i+1),
-price:50000+i*1500,
-img:"https://via.placeholder.com/300"
-})),
-phones: Array.from({length: 20}, (_,i)=>({
-name:"Phone "+(i+1),
-price:800+i*40,
-img:"https://via.placeholder.com/300"
-})),
-laptops: Array.from({length: 20}, (_,i)=>({
-name:"Laptop "+(i+1),
-price:1200+i*80,
-img:"https://via.placeholder.com/300"
-})),
-imac: Array.from({length: 15}, (_,i)=>({
-name:"iMac "+(i+1),
-price:1500+i*100,
-img:"https://via.placeholder.com/300"
-})),
-beds: Array.from({length: 15}, (_,i)=>({
-name:"Bed "+(i+1),
-price:300+i*30,
-img:"https://via.placeholder.com/300"
-}))
+cars: Array.from({length: 20}, (_,i)=>({name:"Car "+(i+1),price:50000+i*1500,img:"https://via.placeholder.com/300"})),
+phones: Array.from({length: 20}, (_,i)=>({name:"Phone "+(i+1),price:800+i*40,img:"https://via.placeholder.com/300"})),
+laptops: Array.from({length: 20}, (_,i)=>({name:"Laptop "+(i+1),price:1200+i*80,img:"https://via.placeholder.com/300"})),
+imac: Array.from({length: 15}, (_,i)=>({name:"iMac "+(i+1),price:1500+i*100,img:"https://via.placeholder.com/300"})),
+beds: Array.from({length: 15}, (_,i)=>({name:"Bed "+(i+1),price:300+i*30,img:"https://via.placeholder.com/300"}))
 };
 
 let t={
@@ -115,24 +223,6 @@ style="width:100%;padding:12px;border-radius:12px;border:1px solid #ddd;">
 <div class="category" onclick="openCat('laptops')">💻<br>${t[lang].laptops}</div>
 <div class="category" onclick="openCat('imac')">🖥<br>${t[lang].imac}</div>
 <div class="category" onclick="openCat('beds')">🛏<br>${t[lang].beds}</div>
-</div>
-
-<h3 style="margin-top:20px;">
-${lang==="en" ? "🔥 Popular Products" : "🔥 محصولات محبوب"}
-</h3>
-
-<div class="grid">
-<div class="card">
-<img src="https://m.media-amazon.com/images/I/61bK6PMOC3L._AC_SL1500_.jpg">
-<h3>iPhone 15 Pro</h3>
-<div class="price">$1200</div>
-</div>
-
-<div class="card">
-<img src="https://m.media-amazon.com/images/I/61L5QgPvgqL._AC_SL1500_.jpg">
-<h3>MacBook Pro</h3>
-<div class="price">$2200</div>
-</div>
 </div>
 `;
 }
