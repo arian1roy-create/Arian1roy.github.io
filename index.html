@@ -144,7 +144,18 @@ document.getElementById("app").innerHTML=`
 <div class="slider">  
 <img id="slideImg" src="${slides[0]}">  
 </div>  
-  
+<input
+type="text"
+id="searchBox"
+placeholder="🔍 Search products..."
+onkeyup="searchProducts()"
+style="
+width:100%;
+padding:10px;
+border-radius:10px;
+border:1px solid #ccc;
+margin-bottom:15px;
+"> 
 <div class="grid">  
 <div class="category" onclick="openCat('cars')">${t[lang].cars}</div>  
 <div class="category" onclick="openCat('phones')">${t[lang].phones}</div>  
