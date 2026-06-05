@@ -217,22 +217,43 @@ fa:{cars:"🚗 ماشین",phones:"📱 موبایل",laptops:"💻 لپ‌تا�
 };
 
 /* HOME */
+
 function renderHome(){
 page="home";
 document.getElementById("backBtn").style.display="none";
 
 document.getElementById("app").innerHTML=`
-<div class="grid">
 
-<div class="category" onclick="openCat('cars')">${t[lang].cars}</div>
-<div class="category" onclick="openCat('phones')">${t[lang].phones}</div>
-<div class="category" onclick="openCat('laptops')">${t[lang].laptops}</div>
-<div class="category" onclick="openCat('imac')">${t[lang].imac}</div>
-<div class="category" onclick="openCat('beds')">${t[lang].beds}</div>
-
-</div>`;
+<div style="background:#111;color:white;padding:20px;border-radius:15px;text-align:center;margin-bottom:15px;">
+<h2>🛍 AR Store</h2>
+<p>${lang==="en" ? "Buy & Sell Everything" : "خرید و فروش همه چیز"}</p>
+</div><div style="margin-bottom:15px;">
+<input
+type="text"
+placeholder="${lang==="en" ? "Search products..." : "جستجوی محصولات..."}"
+style="width:100%;padding:12px;border-radius:12px;border:1px solid #ddd;box-sizing:border-box;font-size:16px;">
+</div><div class="grid"><div class="category" onclick="openCat('cars')">
+🚗<br>${t[lang].cars}
+</div><div class="category" onclick="openCat('phones')">
+📱<br>${t[lang].phones}
+</div><div class="category" onclick="openCat('laptops')">
+💻<br>${t[lang].laptops}
+</div><div class="category" onclick="openCat('imac')">
+🖥<br>${t[lang].imac}
+</div><div class="category" onclick="openCat('beds')">
+🛏<br>${t[lang].beds}
+</div></div><h3 style="margin-top:20px;">
+${lang==="en" ? "🔥 Popular Products" : "🔥 محصولات محبوب"}
+</h3><div class="grid"><div class="card">
+<img src="https://m.media-amazon.com/images/I/61bK6PMOC3L._AC_SL1500_.jpg">
+<h3>iPhone 15 Pro</h3>
+<div class="price">$1200</div>
+</div><div class="card">
+<img src="https://m.media-amazon.com/images/I/61L5QgPvgqL._AC_SL1500_.jpg">
+<h3>MacBook Pro</h3>
+<div class="price">$2200</div>
+</div></div>`;
 }
-
 /* CATEGORY */
 function openCat(cat){
 page=cat;
