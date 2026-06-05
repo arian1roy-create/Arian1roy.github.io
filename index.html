@@ -195,24 +195,38 @@ let cart=[];
 let lang="en";
 
 let data={
-cars:[
-{name:"BMW M5",price:80000,img:"https://via.placeholder.com/300"},
-{name:"Toyota Supra",price:60000,img:"https://via.placeholder.com/300"}
-],
-phones:[
-{name:"iPhone 15",price:1200,img:"https://via.placeholder.com/300"},
-{name:"Samsung S24",price:1100,img:"https://via.placeholder.com/300"}
-],
-laptops:[
-{name:"MacBook Pro M3",price:2200,img:"https://via.placeholder.com/300"}
-],
-imac:[
-{name:"iMac 2026",price:1800,img:"https://via.placeholder.com/300"}
-],
-beds:[
-{name:"Luxury Bed",price:500,img:"https://via.placeholder.com/300"}
-]
+let data = {
+cars: Array.from({length: 20}, (_,i)=>({
+name: "Car " + (i+1),
+price: 50000 + i*2000,
+img: "https://via.placeholder.com/300"
+})),
+
+phones: Array.from({length: 20}, (_,i)=>({
+name: "Phone " + (i+1),
+price: 800 + i*50,
+img: "https://via.placeholder.com/300"
+})),
+
+laptops: Array.from({length: 15}, (_,i)=>({
+name: "Laptop " + (i+1),
+price: 1200 + i*100,
+img: "https://via.placeholder.com/300"
+})),
+
+imac: Array.from({length: 10}, (_,i)=>({
+name: "iMac " + (i+1),
+price: 1500 + i*150,
+img: "https://via.placeholder.com/300"
+})),
+
+beds: Array.from({length: 15}, (_,i)=>({
+name: "Bed " + (i+1),
+price: 300 + i*40,
+img: "https://via.placeholder.com/300"
+}))
 };
+{name:"iMac 2026",price:1800,img:"https://via.placeholder.com/
 
 let t={
 en:{cars:"🚗 Cars",phones:"📱 Phones",laptops:"💻 Laptops",imac:"🖥 iMac",beds:"🛏 Beds",add:"Add"},
