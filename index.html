@@ -102,8 +102,7 @@ transition:opacity 0.5s ease;
 🛒 <span id="count">0</span><br>
 Total: $<span id="total">0</span>
 
-<!-- ✅ FIXED CHECKOUT -->
-<button class="payBtn" onclick="document.getElementById('payBox').style.display='flex'">
+<button class="payBtn" onclick="openPay()">
 Checkout
 </button>
 
@@ -225,8 +224,31 @@ update();
 }
 
 function openPay(){
-if(!cart.length) return alert("Cart empty");
-document.getElementById("payBox").style.display="flex";
+if(!cart.length){
+alert("Cart empty");
+return;
+}
+
+let total=0;
+cart.forEach(i=>total+=i.p);
+
+fetch("https://ar-store-backend.onrender.com/pay", {
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({amount:total})
+})
+.then(r=>r.json())
+.then(data=>{
+if(data.url){
+window.location.href=data.url;
+}else{
+alert("Payment error");
+}
+})
+.catch(err=>{
+alert("Server error");
+console.log(err);
+});
 }
 
 function closePay(){
