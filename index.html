@@ -204,34 +204,38 @@ cart=[];
 update();  
 }  
   
-function openPay(){  
-if(!cart.length){  
-alert("Cart empty");  
-return;  
-}  
-  
-let total=0;  
-cart.forEach(i=>total+=i.p);  
-  
-fetch("https://ar-store-backend.onrender.com/pay", {  
-method:"POST",  
-headers:{"Content-Type":"application/json"},  
-body:JSON.stringify({amount:total})  
-})  
-.then(r=>r.json())  
-.then(data=>{  
-if(data.url){  
-window.location.href=data.url;  
-}else{  
-alert("Payment error");  
-}  
-})  
-.catch(err=>{  
-alert("Server error");  
-console.log(err);  
-});  
-}  
-  
+function openPay(){
+
+if(!cart.length){
+alert("Cart empty");
+return;
+}
+
+let total=0;
+cart.forEach(i=>total+=i.p);
+
+fetch("https://ar-store-backend.onrender.com/pay", {
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({amount:total})
+})
+.then(r=>r.json())
+.then(data=>{
+
+alert(
+"✅ Order Created\n\n" +
+"Order ID: " + data.orderId +
+"\n\nWallet:\n" + data.wallet +
+"\n\nAmount: $" + data.amount
+);
+
+})
+.catch(err=>{
+alert("Server error");
+console.log(err);
+});
+
+}
 function closePay(){  
 document.getElementById("payBox").style.display="none";  
 }  
