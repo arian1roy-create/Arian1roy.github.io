@@ -278,23 +278,18 @@ el.style.opacity="1";
 function openCat(cat){  
 let html=`<div class="grid">`;  
 
-let changedIndex = 0;
-
 data[cat].forEach((p,i)=>{  
-
-if(i === changedIndex){
-p = {
-  ...p,
-  name: "🔥 Special " + p.name,
-  price: p.price + 100
-};
-}
 
 html+=`  
 <div class="card">
 
 <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9">
+`;
 
+
+// 👇 فقط برای موبایل این توضیحات خاص نمایش داده شود
+if(cat === "phones"){
+html+=`
 <div class="desc">
   اسم گوشی: ${p.name}<br>
   حافظه داخلی: ---<br>
@@ -303,14 +298,18 @@ html+=`
   توضیحات: ---<br>
   قیمت: ${p.price}$
 </div>
+`;
+}
 
-<h3>${p.name}</h3>  
+html+=`
+<h3>${p.name}</h3>
 
 <div class="price">$${p.price}</div>  
 
 <button onclick="add('${p.name}',${p.price})">${t[lang].add}</button>  
 
 </div>`;  
+
 });  
 
 html+="</div>";  
