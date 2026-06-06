@@ -306,12 +306,12 @@ html+=`
 if(cat === "phones"){
 html+=`
 <div class="desc">
-  اسم گوشی: ${p.name}<br>
-  حافظه داخلی: ---<br>
-  رنگ: ---<br>
-  ریجیستر: ---<br>
-  توضیحات: ---<br>
-  قیمت: ${p.price}$
+  ${t[lang].phoneName} ${p.name}<br>
+  ${t[lang].storage} ---<br>
+  ${t[lang].color} ---<br>
+  ${t[lang].register} ---<br>
+  ${t[lang].desc} ---<br>
+  ${t[lang].price} ${p.price}$
 </div>
 `;
 }
