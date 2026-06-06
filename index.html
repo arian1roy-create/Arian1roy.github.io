@@ -142,18 +142,48 @@ Checkout
 let cart=[];  
 let lang="en";  
   
-let data={  
-cars:Array.from({length:20},(_,i)=>({name:"Car "+(i+1),price:50000+i*1500})),  
-phones:Array.from({length:20},(_,i)=>({name:"Phone "+(i+1),price:800+i*40})),  
-laptops:Array.from({length:20},(_,i)=>({name:"Laptop "+(i+1),price:1200+i*80})),  
-imac:Array.from({length:20},(_,i)=>({name:"iMac "+(i+1),price:1500+i*100})),  
-beds:Array.from({length:20},(_,i)=>({name:"Bed "+(i+1),price:300+i*30}))  
-};  
+let data={
+cars:Array.from({length:20},(_,i)=>({name:"Car "+(i+1),price:50000+i*1500})),
+phones:Array.from({length:20},(_,i)=>({name:"Phone "+(i+1),price:800+i*40})),
+laptops:Array.from({length:20},(_,i)=>({name:"Laptop "+(i+1),price:1200+i*80})),
+imac:Array.from({length:20},(_,i)=>({name:"iMac "+(i+1),price:1500+i*100})),
+beds:Array.from({length:20},(_,i)=>({name:"Bed "+(i+1),price:300+i*30})),
+
+tablets:Array.from({length:20},(_,i)=>({name:"Tablet "+(i+1),price:900+i*50})),
+watches:Array.from({length:20},(_,i)=>({name:"Watch "+(i+1),price:200+i*20})),
+headphones:Array.from({length:20},(_,i)=>({name:"Headphone "+(i+1),price:150+i*10})),
+tv:Array.from({length:20},(_,i)=>({name:"TV "+(i+1),price:1000+i*100})),
+shoes:Array.from({length:20},(_,i)=>({name:"Shoes "+(i+1),price:120+i*15}))
+};
   
 let t={  
-en:{cars:"Cars",phones:"Phones",laptops:"Laptops",imac:"iMac",beds:"Beds",add:"Add"},  
-fa:{cars:"ماشین",phones:"موبایل",laptops:"لپ‌تاپ",imac:"آی‌مک",beds:"تخت",add:"افزودن"}  
-};  
+en:{
+cars:"Cars",
+phones:"Phones",
+laptops:"Laptops",
+imac:"iMac",
+beds:"Beds",
+tablets:"Tablets",
+watches:"Watches",
+headphones:"Headphones",
+tv:"TV",
+shoes:"Shoes",
+add:"Add"
+},  
+fa:{
+cars:"ماشین",
+phones:"موبایل",
+laptops:"لپ‌تاپ",
+imac:"آی‌مک",
+beds:"تخت",
+tablets:"تبلت",
+watches:"ساعت",
+headphones:"هدفون",
+tv:"تلویزیون",
+shoes:"کفش",
+add:"افزودن"
+}  
+};
   
 let slides=[  
 "arian-company.png",  
