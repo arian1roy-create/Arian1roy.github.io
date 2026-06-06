@@ -277,8 +277,19 @@ el.style.opacity="1";
   
 function openCat(cat){  
 let html=`<div class="grid">`;  
-  
-data[cat].forEach(p=>{  
+
+let changedIndex = 0;
+
+data[cat].forEach((p,i)=>{  
+
+if(i === changedIndex){
+p = {
+  ...p,
+  name: "🔥 Special " + p.name,
+  price: p.price + 100
+};
+}
+
 html+=`  
 <div class="card">
 <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9">
@@ -292,10 +303,10 @@ html+=`
 <button onclick="add('${p.name}',${p.price})">${t[lang].add}</button>  
 </div>`;  
 });  
-  
+
 html+="</div>";  
 document.getElementById("app").innerHTML=html;  
-}  
+ } 
   
 function add(n,p){  
 cart.push({n,p});  
