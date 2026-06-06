@@ -286,8 +286,6 @@ html+=`
 <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9">
 `;
 
-
-// 👇 فقط برای موبایل این توضیحات خاص نمایش داده شود
 if(cat === "phones"){
 html+=`
 <div class="desc">
@@ -302,7 +300,11 @@ html+=`
 }
 
 html+=`
-<h3>${p.name}</h3>
+<h3>
+${lang === "fa"
+  ? "محصول: " + p.name
+  : "Product: " + p.name}
+</h3>
 
 <div class="price">$${p.price}</div>  
 
