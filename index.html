@@ -315,6 +315,8 @@ html+=`
 
 <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9">
 `;
+
+// 👇 فقط برای phones و فقط Phone 1
 if(cat === "phones" && i === 0){
 html+=`
 <div class="desc">
@@ -323,18 +325,6 @@ html+=`
   ${t[lang].color} ${p.color || "Orange"}<br>
   ${t[lang].register} ${p.register || "no"}<br>
   ${t[lang].desc} ${p.desc || ""}<br>
-  ${t[lang].price} ${p.price}$
-</div>
-`;
-}
-if(cat === "phones"){
-html+=`
-<div class="desc">
-  ${t[lang].phoneName} ${p.name}<br>
-  ${t[lang].storage} ---<br>
-  ${t[lang].color} ---<br>
-  ${t[lang].register} ---<br>
-  ${t[lang].desc} ---<br>
   ${t[lang].price} ${p.price}$
 </div>
 `;
