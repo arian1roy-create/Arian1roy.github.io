@@ -53,6 +53,23 @@ height:55px;
 width:auto;
 display:block;
 }  
+.storeGlow{
+font-size:32px;
+font-weight:bold;
+color:#ffd700;
+margin-left:10px;
+text-shadow:
+0 0 5px #ffd700,
+0 0 10px #ffd700,
+0 0 20px #ffd700;
+animation: glowMove 2s infinite ease-in-out;
+}
+
+@keyframes glowMove{
+0%{transform:translateY(0);}
+50%{transform:translateY(-4px);}
+100%{transform:translateY(0);}
+}
 .container{padding:10px;padding-bottom:170px;}  
   
 .grid{  
@@ -110,10 +127,9 @@ object-fit:cover;
 transition:opacity 0.5s ease;  
 }  
 </style>  </head>  <body>  <div class="header">
-<button class="back" id="backBtn">⬅</button>
 
 <img src="arian-roy.png" class="headerLogo">
-
+<div class="storeGlow">STORE</div>
 <button class="langBtn" onclick="toggleLang()">🌐</button>
 </div>  <div class="container" id="app"></div>  <div class="cartBar">  
 🛒 <span id="count">0</span><br>  
