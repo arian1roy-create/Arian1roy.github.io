@@ -280,7 +280,13 @@ let html=`<div class="grid">`;
   
 data[cat].forEach(p=>{  
 html+=`  
-<div class="card">  
+<div class="card">
+<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9">
+<div class="desc">
+  Apple A17 Pro chip<br>
+  128GB Storage<br>
+  Super Retina Display
+</div>
 <h3>${p.name}</h3>  
 <div class="price">$${p.price}</div>  
 <button onclick="add('${p.name}',${p.price})">${t[lang].add}</button>  
