@@ -176,7 +176,16 @@ let lang="en";
   
 let data={
 cars:Array.from({length:20},(_,i)=>({name:"Car "+(i+1),price:50000+i*1500})),
-phones:Array.from({length:20},(_,i)=>({name:"Phone "+(i+1),price:800+i*40})),
+phones:[
+{
+  name:"iPhone 17 Pro 256GB Cosmic Orange",
+  price:999
+},
+...Array.from({length:19},(_,i)=>({
+  name:"Phone "+(i+2),
+  price:840+i*40
+}))
+],
 laptops:Array.from({length:20},(_,i)=>({name:"Laptop "+(i+1),price:1200+i*80})),
 imac:Array.from({length:20},(_,i)=>({name:"iMac "+(i+1),price:1500+i*100})),
 beds:Array.from({length:20},(_,i)=>({name:"Bed "+(i+1),price:300+i*30})),
