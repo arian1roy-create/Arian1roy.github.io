@@ -277,11 +277,10 @@ el.style.opacity="1";
   
 function openCat(cat){
 
-let p = data[cat][0];
+let html = `<div class="grid">`;
 
-let html = `
-<div class="grid">
-
+data[cat].forEach(p=>{
+html+=`
 <div class="card">
 
 <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9">
@@ -298,12 +297,13 @@ let html = `
 
 <button onclick="add('${p.name}',${p.price})">${t[lang].add}</button>
 
-</div>
+</div>`;
+});
 
-</div>
-`;
+html+=`</div>`;
 
 document.getElementById("app").innerHTML = html;
+}
 }
   
 function add(n,p){  
