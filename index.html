@@ -326,35 +326,7 @@ html+=`
 <div class="card">
 
 <img src="${p.img ? p.img : 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9'}">
-`;
 
-// 👇 Phone 1 (VIP کامل)
-if(cat === "phones" && i === 0){
-html+=`
-<div class="desc">
-  <span style="color:#fff">${t[lang].storage}</span> ${p.storage || "128"}<br>
-  <span style="color:#fff">${t[lang].color}</span> ${p.color || "Orange"}<br>
-  <span style="color:#fff">${t[lang].register}</span> ${p.register || "no"}<br>
-  <span style="color:#fff">${t[lang].desc}</span> ${p.desc || ""}<br>
-  <span style="color:#fff">${t[lang].price}</span> ${p.price}$
-</div>
-`;
-}
-
-// 👇 بقیه Phone ها
-if(cat === "phones" && i !== 0){
-html+=`
-<div class="desc">
-  <span style="color:#fff">${t[lang].storage}</span> ---<br>
-  <span style="color:#fff">${t[lang].color}</span> ---<br>
-  <span style="color:#fff">${t[lang].register}</span> ---<br>
-  <span style="color:#fff">${t[lang].desc}</span> ---<br>
-  <span style="color:#fff">${t[lang].price}</span> ${p.price}$
-</div>
-`;
-}
-
-html+=`
 <h3>
 ${lang === "fa"
   ? "محصول: " + p.name
