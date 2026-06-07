@@ -373,9 +373,18 @@ html+=`
 
 <h3>${lang==="fa" ? "محصول: "+p.name : "Product: "+p.name}</h3>
 
+<div class="desc">
+  ${p.storage ? t[lang].storage + " " + p.storage + "<br>" : ""}
+  ${p.color ? t[lang].color + " " + p.color + "<br>" : ""}
+  ${p.register ? t[lang].register + " " + p.register + "<br>" : ""}
+  ${p.desc ? t[lang].desc + " " + p.desc + "<br>" : ""}
+</div>
+
 <div class="price">$${p.price}</div>
 
-<button onclick="add('${p.name}',${p.price})">${t[lang].add}</button>
+<button onclick="add('${p.name}',${p.price})">
+  ${t[lang].add}
+</button>
 
 </div>`;  
 
