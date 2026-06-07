@@ -354,6 +354,10 @@ el.style.opacity="1";
   
 function openCat(cat){
 
+  console.log("CAT:", cat);
+  console.log("DATA:", data[cat]);
+  console.log("LENGTH:", data[cat]?.length);
+
   let html = `<div class="grid">`;
 
   if(!data[cat]){
@@ -363,8 +367,8 @@ function openCat(cat){
 
   data[cat].forEach((p,i)=>{
 
-    let img = (p && p.img) 
-      ? p.img 
+    let img = (p && p.img)
+      ? p.img
       : "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9";
 
     html += `
