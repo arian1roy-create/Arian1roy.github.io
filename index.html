@@ -320,7 +320,7 @@ el.style.opacity="1";
 function openCat(cat){  
 let html=`<div class="grid">`;  
 
-data[cat].forEach((p,i)=>{  
+data[cat].forEach((p)=>{  
 
 let img = p.img || 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9';
 
@@ -329,11 +329,7 @@ html+=`
 
 <img src="${img}">
 
-<h3>
-${lang === "fa"
-  ? "محصول: " + p.name
-  : "Product: " + p.name}
-</h3>
+<h3>${lang === "fa" ? "محصول: " + p.name : "Product: " + p.name}</h3>
 
 <div class="price">$${p.price}</div>  
 
