@@ -356,21 +356,28 @@ function openCat(cat){
 
   let html = `<div class="grid">`;
 
+  if(!data[cat]){
+    document.getElementById("app").innerHTML = "<p style='color:white'>Category not found</p>";
+    return;
+  }
+
   data[cat].forEach((p,i)=>{
 
-    let img = p.img || "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9";
+    let img = (p && p.img) 
+      ? p.img 
+      : "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9";
 
     html += `
       <div class="card">
 
-        <img src="${img}" 
-             onerror="this.src='https://images.unsplash.com/photo-1511707171634-5f897ff02aa9'">
+        <img src="${img}"
+             onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1511707171634-5f897ff02aa9'">
 
-        <h3>${lang === "fa" ? "محصول: " + p.name : "Product: " + p.name}</h3>
+        <h3>${lang === "fa" ? "محصول: " + (p.name || "") : "Product: " + (p.name || "")}</h3>
 
-        <div class="price">$${p.price}</div>
+        <div class="price">$${p.price || 0}</div>
 
-        <button onclick="add('${p.name}',${p.price})">
+        <button onclick="add('${p.name || ""}',${p.price || 0})">
           ${t[lang].add}
         </button>
 
