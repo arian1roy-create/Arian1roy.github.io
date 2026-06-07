@@ -361,7 +361,8 @@ function openCat(cat){
   let html = `<div class="grid">`;
 
   if(!data[cat]){
-    document.getElementById("app").innerHTML = "<p style='color:white'>Category not found</p>";
+    document.getElementById("app").innerHTML =
+      "<p style='color:white'>Category not found</p>";
     return;
   }
 
@@ -377,7 +378,11 @@ function openCat(cat){
         <img src="${img}"
              onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1511707171634-5f897ff02aa9'">
 
-        <h3>${lang === "fa" ? "محصول: " + (p.name || "") : "Product: " + (p.name || "")}</h3>
+        <h3>
+          ${lang === "fa"
+            ? "محصول: " + (p.name || "")
+            : "Product: " + (p.name || "")}
+        </h3>
 
         <div class="price">$${p.price || 0}</div>
 
