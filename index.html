@@ -176,6 +176,7 @@ let lang="en";
   
 let data={
 cars:Array.from({length:20},(_,i)=>({name:"Car "+(i+1),price:50000+i*1500})),
+
 phones:[
 {
   name:"iPhone 17 Pro 256GB Cosmic Orange",
@@ -183,7 +184,8 @@ phones:[
   color:"Cosmic Orange",
   register:"Non PTA",
   desc:"Brand new box pack",
-  price:999
+  price:999,
+  img:"https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=800&q=80"
 },
 {
   name:"iPhone 16 Pro Max",
@@ -191,10 +193,11 @@ phones:[
   color:"Titanium Black",
   register:"Non PTA",
   desc:"Brand new box pack",
-  price:1099
+  price:1099,
+  img:"https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=800&q=80"
 },
 ...Array.from({length:18},(_,i)=>({
-  name:"Phone "+(i+2),
+  name:"Phone "+(i+3),
   price:840+i*40
 }))
 ],
