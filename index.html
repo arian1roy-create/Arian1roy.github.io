@@ -366,28 +366,25 @@ function openCat(cat){
 
   data[cat].forEach((p)=>{
 
-    let img = p?.img || ONLINE_FALLBACK;
+    let img = p && p.img ? p.img : FALLBACK_IMG;
+
+    let title = lang === "fa"
+      ? "محصول: " + p.name
+      : "Product: " + p.name;
+
+    let price = p.price || 0;
 
     html += `
       <div class="card">
 
         <img src="${img}"
-          onerror="this.onerror=null;
-            if(this.src !== '${ONLINE_FALLBACK}'){
-              this.src='${ONLINE_FALLBACK}'
-            } else {
-              this.src='${FALLBACK_IMG}'
-            }">
+          onerror="this.onerror=null;this.src='${FALLBACK_IMG}'">
 
-        <h3>
-          ${lang === "fa"
-            ? "محصول: " + (p.name || "")
-            : "Product: " + (p.name || "")}
-        </h3>
+        <h3>${title}</h3>
 
-        <div class="price">$${p.price || 0}</div>
+        <div class="price">$${price}</div>
 
-        <button onclick="add('${p.name || ""}',${p.price || 0})">
+        <button onclick="add('${p.name}',${price})">
           ${t[lang].add}
         </button>
 
@@ -397,7 +394,7 @@ function openCat(cat){
 
   html += `</div>`;
   document.getElementById("app").innerHTML = html;
-} 
+}
 function add(n,p){  
 cart.push({n,p});  
 update();  
