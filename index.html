@@ -174,43 +174,78 @@ Checkout
 let cart=[];  
 let lang="en";  
   
-let data={
-cars:Array.from({length:20},(_,i)=>({name:"Car "+(i+1),price:50000+i*1500})),
+let data = {
+  cars: Array.from({length:20},(_,i)=>({
+    name:"Car "+(i+1),
+    price:50000+i*1500
+  })),
 
-phones:[
-{
-  name:"iPhone 17 Pro 256GB Cosmic Orange",
-  storage:"256GB",
-  color:"Cosmic Orange",
-  register:"Non PTA",
-  desc:"Brand new box pack",
-  price:999,
-  img:"https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=800&q=80"
-},
-{
-  name:"iPhone 16 Pro Max",
-  storage:"256GB",
-  color:"Titanium Black",
-  register:"Non PTA",
-  desc:"Brand new box pack",
-  price:1099,
-  img:"https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=800&q=80"
-},
-...Array.from({length:18},(_,i)=>({
-  name:"Phone "+(i+3),
-  price:840+i*40,
-  img:"https://images.unsplash.com/photo-1511707171634-5f897ff02aa9"
-}))
-],
-laptops:Array.from({length:20},(_,i)=>({name:"Laptop "+(i+1),price:1200+i*80})),
-imac:Array.from({length:20},(_,i)=>({name:"iMac "+(i+1),price:1500+i*100})),
-beds:Array.from({length:20},(_,i)=>({name:"Bed "+(i+1),price:300+i*30})),
+  phones:[
+    {
+      name:"iPhone 17 Pro 256GB Cosmic Orange",
+      storage:"256GB",
+      color:"Cosmic Orange",
+      register:"Non PTA",
+      desc:"Brand new box pack",
+      price:999,
+      img:"https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      name:"iPhone 16 Pro Max",
+      storage:"256GB",
+      color:"Titanium Black",
+      register:"Non PTA",
+      desc:"Brand new box pack",
+      price:1099,
+      img:"https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=800&q=80"
+    },
 
-tablets:Array.from({length:20},(_,i)=>({name:"Tablet "+(i+1),price:900+i*50})),
-watches:Array.from({length:20},(_,i)=>({name:"Watch "+(i+1),price:200+i*20})),
-headphones:Array.from({length:20},(_,i)=>({name:"Headphone "+(i+1),price:150+i*10})),
-tv:Array.from({length:20},(_,i)=>({name:"TV "+(i+1),price:1000+i*100})),
-shoes:Array.from({length:20},(_,i)=>({name:"Shoes "+(i+1),price:120+i*15}))
+    ...Array.from({length:18},(_,i)=>({
+      name:"Phone "+(i+3),
+      price:840+i*40,
+      img:"https://images.unsplash.com/photo-1511707171634-5f897ff02aa9"
+    }))
+  ],
+
+  laptops: Array.from({length:20},(_,i)=>({
+    name:"Laptop "+(i+1),
+    price:1200+i*80
+  })),
+
+  imac: Array.from({length:20},(_,i)=>({
+    name:"iMac "+(i+1),
+    price:1500+i*100
+  })),
+
+  beds: Array.from({length:20},(_,i)=>({
+    name:"Bed "+(i+1),
+    price:300+i*30
+  })),
+
+  tablets: Array.from({length:20},(_,i)=>({
+    name:"Tablet "+(i+1),
+    price:900+i*50
+  })),
+
+  watches: Array.from({length:20},(_,i)=>({
+    name:"Watch "+(i+1),
+    price:200+i*20
+  })),
+
+  headphones: Array.from({length:20},(_,i)=>({
+    name:"Headphone "+(i+1),
+    price:150+i*10
+  })),
+
+  tv: Array.from({length:20},(_,i)=>({
+    name:"TV "+(i+1),
+    price:1000+i*100
+  })),
+
+  shoes: Array.from({length:20},(_,i)=>({
+    name:"Shoes "+(i+1),
+    price:120+i*15
+  }))
 };
   
 let t={  
