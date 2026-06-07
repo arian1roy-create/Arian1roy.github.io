@@ -353,22 +353,29 @@ el.style.opacity="1";
 },3000);  
   
 function openCat(cat){  
+
+if(!data[cat]){
+  document.getElementById("app").innerHTML =
+    "<h2 style='color:white;text-align:center'>Category not found</h2>";
+  return;
+}
+
 let html=`<div class="grid">`;  
 
 data[cat].forEach((p)=>{  
 
-let img = p.<img src="https://picsum.photos/300/300?random=999">
+let img = p.img || "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9";
 
 html+=`
 <div class="card">
 
 <img src="${img}">
 
-<h3>${lang === "fa" ? "محصول: " + p.name : "Product: " + p.name}</h3>
+<h3>${lang==="fa" ? "محصول: "+p.name : "Product: "+p.name}</h3>
 
-<div class="price">$${p.price}</div>  
+<div class="price">$${p.price}</div>
 
-<button onclick="add('${p.name}',${p.price})">${t[lang].add}</button>  
+<button onclick="add('${p.name}',${p.price})">${t[lang].add}</button>
 
 </div>`;  
 
