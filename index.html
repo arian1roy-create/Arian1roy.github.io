@@ -322,10 +322,12 @@ let html=`<div class="grid">`;
 
 data[cat].forEach((p,i)=>{  
 
-html+=`  
+let img = p.img || 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9';
+
+html+=`
 <div class="card">
 
-<img src="${p.img ? p.img : 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9'}">
+<img src="${img}">
 
 <h3>
 ${lang === "fa"
