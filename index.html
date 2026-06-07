@@ -354,9 +354,9 @@ el.style.opacity="1";
   
 function openCat(cat){
 
+function openCat(cat){
+
   console.log("CAT:", cat);
-  console.log("DATA:", data[cat]);
-  console.log("LENGTH:", data[cat]?.length);
 
   let html = `<div class="grid">`;
 
@@ -366,17 +366,20 @@ function openCat(cat){
     return;
   }
 
-  data[cat].forEach((p,i)=>{
+  data[cat].forEach((p)=>{
 
-    let img = (p && p.img)
-      ? p.img
-      : "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9";
+    let img = p?.img || ONLINE_FALLBACK;
 
     html += `
       <div class="card">
 
         <img src="${img}"
-             onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1511707171634-5f897ff02aa9'">
+          onerror="this.onerror=null;
+            if(this.src !== '${ONLINE_FALLBACK}'){
+              this.src='${ONLINE_FALLBACK}'
+            } else {
+              this.src='${FALLBACK_IMG}'
+            }">
 
         <h3>
           ${lang === "fa"
@@ -392,12 +395,11 @@ function openCat(cat){
 
       </div>
     `;
-
   });
 
   html += `</div>`;
   document.getElementById("app").innerHTML = html;
-}
+} 
 function add(n,p){  
 cart.push({n,p});  
 update();  
