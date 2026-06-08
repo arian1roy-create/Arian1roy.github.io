@@ -427,6 +427,29 @@ function add(n,p){
 
   update();
 }
+function inc(name){
+
+  let item = cart.find(i => i.n === name);
+  if(item){
+    item.q++;
+  }
+
+  update();
+}
+function dec(name){
+
+  let item = cart.find(i => i.n === name);
+
+  if(!item) return;
+
+  item.q--;
+
+  if(item.q <= 0){
+    cart = cart.filter(i => i.n !== name);
+  }
+
+  update();
+}  
   
 function update(){
 
