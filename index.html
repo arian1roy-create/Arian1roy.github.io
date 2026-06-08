@@ -395,8 +395,25 @@ function openCat(cat){
     html += `
       <div class="card" onclick="openProduct('${cat}',${i})">
 
-        <img src="${img}"
-          onerror="this.onerror=null;this.src='https://via.placeholder.com/150'">
+        <div style="position:relative">
+
+          <!-- ❤️ Favorites Button -->
+          <div onclick="event.stopPropagation();toggleWish('${p.name}')"
+            style="
+              position:absolute;
+              top:6px;
+              right:6px;
+              font-size:20px;
+              cursor:pointer;
+              z-index:2;
+              color:${wishlist.includes(p.name) ? 'red' : 'white'};
+            ">
+            ❤️
+          </div>
+
+          <img src="${img}"
+            onerror="this.onerror=null;this.src='https://via.placeholder.com/150'">
+        </div>
 
         <h3>${title}</h3>
 
@@ -508,20 +525,17 @@ function update(){
   // 👇 اینجا باید یه div برای cart داشته باشی
   document.getElementById("cartList").innerHTML = html;
 }  
- function toggleWish(name){
+function toggleWish(name){
 
   if(wishlist.includes(name)){
     wishlist = wishlist.filter(i => i !== name);
-  }else{
+  } else {
     wishlist.push(name);
   }
 
-  localStorage.setItem(
-    "wishlist",
-    JSON.stringify(wishlist)
-  );
+  localStorage.setItem("wishlist", JSON.stringify(wishlist));
 
-  renderHome();
+  renderHome(); // یا openCat اگر داخل دسته‌ای هستی
 }
 function clearCart(){  
 cart=[];  
@@ -589,6 +603,8 @@ function openProduct(cat, index){
 
   let img = p.img || "https://via.placeholder.com/300";
 
+  let isFav = wishlist.includes(p.name);
+
   let html = `
     <div style="padding:10px;color:white">
 
@@ -598,6 +614,13 @@ function openProduct(cat, index){
       </button>
 
       <div style="background:#1a1a1a;padding:10px;border-radius:12px">
+
+        <!-- ❤️ Favorite Button -->
+        <div style="text-align:right;font-size:24px;cursor:pointer;"
+          onclick="toggleWish('${p.name}');openProduct('${cat}',${index})"
+        >
+          ${isFav ? "❤️" : "🤍"}
+        </div>
 
         <img src="${img}" 
           style="width:100%;border-radius:10px">
