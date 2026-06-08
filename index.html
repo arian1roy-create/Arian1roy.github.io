@@ -688,9 +688,12 @@ function openProduct(cat, index){
 }
 function handleFav(cat, index, el){
 
+  console.log("CLICK HEART");
+
   let p = data[cat][index];
 
-  // toggle wishlist
+  if(!wishlist) wishlist = [];
+
   if(wishlist.includes(p.name)){
     wishlist = wishlist.filter(i => i !== p.name);
   } else {
@@ -699,11 +702,8 @@ function handleFav(cat, index, el){
 
   localStorage.setItem("wishlist", JSON.stringify(wishlist));
 
-  // فقط انیمیشن روی همان قلب
-  el.classList.add("active");
-  setTimeout(()=>el.classList.remove("active"), 300);
+  console.log("WISHLIST:", wishlist);
 
-  // فقط اگر لازم بود UI محصول را refresh کن
   openProduct(cat, index);
 }
 </script>
