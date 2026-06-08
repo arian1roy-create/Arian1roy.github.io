@@ -638,11 +638,16 @@ function openFavorites(){
 
           <div class="price">$${product.price || 0}</div>
 
-          <button onclick="add('${product.name}',${product.price || 0})">
+          <button onclick="add('${product.name}', ${product.price || 0})">
             ➕ Add to Cart
           </button>
 
-          <button onclick="toggleWish('${product.name}');openFavorites()">
+          <button onclick="
+            wishlist = wishlist.filter(i => i !== '${product.name}');
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            updateFavUI();
+            openFavorites();
+          ">
             ❌ Remove
           </button>
 
