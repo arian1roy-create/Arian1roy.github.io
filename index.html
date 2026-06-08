@@ -198,12 +198,21 @@ Total: $<span id="total">0</span>  <button class="payBtn" onclick="openPay()">
 Checkout  
 </button>  <button class="clearBtn" onclick="clearCart()">Clear</button>
 
-</div>  <div id="payBox">  
-<div class="payInner">  
-<div style="font-size:40px">💳</div>  
-<div style="font-weight:bold;margin-bottom:10px;">Telegram Payment</div>  
-<button class="payBtn" onclick="goTelegram()">Pay via Telegram</button>  
-let data = {
+<div id="payBox">
+  <div class="payInner">
+
+    <div style="font-size:40px">💳</div>
+
+    <div style="font-weight:bold;margin-bottom:10px;">
+      Telegram Payment
+    </div>
+
+    <button class="payBtn" onclick="goTelegram()">
+      Pay via Telegram
+    </button>
+
+  </div>
+</div>
 
   cars: Array.from({length:20},(_,i)=>({
     name:"Car "+(i+1),
