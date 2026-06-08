@@ -406,17 +406,17 @@ function openCat(cat){
 
   console.log("CAT:", cat);
 
-  let html = `<div class="grid">`;
-
   if(!data[cat]){
     document.getElementById("app").innerHTML =
-      "<p style='color:white'>Category not found</p>";
+      "<p style='color:white;text-align:center'>Category not found</p>";
     return;
   }
 
+  let html = `<div class="grid">`;
+
   data[cat].forEach((p,i)=>{
 
-    let img = (p && p.img) ? p.img : "https://via.placeholder.com/150";
+    let img = p?.img || "https://via.placeholder.com/150";
 
     let title = lang === "fa"
       ? "محصول: " + p.name
@@ -424,13 +424,15 @@ function openCat(cat){
 
     let price = p.price || 0;
 
+    let isFav = wishlist.includes(p.name);
+
     html += `
       <div class="card" onclick="openProduct('${cat}',${i})">
 
         <div style="position:relative">
 
-          <!-- ❤️ Favorites Button -->
-          <div onclick="event.stopPropagation();toggleWish('${p.name}')"
+          <!-- ❤️ Heart -->
+          <div onclick="event.stopPropagation(); toggleWish('${p.name}'); openCat('${cat}')"
             style="
               position:absolute;
               top:6px;
@@ -438,13 +440,14 @@ function openCat(cat){
               font-size:20px;
               cursor:pointer;
               z-index:2;
-              color:${wishlist.includes(p.name) ? 'red' : 'white'};
+              color:${isFav ? 'red' : 'white'};
             ">
             ❤️
           </div>
 
           <img src="${img}"
             onerror="this.onerror=null;this.src='https://via.placeholder.com/150'">
+
         </div>
 
         <h3>${title}</h3>
@@ -649,9 +652,15 @@ function openProduct(cat, index){
 
       <div style="background:#1a1a1a;padding:10px;border-radius:12px">
 
+        <!-- ❤️ HEART -->
         <div class="heart ${isFav ? 'active' : ''}"
-          style="text-align:right;font-size:24px;cursor:pointer;"
-          onclick="handleWish('${cat}',${index},this)">
+          style="
+            text-align:right;
+            font-size:24px;
+            cursor:pointer;
+            color:${isFav ? 'red' : 'white'};
+          "
+          onclick="handleFav('${cat}',${index},this)">
           ${isFav ? "❤️" : "🤍"}
         </div>
 
@@ -681,17 +690,24 @@ function handleFav(cat, index, el){
 
   let p = data[cat][index];
 
-  toggleWish(p.name);
+  // toggle wishlist
+  if(wishlist.includes(p.name)){
+    wishlist = wishlist.filter(i => i !== p.name);
+  } else {
+    wishlist.push(p.name);
+  }
 
-  openProduct(cat, index); // اول UI آپدیت
+  localStorage.setItem("wishlist", JSON.stringify(wishlist));
+
+  // انیمیشن روی همون قلبی که کلیک شده
+  el.classList.add("active");
 
   setTimeout(()=>{
-    let newEl = document.querySelector(".heart");
-    if(newEl){
-      newEl.classList.add("active");
-      setTimeout(()=>newEl.classList.remove("active"),300);
-    }
-  },50);
+    el.classList.remove("active");
+  }, 300);
+
+  // فقط UI همون صفحه رو دوباره بساز
+  openProduct(cat, index);
 }
 </script>
 
