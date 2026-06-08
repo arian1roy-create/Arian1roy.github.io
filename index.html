@@ -393,7 +393,9 @@ function openCat(cat){
 
   data[cat].forEach((p,i)=>{
 
-    let img = (p && p.img) ? p.img : "https://via.placeholder.com/150";
+    let img = (p && p.img)
+      ? p.img
+      : "https://via.placeholder.com/150";
 
     let title = lang === "fa"
       ? "محصول: " + p.name
@@ -420,7 +422,7 @@ function openCat(cat){
 
         <div class="price">$${price}</div>
 
-        <button onclick="event.stopPropagation(); add('${p.name}',${price})">
+        <button onclick="event.stopPropagation();add('${p.name}',${price})">
           ${t[lang].add}
         </button>
 
@@ -429,6 +431,7 @@ function openCat(cat){
   });
 
   html += `</div>`;
+
   document.getElementById("app").innerHTML = html;
 }
 function add(n,p){  
@@ -499,28 +502,46 @@ txt+="\nTotal:"+total;
 window.location.href="https://t.me/iphonearian?text="+encodeURIComponent(txt);  
 }  
   
-function toggleLang(){  
-lang=(lang==="en")?"fa":"en";  
-renderHome();  
-}  
+function toggleLang(){
+  lang=(lang==="en")?"fa":"en";
+  renderHome();
+}
+
 function openProduct(cat, index){
 
   let p = data[cat][index];
 
-  let img = p.img || "https://via.placeholder.com/300";
+  let images = p.images || [p.img || "https://via.placeholder.com/300"];
+
+  let main = images[0];
+
+  let thumbs = images.map((img,i)=>`
+    <img src="${img}" class="thumb ${i===0?'active':''}"
+      onclick="setMainImg('${img}')">
+  `).join("");
 
   let html = `
     <div style="padding:10px;color:white">
 
-      <button onclick="renderHome()" 
+      <button onclick="renderHome()"
         style="margin-bottom:10px;background:#444;">
         ⬅ Back
       </button>
 
-      <div style="background:#1a1a1a;padding:10px;border-radius:12px">
+      <div class="gallery">
 
-        <img src="${img}" 
-          style="width:100%;border-radius:10px">
+        <img id="mainImg"
+          src="${main}"
+          class="mainImg"
+          onclick="openZoom(this.src)">
+
+        <div class="thumbRow">
+          ${thumbs}
+        </div>
+
+      </div>
+
+      <div style="background:#1a1a1a;padding:10px;border-radius:12px;margin-top:10px">
 
         <h2>${p.name}</h2>
 
@@ -541,7 +562,16 @@ function openProduct(cat, index){
 
   document.getElementById("app").innerHTML = html;
 }
-renderHome();  
+
+function setMainImg(img){
+  document.getElementById("mainImg").src = img;
+}
+
+function openZoom(img){
+  window.open(img,"_blank");
+}
+
+renderHome(); 
   
 </script>  </body>  
 </html>  
