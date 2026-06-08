@@ -542,6 +542,20 @@ function dec(name){
 
   update();
 }
+function toggleWish(name){
+
+  if(!Array.isArray(wishlist)) wishlist = [];
+
+  if(wishlist.includes(name)){
+    wishlist = wishlist.filter(i => i !== name);
+  } else {
+    wishlist.push(name);
+  }
+
+  localStorage.setItem("wishlist", JSON.stringify(wishlist));
+
+  updateFavUI();
+}  
   
 function update(){
 
@@ -778,6 +792,7 @@ function handleFav(cat, index, el){
 
 <script>
 window.onload = renderHome;
+updateFavUI();  
 </script>
 
 </body>
