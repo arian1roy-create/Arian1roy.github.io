@@ -415,14 +415,25 @@ function openCat(cat){
   html += `</div>`;
   document.getElementById("app").innerHTML = html;
 }
-function add(n,p){
+function add(n, p){
 
+  // اگر cart هنوز ساخته نشده
+  if(!Array.isArray(cart)){
+    cart = [];
+  }
+
+  // پیدا کردن آیتم
   let item = cart.find(i => i.n === n);
 
   if(item){
-    item.q += 1;
+    // اگر q خراب بود درستش کن
+    item.q = (item.q || 1) + 1;
   } else {
-    cart.push({n,p,q:1});
+    cart.push({
+      n: n,
+      p: p,
+      q: 1
+    });
   }
 
   update();
@@ -442,26 +453,30 @@ function dec(name){
 
   if(!item) return;
 
-  item.q--;
+  // اگر q وجود نداشت خراب نشه
+  item.q = (item.q || 1) - 1;
 
+  // اگر صفر یا کمتر شد حذف کن
   if(item.q <= 0){
     cart = cart.filter(i => i.n !== name);
   }
 
   update();
-}  
+}
   
 function update(){
 
-  document.getElementById("count").innerText = cart.length;
-
+  let count = 0;
   let total = 0;
 
   cart.forEach(i => {
-    total += i.p * i.q;
+    count += (i.q || 1);   // تعداد واقعی
+    total += (i.p * (i.q || 1));
   });
 
+  document.getElementById("count").innerText = count;
   document.getElementById("total").innerText = total;
+
 }
   
 function clearCart(){  
