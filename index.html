@@ -177,16 +177,7 @@ Checkout
 <div style="font-size:40px">💳</div>  
 <div style="font-weight:bold;margin-bottom:10px;">Telegram Payment</div>  
 <button class="payBtn" onclick="goTelegram()">Pay via Telegram</button>  
-<button class="payBtn" onclick="fakePay()">Pay Now</button>  
-<button class="clearBtn" onclick="closePay()">Close</button>  
-</div>  
-</div>  <script>  
-  
-let cart=[];  
-let lang="en";  
-  
-let data = {
-  cars: Array.from({length:20},(_,i)=>({
+: Array.from({length:20},(_,i)=>({
     name:"Car "+(i+1),
     price:50000+i*1500
   })),
@@ -199,8 +190,16 @@ let data = {
       register:"Non PTA",
       desc:"Brand new box pack",
       price:999,
-      img:"https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=800&q=80"
+
+      img:"https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=800&q=80",
+
+      images:[
+        "https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9"
+      ]
     },
+
     {
       name:"iPhone 16 Pro Max",
       storage:"256GB",
@@ -208,13 +207,29 @@ let data = {
       register:"Non PTA",
       desc:"Brand new box pack",
       price:1099,
-      img:"https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=800&q=80"
+
+      img:"https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=800&q=80",
+
+      images:[
+        "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9"
+      ]
     },
 
     ...Array.from({length:18},(_,i)=>({
       name:"Phone "+(i+3),
+      storage:"-",
+      color:"-",
+      register:"-",
+      desc:"-",
       price:840+i*40,
-      img:"https://images.unsplash.com/photo-1511707171634-5f897ff02aa9"
+
+      img:"https://images.unsplash.com/photo-1511707171634-5f897ff02aa9",
+
+      images:[
+        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9"
+      ]
     }))
   ],
 
@@ -258,6 +273,7 @@ let data = {
     price:120+i*15
   }))
 };
+
   
 let t={  
 en:{
@@ -273,7 +289,7 @@ tv:"TV",
 shoes:"Shoes",
 add:"Add",
 
-// 👇 اضافه شد برای توضیحات موبایل
+// Product page labels
 phoneName:"Phone Name:",
 storage:"Storage:",
 color:"Color:",
@@ -295,9 +311,9 @@ tv:"تلویزیون",
 shoes:"کفش",
 add:"افزودن",
 
-// 👇 اضافه شد برای توضیحات موبایل
+// Product page labels
 phoneName:"اسم گوشی:",
-storage:"حافظه داخلی:",
+storage:"حافظه:",
 color:"رنگ:",
 register:"ریجیستر:",
 desc:"توضیحات:",
