@@ -375,7 +375,7 @@ function openCat(cat){
     return;
   }
 
-  data[cat].forEach((p)=>{
+  data[cat].forEach((p,i)=>{
 
     let img = (p && p.img) ? p.img : "https://via.placeholder.com/150";
 
@@ -386,7 +386,7 @@ function openCat(cat){
     let price = p.price || 0;
 
     html += `
-      <div class="card">
+      <div class="card" onclick="openProduct('${cat}',${i})">
 
         <img src="${img}"
           onerror="this.onerror=null;this.src='https://via.placeholder.com/150'">
@@ -404,7 +404,7 @@ function openCat(cat){
 
         <div class="price">$${price}</div>
 
-        <button onclick="add('${p.name}',${price})">
+        <button onclick="event.stopPropagation(); add('${p.name}',${price})">
           ${t[lang].add}
         </button>
 
@@ -487,7 +487,44 @@ function toggleLang(){
 lang=(lang==="en")?"fa":"en";  
 renderHome();  
 }  
-  
+function openProduct(cat, index){
+
+  let p = data[cat][index];
+
+  let img = p.img || "https://via.placeholder.com/300";
+
+  let html = `
+    <div style="padding:10px;color:white">
+
+      <button onclick="renderHome()" 
+        style="margin-bottom:10px;background:#444;">
+        ⬅ Back
+      </button>
+
+      <div style="background:#1a1a1a;padding:10px;border-radius:12px">
+
+        <img src="${img}" 
+          style="width:100%;border-radius:10px">
+
+        <h2>${p.name}</h2>
+
+        <p>💾 Storage: ${p.storage || "-"}</p>
+        <p>🎨 Color: ${p.color || "-"}</p>
+        <p>📦 Register: ${p.register || "-"}</p>
+        <p>📝 ${p.desc || "-"}</p>
+
+        <h3 style="color:yellow">$${p.price}</h3>
+
+        <button onclick="add('${p.name}',${p.price})" style="width:100%">
+          ➕ Add to Cart
+        </button>
+
+      </div>
+    </div>
+  `;
+
+  document.getElementById("app").innerHTML = html;
+}
 renderHome();  
   
 </script>  </body>  
