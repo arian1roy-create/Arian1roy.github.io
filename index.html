@@ -377,7 +377,7 @@ function openCat(cat){
 
   data[cat].forEach((p)=>{
 
-    let img = p && p.img ? p.img : FALLBACK_IMG;
+    let img = (p && p.img) ? p.img : "https://via.placeholder.com/150";
 
     let title = lang === "fa"
       ? "محصول: " + p.name
@@ -389,9 +389,18 @@ function openCat(cat){
       <div class="card">
 
         <img src="${img}"
-          onerror="this.onerror=null;this.src='${FALLBACK_IMG}'">
+          onerror="this.onerror=null;this.src='https://via.placeholder.com/150'">
 
         <h3>${title}</h3>
+
+        ${cat === "phones" ? `
+          <div class="phoneInfo">
+            <span>📱 Storage: ${p.storage || "-"}</span>
+            <span>🎨 Color: ${p.color || "-"}</span>
+            <span>📦 Register: ${p.register || "-"}</span>
+            <span>📝 ${p.desc || "-"}</span>
+          </div>
+        ` : ""}
 
         <div class="price">$${price}</div>
 
