@@ -556,6 +556,22 @@ function toggleWish(name){
 
   updateFavUI();
 }  
+function handleFav(cat, index, el){
+
+  let p = data[cat][index];
+
+  if(wishlist.includes(p.name)){
+    wishlist = wishlist.filter(i => i !== p.name);
+  } else {
+    wishlist.push(p.name);
+  }
+
+  localStorage.setItem("wishlist", JSON.stringify(wishlist));
+
+  updateFavUI(); // 👈 این خط مهمه
+
+  openProduct(cat, index);
+}  
   
 function update(){
 
@@ -775,11 +791,11 @@ function openProduct(cat, index){
 }
 function handleFav(cat, index, el){
 
-  console.log("CLICK HEART");
-
   let p = data[cat][index];
 
-  if(!wishlist) wishlist = [];
+  if(!Array.isArray(wishlist)){
+    wishlist = [];
+  }
 
   if(wishlist.includes(p.name)){
     wishlist = wishlist.filter(i => i !== p.name);
@@ -789,7 +805,10 @@ function handleFav(cat, index, el){
 
   localStorage.setItem("wishlist", JSON.stringify(wishlist));
 
-  console.log("WISHLIST:", wishlist);
+  updateFavUI();
+
+  // تست
+  alert("Favorites: " + wishlist.length);
 
   openProduct(cat, index);
 }
