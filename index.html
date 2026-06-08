@@ -428,12 +428,18 @@ function add(n,p){
   update();
 }
   
-function update(){  
-document.getElementById("count").innerText=cart.length;  
-let total=0;  
-cart.forEach(i=>total+=i.p);  
-document.getElementById("total").innerText=total;  
-}  
+function update(){
+
+  document.getElementById("count").innerText = cart.length;
+
+  let total = 0;
+
+  cart.forEach(i => {
+    total += i.p * i.q;
+  });
+
+  document.getElementById("total").innerText = total;
+}
   
 function clearCart(){  
 cart=[];  
