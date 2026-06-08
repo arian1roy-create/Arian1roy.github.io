@@ -699,14 +699,11 @@ function handleFav(cat, index, el){
 
   localStorage.setItem("wishlist", JSON.stringify(wishlist));
 
-  // انیمیشن روی همون قلبی که کلیک شده
+  // فقط انیمیشن روی همان قلب
   el.classList.add("active");
+  setTimeout(()=>el.classList.remove("active"), 300);
 
-  setTimeout(()=>{
-    el.classList.remove("active");
-  }, 300);
-
-  // فقط UI همون صفحه رو دوباره بساز
+  // فقط اگر لازم بود UI محصول را refresh کن
   openProduct(cat, index);
 }
 </script>
