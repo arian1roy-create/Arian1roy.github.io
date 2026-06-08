@@ -415,10 +415,18 @@ function openCat(cat){
   html += `</div>`;
   document.getElementById("app").innerHTML = html;
 }
-function add(n,p){  
-cart.push({n,p});  
-update();  
-}  
+function add(n,p){
+
+  let item = cart.find(i => i.n === n);
+
+  if(item){
+    item.q += 1;
+  } else {
+    cart.push({n,p,q:1});
+  }
+
+  update();
+}
   
 function update(){  
 document.getElementById("count").innerText=cart.length;  
