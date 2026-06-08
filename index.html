@@ -469,16 +469,38 @@ function update(){
   let count = 0;
   let total = 0;
 
+  let html = "";
+
   cart.forEach(i => {
-    count += (i.q || 1);   // تعداد واقعی
-    total += (i.p * (i.q || 1));
+
+    let qty = i.q || 1;
+
+    count += qty;
+    total += i.p * qty;
+
+    html += `
+      <div style="color:white;margin:8px 0;display:flex;justify-content:space-between;align-items:center;">
+
+        <div>
+          ${i.n}<br>
+          <small>$${i.p} × ${qty} = $${i.p * qty}</small>
+        </div>
+
+        <div>
+          <button onclick="inc('${i.n}')" style="width:30px">➕</button>
+          <button onclick="dec('${i.n}')" style="width:30px">➖</button>
+        </div>
+
+      </div>
+    `;
   });
 
   document.getElementById("count").innerText = count;
   document.getElementById("total").innerText = total;
 
-}
-  
+  // 👇 اینجا باید یه div برای cart داشته باشی
+  document.getElementById("cartList").innerHTML = html;
+}  
 function clearCart(){  
 cart=[];  
 update();  
