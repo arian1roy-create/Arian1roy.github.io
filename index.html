@@ -178,13 +178,28 @@ transition:opacity 0.5s ease;
   display:block;
   color:#ccc;
 }  
-</style>  </head>  <body>  <div class="header">
+</style>
+</head>
 
-<img src="arian-roy.png" class="headerLogo">
-<div class="storeGlow">STORE</div>
-<button class="langBtn" onclick="toggleLang()">🌐</button>
-</div>  <div class="container" id="app"></div>  <div class="cartBar">
+<body>
 
+<div class="header">
+
+  <img src="arian-roy.png" class="headerLogo">
+  
+  <div class="storeGlow">STORE</div>
+
+  <!-- 🌐 زبان -->
+  <button class="langBtn" onclick="toggleLang()">🌐</button>
+
+  <!-- ❤️ Favorites -->
+  <button class="langBtn" onclick="openFavorites()">❤️</button>
+
+</div>
+
+<div class="container" id="app"></div>
+
+<div class="cartBar">
 🛒 <span id="count">0</span><br>
 Total: $<span id="total">0</span>
 
@@ -666,7 +681,11 @@ function openProduct(cat, index){
 
   document.getElementById("app").innerHTML = html;
 }
-renderHome();  
-  
-</script>  </body>  
-</html>  
+</script>
+
+<script>
+window.onload = renderHome;
+</script>
+
+</body>
+</html>
