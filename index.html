@@ -186,8 +186,11 @@ Total: $<span id="total">0</span>
 </div>  
 </div>  <script>  
   
-let cart=[];  
-let lang="en";  
+ let cart = [];
+
+let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+let lang = "en"; 
   
 let data = {
   cars: Array.from({length:20},(_,i)=>({
@@ -505,6 +508,21 @@ function update(){
   // 👇 اینجا باید یه div برای cart داشته باشی
   document.getElementById("cartList").innerHTML = html;
 }  
+ function toggleWish(name){
+
+  if(wishlist.includes(name)){
+    wishlist = wishlist.filter(i => i !== name);
+  }else{
+    wishlist.push(name);
+  }
+
+  localStorage.setItem(
+    "wishlist",
+    JSON.stringify(wishlist)
+  );
+
+  renderHome();
+}
 function clearCart(){  
 cart=[];  
 update();  
