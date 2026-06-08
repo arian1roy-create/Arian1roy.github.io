@@ -589,8 +589,12 @@ function openFavorites(){
 
   if(!Array.isArray(wishlist)) wishlist = [];
 
+  const app = document.getElementById("app");
+
+  if(!app) return;
+
   if(wishlist.length === 0){
-    document.getElementById("app").innerHTML =
+    app.innerHTML =
       "<p style='color:white;text-align:center'>No Favorites ❤️</p>";
     return;
   }
@@ -601,14 +605,13 @@ function openFavorites(){
 
     let product = null;
 
-    // پیدا کردن محصول در همه دسته‌ها
-    Object.keys(data).forEach(cat => {
-      data[cat].forEach(p => {
-        if(p.name === name){
-          product = p;
-        }
-      });
-    });
+    for(let cat in data){
+      let found = data[cat].find(p => p.name === name);
+      if(found){
+        product = found;
+        break;
+      }
+    }
 
     if(product){
 
@@ -637,7 +640,7 @@ function openFavorites(){
 
   html += `</div>`;
 
-  document.getElementById("app").innerHTML = html;
+  app.innerHTML = html;
 }
 function clearCart(){  
 cart=[];  
