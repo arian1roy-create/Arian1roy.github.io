@@ -559,6 +559,10 @@ function update(){
 }  
 function toggleWish(name){
 
+  if(!Array.isArray(wishlist)){
+    wishlist = [];
+  }
+
   if(wishlist.includes(name)){
     wishlist = wishlist.filter(i => i !== name);
   } else {
@@ -566,8 +570,6 @@ function toggleWish(name){
   }
 
   localStorage.setItem("wishlist", JSON.stringify(wishlist));
-
-  renderHome(); // یا openCat اگر داخل دسته‌ای هستی
 }
 function clearCart(){  
 cart=[];  
@@ -647,15 +649,9 @@ function openProduct(cat, index){
 
       <div style="background:#1a1a1a;padding:10px;border-radius:12px">
 
-        <!-- ❤️ Favorite Button with Animation -->
         <div class="heart ${isFav ? 'active' : ''}"
           style="text-align:right;font-size:24px;cursor:pointer;"
-          onclick="
-            toggleWish('${p.name}');
-            this.classList.add('active');
-            setTimeout(()=>this.classList.remove('active'),300);
-            setTimeout(()=>openProduct('${cat}',${index}),150);
-          ">
+          onclick="handleWish('${cat}',${index},this)">
           ${isFav ? "❤️" : "🤍"}
         </div>
 
@@ -680,6 +676,22 @@ function openProduct(cat, index){
   `;
 
   document.getElementById("app").innerHTML = html;
+}
+function handleFav(cat, index, el){
+
+  let p = data[cat][index];
+
+  toggleWish(p.name);
+
+  openProduct(cat, index); // اول UI آپدیت
+
+  setTimeout(()=>{
+    let newEl = document.querySelector(".heart");
+    if(newEl){
+      newEl.classList.add("active");
+      setTimeout(()=>newEl.classList.remove("active"),300);
+    }
+  },50);
 }
 </script>
 
