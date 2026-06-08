@@ -135,22 +135,21 @@ background:#fff;width:90%;max-width:320px;
 border-radius:12px;padding:15px;text-align:center;  
 }  
   
-/* SLIDER */
-.slider{
-  width:100%;
-  height:160px;
-  overflow:hidden;
-  border-radius:15px;
-  margin-bottom:15px;
-}
-
-.slider img{
-  width:100%;
-  height:160px;
-  object-fit:cover;
-  transition:opacity 0.5s ease;
-}
-
+/* SLIDER */  
+.slider{  
+width:100%;  
+height:160px;  
+overflow:hidden;  
+border-radius:15px;  
+margin-bottom:15px;  
+}  
+  
+.slider img{  
+width:100%;  
+height:160px;  
+object-fit:cover;  
+transition:opacity 0.5s ease;  
+}  
 .phoneInfo{
   text-align:right;
   margin-top:8px;
@@ -161,32 +160,7 @@ border-radius:12px;padding:15px;text-align:center;
 .phoneInfo span{
   display:block;
   color:#ccc;
-}
-
-.gallery{
-  margin-bottom:10px;
-}
-
-.mainImg{
-  width:100%;
-  border-radius:12px;
-  cursor:pointer;
-}
-
-.thumbRow{
-  display:flex;
-  gap:8px;
-  margin-top:8px;
-  overflow-x:auto;
-}
-
-.thumb{
-  width:70px;
-  height:70px;
-  object-fit:cover;
-  border-radius:8px;
-  cursor:pointer;
-}
+}  
 </style>  </head>  <body>  <div class="header">
 
 <img src="arian-roy.png" class="headerLogo">
@@ -198,29 +172,20 @@ Total: $<span id="total">0</span>  <button class="payBtn" onclick="openPay()">
 Checkout  
 </button>  <button class="clearBtn" onclick="clearCart()">Clear</button>
 
-<div id="payBox">
-  <div class="payInner">
-
-    <div style="font-size:40px">💳</div>
-
-    <div style="font-weight:bold;margin-bottom:10px;">
-      Telegram Payment
-    </div>
-
-    <button class="payBtn" onclick="goTelegram()">
-      Pay via Telegram
-    </button>
-
-  </div>
-</div>
-
-  cars: Array.from({length:20},(_,i)=>({
-    name:"Car "+(i+1),
-    price:50000+i*1500
-  })),
-
+</div>  <div id="payBox">  
+<div class="payInner">  
+<div style="font-size:40px">💳</div>  
+<div style="font-weight:bold;margin-bottom:10px;">Telegram Payment</div>  
+<button class="payBtn" onclick="goTelegram()">Pay via Telegram</button>  
+<button class="payBtn" onclick="fakePay()">Pay Now</button>  
+<button class="clearBtn" onclick="closePay()">Close</button>  
+</div>  
+</div>  <script>  
+  
+let cart=[];  
+let lang="en";  
+  
 let data = {
-
   cars: Array.from({length:20},(_,i)=>({
     name:"Car "+(i+1),
     price:50000+i*1500
@@ -234,14 +199,8 @@ let data = {
       register:"Non PTA",
       desc:"Brand new box pack",
       price:999,
-      img:"https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=800&q=80",
-      images:[
-        "https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9"
-      ]
+      img:"https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=800&q=80"
     },
-
     {
       name:"iPhone 16 Pro Max",
       storage:"256GB",
@@ -249,25 +208,13 @@ let data = {
       register:"Non PTA",
       desc:"Brand new box pack",
       price:1099,
-      img:"https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=800&q=80",
-      images:[
-        "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9"
-      ]
+      img:"https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=800&q=80"
     },
 
     ...Array.from({length:18},(_,i)=>({
       name:"Phone "+(i+3),
-      storage:"-",
-      color:"-",
-      register:"-",
-      desc:"-",
       price:840+i*40,
-      img:"https://images.unsplash.com/photo-1511707171634-5f897ff02aa9",
-      images:[
-        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9"
-      ]
+      img:"https://images.unsplash.com/photo-1511707171634-5f897ff02aa9"
     }))
   ],
 
@@ -311,7 +258,6 @@ let data = {
     price:120+i*15
   }))
 };
-
   
 let t={  
 en:{
@@ -327,7 +273,7 @@ tv:"TV",
 shoes:"Shoes",
 add:"Add",
 
-// Product page labels
+// 👇 اضافه شد برای توضیحات موبایل
 phoneName:"Phone Name:",
 storage:"Storage:",
 color:"Color:",
@@ -349,9 +295,9 @@ tv:"تلویزیون",
 shoes:"کفش",
 add:"افزودن",
 
-// Product page labels
+// 👇 اضافه شد برای توضیحات موبایل
 phoneName:"اسم گوشی:",
-storage:"حافظه:",
+storage:"حافظه داخلی:",
 color:"رنگ:",
 register:"ریجیستر:",
 desc:"توضیحات:",
@@ -431,9 +377,7 @@ function openCat(cat){
 
   data[cat].forEach((p,i)=>{
 
-    let img = (p && p.img)
-      ? p.img
-      : "https://via.placeholder.com/150";
+    let img = (p && p.img) ? p.img : "https://via.placeholder.com/150";
 
     let title = lang === "fa"
       ? "محصول: " + p.name
@@ -460,7 +404,7 @@ function openCat(cat){
 
         <div class="price">$${price}</div>
 
-        <button onclick="event.stopPropagation();add('${p.name}',${price})">
+        <button onclick="event.stopPropagation(); add('${p.name}',${price})">
           ${t[lang].add}
         </button>
 
@@ -469,7 +413,6 @@ function openCat(cat){
   });
 
   html += `</div>`;
-
   document.getElementById("app").innerHTML = html;
 }
 function add(n,p){  
@@ -540,46 +483,28 @@ txt+="\nTotal:"+total;
 window.location.href="https://t.me/iphonearian?text="+encodeURIComponent(txt);  
 }  
   
-function toggleLang(){
-  lang=(lang==="en")?"fa":"en";
-  renderHome();
-}
-
+function toggleLang(){  
+lang=(lang==="en")?"fa":"en";  
+renderHome();  
+}  
 function openProduct(cat, index){
 
   let p = data[cat][index];
 
-  let images = p.images || [p.img || "https://via.placeholder.com/300"];
-
-  let main = images[0];
-
-  let thumbs = images.map((img,i)=>`
-    <img src="${img}" class="thumb ${i===0?'active':''}"
-      onclick="setMainImg('${img}')">
-  `).join("");
+  let img = p.img || "https://via.placeholder.com/300";
 
   let html = `
     <div style="padding:10px;color:white">
 
-      <button onclick="renderHome()"
+      <button onclick="renderHome()" 
         style="margin-bottom:10px;background:#444;">
         ⬅ Back
       </button>
 
-      <div class="gallery">
+      <div style="background:#1a1a1a;padding:10px;border-radius:12px">
 
-        <img id="mainImg"
-          src="${main}"
-          class="mainImg"
-          onclick="openZoom(this.src)">
-
-        <div class="thumbRow">
-          ${thumbs}
-        </div>
-
-      </div>
-
-      <div style="background:#1a1a1a;padding:10px;border-radius:12px;margin-top:10px">
+        <img src="${img}" 
+          style="width:100%;border-radius:10px">
 
         <h2>${p.name}</h2>
 
@@ -600,16 +525,7 @@ function openProduct(cat, index){
 
   document.getElementById("app").innerHTML = html;
 }
-
-function setMainImg(img){
-  document.getElementById("mainImg").src = img;
-}
-
-function openZoom(img){
-  window.open(img,"_blank");
-}
-
-renderHome(); 
+renderHome();  
   
 </script>  </body>  
 </html>  
