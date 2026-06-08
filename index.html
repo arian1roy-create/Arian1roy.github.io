@@ -585,29 +585,59 @@ function update(){
   if(totalEl) totalEl.innerText = total;
   if(listEl) listEl.innerHTML = html;
 }
-function toggleWish(name){
+function openFavorites(){
 
-  if(!Array.isArray(wishlist)){
-    wishlist = [];
+  if(!Array.isArray(wishlist)) wishlist = [];
+
+  if(wishlist.length === 0){
+    document.getElementById("app").innerHTML =
+      "<p style='color:white;text-align:center'>No Favorites ❤️</p>";
+    return;
   }
 
-  // اضافه یا حذف
-  if(wishlist.includes(name)){
-    wishlist = wishlist.filter(i => i !== name);
-  } else {
-    wishlist.push(name);
-  }
+  let html = `<div class="grid">`;
 
-  // ذخیره در مرورگر
-  localStorage.setItem("wishlist", JSON.stringify(wishlist));
+  wishlist.forEach(name => {
 
-  // 👇 خیلی مهم: آپدیت UI
-  updateFavUI();
+    let product = null;
 
-  // 👇 اگر صفحه Favorites باز است، رفرش شود (اختیاری ولی بهتر)
-  if(typeof openFavorites === "function"){
-    // فقط اگر صفحه باز باشد اجرا کن
-  }
+    // پیدا کردن محصول در همه دسته‌ها
+    Object.keys(data).forEach(cat => {
+      data[cat].forEach(p => {
+        if(p.name === name){
+          product = p;
+        }
+      });
+    });
+
+    if(product){
+
+      html += `
+        <div class="card">
+
+          <img src="${product.img || 'https://via.placeholder.com/150'}">
+
+          <h3>${product.name}</h3>
+
+          <div class="price">$${product.price || 0}</div>
+
+          <button onclick="add('${product.name}',${product.price || 0})">
+            ➕ Add to Cart
+          </button>
+
+          <button onclick="toggleWish('${product.name}');openFavorites()">
+            ❌ Remove
+          </button>
+
+        </div>
+      `;
+    }
+
+  });
+
+  html += `</div>`;
+
+  document.getElementById("app").innerHTML = html;
 }
 function clearCart(){  
 cart=[];  
