@@ -186,14 +186,31 @@ transition:opacity 0.5s ease;
 <div class="header">
 
   <img src="arian-roy.png" class="headerLogo">
-  
+
   <div class="storeGlow">STORE</div>
 
   <!-- 🌐 زبان -->
   <button class="langBtn" onclick="toggleLang()">🌐</button>
 
   <!-- ❤️ Favorites -->
-  <button class="langBtn" onclick="openFavorites()">❤️</button>
+  <button class="langBtn" onclick="openFavorites()" style="position:relative;">
+
+    ❤️
+    <span id="favCount"
+      style="
+        position:absolute;
+        top:-5px;
+        right:-5px;
+        background:red;
+        color:white;
+        font-size:10px;
+        padding:2px 5px;
+        border-radius:50%;
+      ">
+      0
+    </span>
+
+  </button>
 
 </div>
 
@@ -506,6 +523,9 @@ function inc(name){
 
   update();
 }
+ function updateFavUI(){
+  document.getElementById("favCount").innerText = wishlist.length;
+} 
 function dec(name){
 
   let item = cart.find(i => i.n === name);
@@ -529,6 +549,8 @@ function update(){
   let total = 0;
 
   let html = "";
+
+  if(!Array.isArray(cart)) cart = [];
 
   cart.forEach(i => {
 
@@ -554,25 +576,38 @@ function update(){
     `;
   });
 
-  document.getElementById("count").innerText = count;
-  document.getElementById("total").innerText = total;
+  // جلوگیری از null error
+  const countEl = document.getElementById("count");
+  const totalEl = document.getElementById("total");
+  const listEl = document.getElementById("cartList");
 
-  // 👇 اینجا باید یه div برای cart داشته باشی
-  document.getElementById("cartList").innerHTML = html;
-}  
+  if(countEl) countEl.innerText = count;
+  if(totalEl) totalEl.innerText = total;
+  if(listEl) listEl.innerHTML = html;
+}
 function toggleWish(name){
 
   if(!Array.isArray(wishlist)){
     wishlist = [];
   }
 
+  // اضافه یا حذف
   if(wishlist.includes(name)){
     wishlist = wishlist.filter(i => i !== name);
   } else {
     wishlist.push(name);
   }
 
+  // ذخیره در مرورگر
   localStorage.setItem("wishlist", JSON.stringify(wishlist));
+
+  // 👇 خیلی مهم: آپدیت UI
+  updateFavUI();
+
+  // 👇 اگر صفحه Favorites باز است، رفرش شود (اختیاری ولی بهتر)
+  if(typeof openFavorites === "function"){
+    // فقط اگر صفحه باز باشد اجرا کن
+  }
 }
 function clearCart(){  
 cart=[];  
