@@ -183,6 +183,7 @@ Checkout
 </div>  <script>  
   
 let cart=[];  
+let wishlist = JSON.parse(localStorage.getItem("wishlist")) || []; 
 let lang="en";  
   
 let data = {
@@ -388,6 +389,19 @@ function openCat(cat){
     html += `
       <div class="card" onclick="openProduct('${cat}',${i})">
 
+        <button 
+          onclick="event.stopPropagation(); toggleWish('${p.name}')"
+          style="
+            position:absolute;
+            margin:5px;
+            background:none;
+            border:none;
+            font-size:20px;
+            color:${wishlist.includes(p.name) ? 'red' : 'white'};
+          ">
+          ❤️
+        </button>
+
         <img src="${img}"
           onerror="this.onerror=null;this.src='https://via.placeholder.com/150'">
 
@@ -404,7 +418,7 @@ function openCat(cat){
 
         <div class="price">$${price}</div>
 
-        <button onclick="event.stopPropagation(); add('${p.name}',${price})">
+        <button onclick="event.stopPropagation();add('${p.name}',${price})">
           ${t[lang].add}
         </button>
 
