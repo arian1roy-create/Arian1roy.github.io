@@ -420,7 +420,10 @@ el.style.opacity="1";
 },3000);  
   
 function openCat(cat){
-pageHistory.push(renderHome);
+
+  pageHistory.push(renderHome);
+  history.pushState({}, "");
+
   console.log("CAT:", cat);
 
   if(!data[cat]){
@@ -738,13 +741,15 @@ lang=(lang==="en")?"fa":"en";
 renderHome();  
 }  
 function openProduct(cat, index){
-pageHistory.push(() => openCat(cat));
+
+  pageHistory.push(() => openCat(cat));
+  history.pushState({}, "");
+
   let p = data[cat][index];
 
   let img = p.img || "https://via.placeholder.com/300";
 
   let isFav = wishlist.includes(p.name);
-
   let html = `
     <div style="padding:10px;color:white">
 
@@ -812,6 +817,16 @@ function handleFav(cat, index, el){
 </script>
 
 <script>
+window.addEventListener("popstate", () => {
+
+  if(pageHistory.length > 0){
+
+    let lastPage = pageHistory.pop();
+    lastPage();
+
+  }
+
+});  
 window.onload = renderHome;
 updateFavUI();  
 </script>
