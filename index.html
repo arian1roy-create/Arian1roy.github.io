@@ -822,7 +822,13 @@ window.addEventListener("popstate", (e) => {
 
   const state = e.state;
 
-  if(!state || state.page === "home"){
+  if(!state){
+    renderHome();
+    updateFavUI();
+    return;
+  }
+
+  if(state.page === "home"){
     renderHome();
   }
 
