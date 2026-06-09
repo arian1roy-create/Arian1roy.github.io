@@ -420,7 +420,7 @@ el.style.opacity="1";
 },3000);  
   
 function openCat(cat){
-history.pushState({page:"cat", cat}, "");
+history.replaceState({page:"home"}, "");
   pageHistory.push(renderHome);
   history.pushState({}, "");
 
@@ -820,27 +820,26 @@ function handleFav(cat, index, el){
 
 window.addEventListener("popstate", (e) => {
 
-  const state = e.state;
+  const s = e.state;
 
-  if(!state){
+  if (!s || s.page === "home") {
     renderHome();
     updateFavUI();
     return;
   }
 
-  if(state.page === "home"){
-    renderHome();
+  if (s.page === "cat") {
+    openCat(s.cat);
+    updateFavUI();
+    return;
   }
 
-  else if(state.page === "cat"){
-    openCat(state.cat);
+  if (s.page === "product") {
+    openProduct(s.cat, s.index);
+    updateFavUI();
+    return;
   }
 
-  else if(state.page === "product"){
-    openProduct(state.cat, state.index);
-  }
-
-  updateFavUI();
 });
 
 </script>
