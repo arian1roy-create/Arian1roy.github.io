@@ -420,7 +420,7 @@ el.style.opacity="1";
 },3000);  
   
 function openCat(cat){
-
+history.pushState({page:"cat", cat}, "");
   pageHistory.push(renderHome);
   history.pushState({}, "");
 
@@ -741,7 +741,7 @@ lang=(lang==="en")?"fa":"en";
 renderHome();  
 }  
 function openProduct(cat, index){
-
+history.pushState({page:"product", cat, index}, "");
   pageHistory.push(() => openCat(cat));
   history.pushState({}, "");
 
