@@ -420,7 +420,10 @@ el.style.opacity="1";
 },3000);  
   
 function openCat(cat){
-history.pushState({page:"cat", cat:cat}, "");
+
+  // 🚀 ثبت در history (فقط یک بار، درست)
+  history.pushState({page:"cat", cat:cat}, "");
+
   console.log("CAT:", cat);
 
   if(!data[cat]){
@@ -434,13 +437,7 @@ history.pushState({page:"cat", cat:cat}, "");
   data[cat].forEach((p,i)=>{
 
     let img = p?.img || "https://via.placeholder.com/150";
-
-    let title = lang === "fa"
-      ? "محصول: " + p.name
-      : "Product: " + p.name;
-
     let price = p.price || 0;
-
     let isFav = wishlist.includes(p.name);
 
     html += `
@@ -448,8 +445,7 @@ history.pushState({page:"cat", cat:cat}, "");
 
         <div style="position:relative">
 
-          <!-- ❤️ Heart -->
-          <div onclick="event.stopPropagation(); toggleWish('${p.name}'); openCat('${cat}')"
+          <div onclick="event.stopPropagation(); handleFav('${cat}',${i},this)"
             style="
               position:absolute;
               top:6px;
@@ -462,26 +458,15 @@ history.pushState({page:"cat", cat:cat}, "");
             ❤️
           </div>
 
-          <img src="${img}"
-            onerror="this.onerror=null;this.src='https://via.placeholder.com/150'">
-
+          <img src="${img}">
         </div>
 
-        <h3>${title}</h3>
-
-        ${cat === "phones" ? `
-          <div class="phoneInfo">
-            <span>📱 Storage: ${p.storage || "-"}</span>
-            <span>🎨 Color: ${p.color || "-"}</span>
-            <span>📦 Register: ${p.register || "-"}</span>
-            <span>📝 ${p.desc || "-"}</span>
-          </div>
-        ` : ""}
+        <h3>${p.name}</h3>
 
         <div class="price">$${price}</div>
 
         <button onclick="event.stopPropagation(); add('${p.name}',${price})">
-          ${t[lang].add}
+          ➕ Add
         </button>
 
       </div>
@@ -489,6 +474,7 @@ history.pushState({page:"cat", cat:cat}, "");
   });
 
   html += `</div>`;
+
   document.getElementById("app").innerHTML = html;
 }
 function add(n, p){
@@ -737,58 +723,7 @@ function toggleLang(){
 lang=(lang==="en")?"fa":"en";  
 renderHome();  
 }  
-function openProduct(cat, index){
-history.pushState({page:"product", cat:cat, index:index}, "");
-  let p = data[cat][index];
 
-  let img = p.img || "https://via.placeholder.com/300";
-
-  let isFav = wishlist.includes(p.name);
-
-  let html = `
-    <div style="padding:10px;color:white">
-
-      <button onclick="openCat('${cat}')"
-  style="margin-bottom:10px;background:#444;">
-  ⬅ Back
-</button>
-
-      <div style="background:#1a1a1a;padding:10px;border-radius:12px">
-
-        <!-- ❤️ HEART -->
-        <div class="heart ${isFav ? 'active' : ''}"
-          style="
-            text-align:right;
-            font-size:24px;
-            cursor:pointer;
-            color:${isFav ? 'red' : 'white'};
-          "
-          onclick="handleFav('${cat}',${index},this)">
-          ${isFav ? "❤️" : "🤍"}
-        </div>
-
-        <img src="${img}" 
-          style="width:100%;border-radius:10px">
-
-        <h2>${p.name}</h2>
-
-        <p>💾 Storage: ${p.storage || "-"}</p>
-        <p>🎨 Color: ${p.color || "-"}</p>
-        <p>📦 Register: ${p.register || "-"}</p>
-        <p>📝 ${p.desc || "-"}</p>
-
-        <h3 style="color:yellow">$${p.price}</h3>
-
-        <button onclick="add('${p.name}',${p.price})" style="width:100%">
-          ➕ Add to Cart
-        </button>
-
-      </div>
-    </div>
-  `;
-
-  document.getElementById("app").innerHTML = html;
-}
 function handleFav(cat, index, el){
 
   let p = data[cat][index];
@@ -818,7 +753,61 @@ window.addEventListener("popstate", (e) => {
     updateFavUI();
     return;
   }
+function openProduct(cat, index){
 
+  history.pushState({page:"product", cat:cat, index:index}, "");
+
+  let p = data[cat][index];
+
+  let img = p.img || "https://via.placeholder.com/300";
+
+  let isFav = wishlist.includes(p.name);
+
+  let html = `
+    <div style="padding:10px;color:white">
+
+      <!-- ✅ BACK درست (نه renderHome، نه openCat مستقیم) -->
+      <button onclick="history.back()" 
+        style="margin-bottom:10px;background:#444;">
+        ⬅ Back
+      </button>
+
+      <div style="background:#1a1a1a;padding:10px;border-radius:12px">
+
+        <!-- ❤️ HEART -->
+        <div class="heart ${isFav ? 'active' : ''}"
+          style="
+            text-align:right;
+            font-size:24px;
+            cursor:pointer;
+            color:${isFav ? 'red' : 'white'};
+          "
+          onclick="handleFav('${cat}',${index},this)">
+          ${isFav ? "❤️" : "🤍"}
+        </div>
+
+        <img src="${img}" 
+          style="width:100%;border-radius:10px">
+
+        <h2>${p.name}</h2>
+
+        <p>💾 Storage: ${p.storage || "-"}</p>
+        <p>🎨 Color: ${p.color || "-"}</p>
+        <p>📦 Register: ${p.register || "-"}</p>
+        <p>📝 ${p.desc || "-"}</p>
+
+        <h3 style="color:yellow">$${p.price}</h3>
+
+        <button onclick="add('${p.name}',${p.price})" style="width:100%">
+          ➕ Add to Cart
+        </button> 
+
+      </div>
+    </div>
+  `;
+
+  document.getElementById("app").innerHTML = html;
+}
 });
 </script>
 
