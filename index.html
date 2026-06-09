@@ -558,7 +558,13 @@ function toggleWish(name){
 }  
 function handleFav(cat, index, el){
 
+ function handleFav(cat, index, el){
+
   let p = data[cat][index];
+
+  if(!Array.isArray(wishlist)){
+    wishlist = [];
+  }
 
   if(wishlist.includes(p.name)){
     wishlist = wishlist.filter(i => i !== p.name);
@@ -568,10 +574,15 @@ function handleFav(cat, index, el){
 
   localStorage.setItem("wishlist", JSON.stringify(wishlist));
 
-  updateFavUI(); // 👈 این خط مهمه
+  updateFavUI();
 
-  openProduct(cat, index);
-}  
+  // ❌ این خط را حذف کن:
+  // openProduct(cat, index);
+
+  // ✅ فقط UI خود عنصر را تغییر بده
+  el.innerText = wishlist.includes(p.name) ? "❤️" : "🤍";
+  el.style.color = wishlist.includes(p.name) ? "red" : "white";
+}
   
 function update(){
 
