@@ -420,7 +420,7 @@ el.style.opacity="1";
 },3000);  
   
 function openCat(cat){
-
+history.pushState({page:"cat", cat:cat}, "");
   console.log("CAT:", cat);
 
   if(!data[cat]){
@@ -738,7 +738,7 @@ lang=(lang==="en")?"fa":"en";
 renderHome();  
 }  
 function openProduct(cat, index){
-
+history.pushState({page:"product", cat:cat, index:index}, "");
   let p = data[cat][index];
 
   let img = p.img || "https://via.placeholder.com/300";
@@ -797,18 +797,29 @@ function handleFav(cat, index, el){
     wishlist = [];
   }
 
-  if(wishlist.includes(p.name)){
-    wishlist = wishlist.filter(i => i !== p.name);
-  } else {
-    wishlist.push(p.name);
+window.addEventListener("popstate", (e) => {
+
+  const s = e.state;
+
+  if(!s || s.page === "home"){
+    renderHome();
+    updateFavUI();
+    return;
   }
 
-  localStorage.setItem("wishlist", JSON.stringify(wishlist));
+  if(s.page === "cat"){
+    openCat(s.cat);
+    updateFavUI();
+    return;
+  }
 
-  updateFavUI();
+  if(s.page === "product"){
+    openProduct(s.cat, s.index);
+    updateFavUI();
+    return;
+  }
 
-  openProduct(cat, index);
-}
+});
 </script>
 
 <script>
