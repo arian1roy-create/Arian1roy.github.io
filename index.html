@@ -818,17 +818,24 @@ function handleFav(cat, index, el){
 
 <script>
 
-window.addEventListener("popstate", () => {
-  renderHome();
+window.addEventListener("popstate", (e) => {
+
+  const state = e.state;
+
+  if(!state || state.page === "home"){
+    renderHome();
+  }
+
+  else if(state.page === "cat"){
+    openCat(state.cat);
+  }
+
+  else if(state.page === "product"){
+    openProduct(state.cat, state.index);
+  }
+
   updateFavUI();
 });
-
-history.replaceState({page:"home"}, "");
-
-window.onload = function(){
-  renderHome();
-  updateFavUI();
-};
 
 </script>
 
