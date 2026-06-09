@@ -817,6 +817,7 @@ function handleFav(cat, index, el){
 </script>
 
 <script>
+
 window.addEventListener("popstate", () => {
 
   if(pageHistory.length > 0){
@@ -826,9 +827,17 @@ window.addEventListener("popstate", () => {
 
   }
 
-});  
-window.onload = renderHome;
-updateFavUI();  
+});
+
+history.replaceState({page:"home"}, "");
+
+window.onload = function(){
+
+  renderHome();
+  updateFavUI();
+
+};
+
 </script>
 
 </body>
