@@ -240,7 +240,7 @@ Total: $<span id="total">0</span>
 let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
 
 let lang = "en"; 
-  
+let pageHistory = [];
 let data = {
   cars: Array.from({length:20},(_,i)=>({
     name:"Car "+(i+1),
@@ -420,7 +420,7 @@ el.style.opacity="1";
 },3000);  
   
 function openCat(cat){
-
+pageHistory.push(renderHome);
   console.log("CAT:", cat);
 
   if(!data[cat]){
@@ -738,7 +738,7 @@ lang=(lang==="en")?"fa":"en";
 renderHome();  
 }  
 function openProduct(cat, index){
-
+pageHistory.push(() => openCat(cat));
   let p = data[cat][index];
 
   let img = p.img || "https://via.placeholder.com/300";
